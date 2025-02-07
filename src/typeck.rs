@@ -517,6 +517,27 @@ impl TypeckState {
         match def {
             Empty => {}
             Expr(expr) => {
+                use ast::Expr::*;
+                match expr {
+                    BinOp(_, _, _, _, _, _, span)
+                    | Case((_, span), _)
+                    | FieldAccess(_, _, span)
+                    | FuncDef((_, span))
+                    | InstantiateExist(_, _, _, span)
+                    | InstantiateUni(_, _, _, span)
+                    | Literal(_, (_, span))
+                    | Record(_, span)
+                    | Variable((_, span)) => {
+                        return Err(SyntaxError::new1(
+                            format!(
+                                "SyntaxError: Only block, call, field set, if, loop, match, and typed expressions can appear in a sequence. The value of this expression will be ignored, which is likely unintentional. If you did intend to ignore the value of this expression, do so explicitly via let _ = ..."
+                            ),
+                            *span,
+                        ));
+                    }
+                    _ => {}
+                };
+
                 self.check_expr(strings, expr, self.core.top_use())?;
             }
             LetDef((pattern, var_expr)) => {

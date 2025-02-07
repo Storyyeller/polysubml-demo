@@ -3,26 +3,26 @@ let f = fun x -> x[];
 
 // Test recovery from bad universal instantiation
 ### Bad
-1 + (f (fun (type t) (x: t) : t -> x)) 1;
-x + 4;
+let _ = 1 + (f (fun (type t) (x: t) : t -> x)) 1;
+let _ = x + 4;
 
 ### Good
-1.0 +. (f (fun (type t) (x: t) : t -> x)) 1.0;
+let _ = 1.0 +. (f (fun (type t) (x: t) : t -> x)) 1.0;
 
 let r = {a=1; b=fun x->x+1; c=1.2; d=fun x->x+.2.1};
 
 // Test recovery from bad existential instantiation
 ### Bad
 let {type t; a: t; b: t->t} = r;
-4 +. 3;
+let _ = 4 +. 3;
 
 ### Good
 let {type t; c: t; d: t->t} = r;
 
-fun (type t) (x: t, f: type u. t * u->int * u) : int * t -> (
+let _ = fun (type t) (x: t, f: type u. t * u->int * u) : int * t -> (
   let (a, b) = f (x, 23);
   let (c, d) = f (x, {x=a+b});
-  c + d.x;
+  let _ = c + d.x;
 
   f (x, x)
 );
@@ -138,7 +138,7 @@ loop match x.v with
 
 ### Bad
 let f = fun (type t) (x: t) : t -> x;
-1 + f 3.2;
+let _ = 1 + f 3.2;
 
 ### Bad
 // Test for types escaping loops
@@ -165,4 +165,12 @@ loop match x.v with
 
 ### Bad
 let a = 3;
-{a: any}.a + 1;
+let _ = {a: any}.a + 1;
+
+
+### Bad
+// Error on unused <= expressions:
+let x = {a=4; mut b=6; c=9};
+print x; // {a=4; b=6; c=9}
+x.b <= x.b + 11;
+print x; // {a=4; b=17; c=9}

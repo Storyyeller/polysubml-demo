@@ -127,7 +127,7 @@ let x = (
 
 > *You can also group expressions using `begin ... end` instead of `( ... )` if you want.*
 
-Note that everything is still an expression, which means that these statement-block like expressions still have to end in an expression. For example, `(let a = 3; let b = 3;)` is not valid because there's no trailing expression in the block. The exception is at the top level of a source file. At the top level, you can just have statements and no trailing expression, or even just have a completely empty source file.
+Note that everything is still an expression, which means that these statement-block like expressions still have to end in an expression. For example, `(let a = 3; let b = 3;)` is not valid because there's no trailing expression in the block. The exception is at the top level of a source file. At the top level, a source file consists of zero or more statements with no trailing expression.
 
 For convenience, PolySubML also includes a print "statement", which prints one or more comma separated expressions to the console:
 
@@ -170,26 +170,26 @@ let x = if true then
         {a=4; b=2} 
     else 
         {c=9; a=1};
-x.b
+let _ = x.b;
 ```
 ```
 TypeError: Missing field b
 Note: Field b is accessed here:
     else 
         {c=9; a=1};
-x.b
- ^~ 
+let _ = x.b;
+         ^~  
 But the record is defined without that field here:
         {a=4; b=2} 
     else 
         {c=9; a=1};
         ^~~~~~~~~~  
-x.b
+let _ = x.b;
 Hint: To narrow down the cause of the type mismatch, consider adding an explicit type annotation here:
 let x: _ = if true then 
      +++                 
         {a=4; b=2} 
-    else 
+    else
 ```
 
 #### Destructuring and let patterns
@@ -230,9 +230,6 @@ print x; // {a=4; b=6; c=9}
 x.b <- x.b + 11;
 print x; // {a=4; b=17; c=9}
 ```
-
-> :warning: **Warning:** Be careful not to accidentally type `<=` instead of `<-`. If you wrote `x.b <= x.b + 11;` above instead of `x.b <- x.b + 11;`, it would just compare `x.b` to itself plus 11 and throw away the result, and thus silently do nothing. (If the field were not of type `int`, then using `<=` would instead be a compile error).
-
 
 Records use reference semantics, so mutating a field affects all references to the same object, even if they are bound to different variable names:
 
@@ -284,7 +281,7 @@ let (x, y, z) = foo;
 print x, y, z; // 9 world 8
 ```
 
-There is no shorthand syntax for 0 or 1 element tuples. For that, you have to use the explicit record syntax (`{}` and `{_0=x}` respectively). Furthermore, tuple syntax does not support mutable fields or existential types. If you want to use those, you need to use the explicit record syntax.
+There is no shorthand syntax for 0 or 1 element tuples. For that, you have to use the explicit record syntax (`{}` or `{_0=x}` respectively). Furthermore, tuple syntax does not support mutable fields or existential types. If you want to use those, you need to use the explicit record syntax.
 
 
 ```ocaml
@@ -562,7 +559,7 @@ let add_curried = fun (a: int) : (int -> int) ->
 print (add_curried 4) 22; // 26
 ```
 
-This is necessary to avoid ambiguity with the `->` indicating the function body. Ocaml requires types and expressions to use different capitalization so they are syntactically distinct sand there is no ambiguity. However, PolySubML has no such restriction on capitalization, so parenthesis are needed to disambiguate this specific case.
+This is necessary to avoid ambiguity with the `->` indicating the function body. Ocaml requires types and expressions to use different capitalization so they are syntactically distinct and there is no ambiguity. However, PolySubML has no such restriction on capitalization, so parenthesis are needed to disambiguate this specific case.
 
 #### How do I write type annotations?
 
@@ -608,26 +605,26 @@ For example, consider the identity function, `id` here:
 ```ocaml
 let id = fun x -> x;
 
-1 + id 1;
-2.2 *. id -1.9;
+let _ = 1 + id 1;
+let _ = 2.2 *. id -1.9;
 ```
 
 `id` is a function that returns its argument unchanged and could theoretically work for any type of value. However, in monomorphic code, it has to operate on a single specific type. Therefore, if we try to use it on both `int`s and `float`s as shown above, we'll get a type error:
 
 ```
 TypeError: Value is required to have type float here:
-1 + id 1;
-2.2 *. id -1.9;
-    ^~~~~~~~~~  
+let _ = 1 + id 1;
+let _ = 2.2 *. id -1.9;
+            ^~~~~~~~~~  
 However, that value may have type int originating here:
 let id = fun x -> x;
-1 + id 1;
-       ^  
-2.2 *. id -1.9;
+let _ = 1 + id 1;
+               ^  
+let _ = 2.2 *. id -1.9;
 Hint: To narrow down the cause of the type mismatch, consider adding an explicit type annotation here:
 let id = fun x: _ -> x;
               +++       
-1 + id 1;
+let _ = 1 + id 1;
 ```
 
 In order to make this work, we need to make `id` *generic* over its input type, so it can work for both ints and floats (as well as any other type).
@@ -639,8 +636,8 @@ To define a generic function, you need to add one or more *type parameters* afte
 ```ocaml
 let id = fun (type t) (x: t): t -> x;
 
-1 + id 1;
-2.2 *. id -1.9;
+let _ = 1 + id 1;
+let _ = 2.2 *. id -1.9;
 ```
 
 Here, `t` is a type parameter for the function, representing a type that can arbitrarily be chosen by the caller on a per-call basis. Then we annotate the function argument and return type to show that it takes a value of type `t` and returns a value of type `t`. Whenever the function is called, `t` will be sustituted for the appropriate type, `int` or `float` in this example.
@@ -961,7 +958,7 @@ All other types are called *intersection-ineligible*. An intersection can contai
 
 Additionally in order to avoid programmer confusion, `any` and `never` cannot appear in unions and intersections, since these can always be simplified away.
 
-The above rules may sound arbitrarily, but they are a) just powerful enough to make every possible type representable while also b) being just restrictive enough to allow for fast type checking. For the most part, you will never have to worry about them, and they are included here just for completeness.
+The above rules may sound arbitrary, but they are a) just powerful enough to make every possible type representable while also b) being just restrictive enough to allow for fast type checking. For the most part, you will never have to worry about them, and they are included here just for completeness.
 
 ### Loops and recursion
 
