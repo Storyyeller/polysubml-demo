@@ -1,0 +1,13 @@
+/target
+**/*.rs.bk
+Cargo.lock
+bin/
+pkg/
+wasm-pack.log
+
+local.html
+src/grammar.rs
+
+test*.ml
+perf.*
+*.svg

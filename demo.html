@@ -1,0 +1,137 @@
+<html>
+    <meta charset="utf-8">
+    <head>
+        <title>PolySubML demo</title>
+    </head>
+    <body>
+        <noscript><em><strong>Error: This demo requires Javascript to run.</strong></em></noscript>
+        <polysubml-demo>
+            <template shadowrootmode="open">
+                <style>
+                    #container {
+                        height: 100%;
+                        position: relative;
+                        font: medium monospace;
+                    }
+                    #container.loading {
+                        opacity: 85%;
+                    }
+                
+                    #container form {
+                        margin: 0;
+                    }
+                    #container, #prompt, #editor {
+                        background: darkslategrey;
+                        color: white;
+                    }
+                
+                    #loading {
+                        position: absolute;
+                        top: 15%;
+                        left: 12%;
+                    }
+                
+                
+                    #pane1, #pane2 {
+                        float: left;
+                        width: 50%;
+                        height: 100%;
+                
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    #editor {
+                        height: 100%;
+                        resize: none;
+                        margin: 0;
+                    }
+                
+                
+                    #container .error {
+                        background: darkred;
+                    }
+                
+                    #container pre {
+                        white-space: pre-wrap;
+                        overflow-wrap: anywhere;
+                        margin: 0;
+                    }
+                
+                    #output {
+                        overflow-y: scroll;
+                    }
+                    #input-line {
+                        display: flex;
+                    }
+                    #prompt {
+                        flex-grow: 1;
+                        border: 0;
+                    }
+                    #space-below-prompt {
+                        flex-grow: 1;
+                    }
+                </style>
+                
+                
+                <div id=container class=loading>
+                    <div id=loading>Loading, please wait...</div>
+                
+                    <div id=pane1>
+                        <textarea id=editor>
+(* calculate fibonacci numbers recursively *)
+let fib =
+    let rec fib_sub = fun {n; a; b} ->
+        if n <= 1 then
+            a
+        else
+            fib_sub {n=n - 1; a=a + b; b=a}
+    in
+    fun n -> fib_sub {n; a=1; b=1};
+
+(* matching on variant types *)
+let area = fun shape ->
+    match shape with
+        | `Circle {rad} -> rad *. rad *. 3.1415926
+        | `Rect {length; height} -> length *. height;
+
+
+print "area `Circle {rad=5.0} =", area `Circle {rad=5.0};
+print "area `Rect {height=4.; length=2.5} =", area `Rect {height=4.; length=2.5};
+
+(* wildcard match delegates to first area function
+    for the non-Circle cases in a type safe manner *)
+let area = fun shape ->
+match shape with
+    | `Square {len} -> len *. len
+    |  v -> area v;
+
+print "area `Square {len=4.} =", area `Square {len=4.};
+print "area `Rect {height=4.; length=2.5} =", area `Rect {height=4.; length=2.5};
+print "area `Circle {rad=1.2} =", area `Circle {rad=1.2};
+
+
+(* ints are arbitrary precision *)
+(* 999th fibonacci number = 43466557686937456435688527675040625802564660517371780402481729089536555417949051890403879840079255169295922593080322634775209689623239873322471161642996440906533187938298969649928516003704476137795166849228875 *)
+print "fib 999 =", fib 999;
+                        </textarea>
+                        <button id=compile-and-run type=button>Compile and run</button>
+                    </div>
+                
+                    <div id=pane2>
+                        <div id=output>
+                        </div>
+                
+                        <form id=rhs-form>
+                        <pre id=input-line>&gt;&gt; <input id=prompt type="text" autocomplete="off" placeholder="Enter code here or to the left" disabled></pre>
+                        </form>
+                
+                        <div id=space-below-prompt></div>
+                    </div>
+                </div>
+            </template>
+        </polysubml-demo>
+    </body>
+</html>
+
+<script src='demo.js'></script>
+
