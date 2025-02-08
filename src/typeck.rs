@@ -110,7 +110,7 @@ impl TypeckState {
                 let mark = self.bindings.unwind_point();
 
                 for stmt in statements.iter() {
-                    self.check_statement(strings, stmt)?;
+                    self.check_statement(strings, stmt, false)?;
                 }
 
                 self.check_expr(strings, rest_expr, bound)?;
@@ -292,7 +292,7 @@ impl TypeckState {
                 let mark = self.bindings.unwind_point();
 
                 for stmt in statements.iter() {
-                    self.check_statement(strings, stmt)?;
+                    self.check_statement(strings, stmt, false)?;
                 }
 
                 let res = self.infer_expr(strings, rest_expr)?;
@@ -512,31 +512,38 @@ impl TypeckState {
         Ok(())
     }
 
-    fn check_statement(&mut self, strings: &mut lasso::Rodeo, def: &ast::Statement) -> Result<()> {
+    fn check_statement(
+        &mut self,
+        strings: &mut lasso::Rodeo,
+        def: &ast::Statement,
+        allow_useless_exprs: bool,
+    ) -> Result<()> {
         use ast::Statement::*;
         match def {
             Empty => {}
             Expr(expr) => {
-                use ast::Expr::*;
-                match expr {
-                    BinOp(_, _, _, _, _, _, span)
-                    | Case((_, span), _)
-                    | FieldAccess(_, _, span)
-                    | FuncDef((_, span))
-                    | InstantiateExist(_, _, _, span)
-                    | InstantiateUni(_, _, _, span)
-                    | Literal(_, (_, span))
-                    | Record(_, span)
-                    | Variable((_, span)) => {
-                        return Err(SyntaxError::new1(
-                            format!(
-                                "SyntaxError: Only block, call, field set, if, loop, match, and typed expressions can appear in a sequence. The value of this expression will be ignored, which is likely unintentional. If you did intend to ignore the value of this expression, do so explicitly via let _ = ..."
-                            ),
-                            *span,
-                        ));
-                    }
-                    _ => {}
-                };
+                if !allow_useless_exprs {
+                    use ast::Expr::*;
+                    match expr {
+                        BinOp(_, _, _, _, _, _, span)
+                        | Case((_, span), _)
+                        | FieldAccess(_, _, span)
+                        | FuncDef((_, span))
+                        | InstantiateExist(_, _, _, span)
+                        | InstantiateUni(_, _, _, span)
+                        | Literal(_, (_, span))
+                        | Record(_, span)
+                        | Variable((_, span)) => {
+                            return Err(SyntaxError::new1(
+                                format!(
+                                    "SyntaxError: Only block, call, field set, if, loop, match, and typed expressions can appear in a sequence. The value of this expression will be ignored, which is likely unintentional. If you did intend to ignore the value of this expression, do so explicitly via let _ = ..."
+                                ),
+                                *span,
+                            ));
+                        }
+                        _ => {}
+                    };
+                }
 
                 self.check_expr(strings, expr, self.core.top_use())?;
             }
@@ -561,8 +568,10 @@ impl TypeckState {
         self.core.save();
         let mark = self.bindings.unwind_point();
 
-        for item in parsed {
-            if let Err(e) = self.check_statement(strings, item) {
+        let len = parsed.len();
+        for (i, item) in parsed.iter().enumerate() {
+            let is_last = i == len - 1;
+            if let Err(e) = self.check_statement(strings, item, is_last) {
                 // println!("num type nodes {}", self.core.num_type_nodes());
 
                 // Roll back changes to the type state and bindings

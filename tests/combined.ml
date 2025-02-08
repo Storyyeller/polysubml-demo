@@ -17,6 +17,9 @@ let {type t; a: t; b: t->t} = r;
 let _ = 4 +. 3;
 
 ### Good
+1+2
+
+### Good
 let {type t; c: t; d: t->t} = r;
 
 let _ = fun (type t) (x: t, f: type u. t * u->int * u) : int * t -> (
