@@ -39,10 +39,10 @@ impl HoleSrc {
     }
 }
 
-pub struct PartialTypeError(SpannedError, u32, Vec<Span>);
+pub struct PartialTypeError(SpannedError, ScopeLvl, Vec<Span>);
 impl PartialTypeError {
     fn new() -> Self {
-        Self(SpannedError::new(), u32::MAX, Vec::new())
+        Self(SpannedError::new(), ScopeLvl(u32::MAX), Vec::new())
     }
 
     fn push(&mut self, msg: String, span: Span) {
@@ -65,7 +65,7 @@ impl PartialTypeError {
         backtrack_hole_list_sub(core, &mut seen, &mut holes, &mut roots, pair);
 
         // For type escape errors, only consider holes in outer scopes
-        holes.retain(|v| v.funclvl <= self.1);
+        holes.retain(|v| v.scopelvl <= self.1);
         // println!("{:?} found {} holes {:?}", pair, holes.len(), holes);
 
         let n = holes.len();
@@ -252,10 +252,10 @@ pub fn type_escape_error(
     ty_ctor: &TypeCtor,
     lhs: &VTypeNode,
     rhs: &UTypeNode,
-    funclvl: u32,
+    scopelvl: ScopeLvl,
 ) -> PartialTypeError {
     let mut parts = PartialTypeError::new();
-    parts.1 = funclvl;
+    parts.1 = scopelvl;
 
     parts.push(
         format!(

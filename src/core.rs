@@ -38,20 +38,26 @@ pub struct Value(pub TypeNodeInd);
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
 pub struct Use(pub TypeNodeInd);
 
+/// Tracks which types were in scope when a given hole was created
+/// This is an integer which is incremeneted whenever one or more
+/// types are added to the bindings.
+#[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub struct ScopeLvl(pub u32);
+
 #[derive(Debug)]
 pub struct TypeCtor {
     pub name: StringId,
     pub span: Option<Span>, // None for builtin type ctors
-    pub funclvl: u32,
+    pub scopelvl: ScopeLvl,
     debug: String,
 }
 impl TypeCtor {
-    fn new(name: StringId, span: Option<Span>, funclvl: u32) -> Self {
+    fn new(name: StringId, span: Option<Span>, scopelvl: ScopeLvl) -> Self {
         let debug = format!("{}@{:?}", name.into_inner(), span);
         Self {
             name,
             span,
-            funclvl,
+            scopelvl,
             debug,
         }
     }
@@ -164,7 +170,6 @@ fn check_heads(
     use CheckHeadsResult::*;
     use UTypeHead::*;
     use VTypeHead::*;
-    // println!("Check {}->{} lvl={}", lhs_ind.0.0, rhs_ind.0.0, edge_context.funclvl);
     edge_context.reason = FlowReason::Check(lhs_ind, rhs_ind);
 
     // Remove unused context
@@ -340,8 +345,8 @@ fn check_heads(
             let ty_def1 = &type_ctors[ty_ind1.0];
             let ty_def2 = &type_ctors[ty_ind2.0];
             if ty_ind1 == ty_ind2 {
-                if edge_context.funclvl < ty_def1.funclvl {
-                    return Err(type_escape_error(strings, ty_def1, lhs, rhs, edge_context.funclvl));
+                if edge_context.scopelvl < ty_def1.scopelvl {
+                    return Err(type_escape_error(strings, ty_def1, lhs, rhs, edge_context.scopelvl));
                 }
             } else {
                 return Err(type_mismatch_err(strings, type_ctors, lhs, rhs));
@@ -363,7 +368,7 @@ fn check_heads(
 
 #[derive(Debug, Clone, Copy)]
 pub struct InferenceVarData {
-    pub funclvl: u32,
+    pub scopelvl: ScopeLvl,
     pub src: HoleSrc,
 }
 
@@ -377,11 +382,11 @@ pub enum TypeNode {
     Placeholder,
 }
 impl TypeNode {
-    fn funclvl(&self) -> u32 {
+    fn scopelvl(&self) -> ScopeLvl {
         use TypeNode::*;
         match self {
-            Var(data) => data.funclvl,
-            _ => u32::MAX,
+            Var(data) => data.scopelvl,
+            _ => ScopeLvl(u32::MAX),
         }
     }
 }
@@ -410,7 +415,7 @@ pub enum FlowReason {
 
 #[derive(Debug, Clone)]
 pub struct TypeEdge {
-    funclvl: u32,
+    scopelvl: ScopeLvl,
     bound_pairs: BoundPairsSet,
     pub reason: FlowReason,
 }
@@ -423,15 +428,15 @@ impl TypeEdge {
 }
 impl EdgeDataTrait<TypeNode> for TypeEdge {
     fn expand(mut self, hole: &TypeNode, ind: TypeNodeInd) -> Self {
-        self.funclvl = std::cmp::min(self.funclvl, hole.funclvl());
+        self.scopelvl = std::cmp::min(self.scopelvl, hole.scopelvl());
         self.reason = FlowReason::Transitivity(ind);
         self
     }
 
     fn update(&mut self, other: &Self) -> bool {
         let mut changed = false;
-        if other.funclvl < self.funclvl {
-            self.funclvl = other.funclvl;
+        if other.scopelvl < self.scopelvl {
+            self.scopelvl = other.scopelvl;
             changed = true;
         }
         if self.bound_pairs.update_intersect(&other.bound_pairs) {
@@ -446,7 +451,7 @@ pub struct TypeCheckerCore {
     // Only public for instantiation.rs
     pub r: reachability::Reachability<TypeNode, TypeEdge>,
     pub type_ctors: Vec<TypeCtor>,
-    pub funclvl: u32,
+    pub scopelvl: ScopeLvl,
     pub flowcount: u32,
     pub varcount: u32,
 }
@@ -455,7 +460,7 @@ impl TypeCheckerCore {
         Self {
             r: Reachability::new(),
             type_ctors: Vec::new(),
-            funclvl: 0,
+            scopelvl: ScopeLvl(0),
             flowcount: 0,
             varcount: 0,
         }
@@ -467,16 +472,16 @@ impl TypeCheckerCore {
         TypeCtorInd(i)
     }
     pub fn add_builtin_type(&mut self, name: StringId) -> TypeCtorInd {
-        self.add_type_ctor(TypeCtor::new(name, None, 0))
+        self.add_type_ctor(TypeCtor::new(name, None, ScopeLvl(0)))
     }
     pub fn add_abstract_type(&mut self, name: StringId, span: Span) -> TypeCtorInd {
         // println!("new abs ctor {} {}", name.into_inner(), self.type_ctors.len());
-        self.add_type_ctor(TypeCtor::new(name, Some(span), self.funclvl))
+        self.add_type_ctor(TypeCtor::new(name, Some(span), self.scopelvl))
     }
 
     fn new_edge_context(&self, reason: FlowReason) -> TypeEdge {
         TypeEdge {
-            funclvl: self.funclvl,
+            scopelvl: self.scopelvl,
             bound_pairs: BoundPairsSet::default(),
             reason,
         }
@@ -588,7 +593,7 @@ impl TypeCheckerCore {
 
     pub fn var(&mut self, src: HoleSrc) -> (Value, Use) {
         let data = InferenceVarData {
-            funclvl: self.funclvl,
+            scopelvl: self.scopelvl,
             src,
         };
         let i = self.r.add_node(TypeNode::Var(data));

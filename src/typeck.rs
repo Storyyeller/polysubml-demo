@@ -169,9 +169,9 @@ impl TypeckState {
                     None,
                     full_span,
                 );
-                self.core.funclvl += 1;
+                self.core.scopelvl.0 += 1;
                 self.check_expr(strings, expr, bound)?;
-                self.core.funclvl -= 1;
+                self.core.scopelvl.0 -= 1;
             }
             &Match((ref match_expr, arg_span), ref cases, full_span) => {
                 // Bounds from the match arms
@@ -312,7 +312,7 @@ impl TypeckState {
                 )?;
 
                 let mark = self.bindings.unwind_point();
-                self.core.funclvl += 1;
+                self.core.scopelvl.0 += 1;
                 let mut mat = TreeMaterializerState::new();
                 let mut mat = mat.with(&mut self.core);
                 let func_type = mat.add_func_type(&parsed);
@@ -320,7 +320,7 @@ impl TypeckState {
 
                 self.check_expr(strings, body_expr, ret_bound)?;
 
-                self.core.funclvl -= 1;
+                self.core.scopelvl.0 -= 1;
                 self.bindings.unwind(mark);
                 Ok(func_type)
             }
@@ -500,12 +500,12 @@ impl TypeckState {
         // Now process the body of each function definition one by one
         for (parsed, body) in temp {
             let mark = self.bindings.unwind_point();
-            self.core.funclvl += 1;
+            self.core.scopelvl.0 += 1;
 
             let ret_bound = mat.with(&mut self.core).add_func_sig(parsed, &mut self.bindings);
             self.check_expr(strings, body, ret_bound)?;
 
-            self.core.funclvl -= 1;
+            self.core.scopelvl.0 -= 1;
             self.bindings.unwind(mark);
         }
 
