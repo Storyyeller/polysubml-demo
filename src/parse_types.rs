@@ -250,7 +250,7 @@ impl<'a> TreeMaterializer<'a> {
 
             &Bot => (self.core.bot(), self.core.new_use(UTypeHead::UBot, ty.1, None)),
             &Top => (self.core.new_val(VTypeHead::VTop, ty.1, None), self.core.top_use()),
-            &Hole(src) => self.core.var(src),
+            &Hole(src) => self.core.var(src, self.core.scopelvl),
         }
     }
 

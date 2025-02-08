@@ -479,19 +479,26 @@ impl TypeCheckerCore {
         self.add_type_ctor(TypeCtor::new(name, Some(span), self.scopelvl))
     }
 
-    fn new_edge_context(&self, reason: FlowReason) -> TypeEdge {
+    fn new_edge_context(&self, reason: FlowReason, scopelvl: ScopeLvl) -> TypeEdge {
         TypeEdge {
-            scopelvl: self.scopelvl,
+            scopelvl,
             bound_pairs: BoundPairsSet::default(),
             reason,
         }
     }
 
-    pub fn flow(&mut self, strings: &mut lasso::Rodeo, lhs: Value, rhs: Use, expl_span: Span) -> Result<(), TypeError> {
+    pub fn flow(
+        &mut self,
+        strings: &mut lasso::Rodeo,
+        lhs: Value,
+        rhs: Use,
+        expl_span: Span,
+        scopelvl: ScopeLvl,
+    ) -> Result<(), TypeError> {
         self.flowcount += 1;
         // println!("flow #{}: {}->{}", self.flowcount, lhs.0.0, rhs.0.0);
 
-        let mut pending_edges = vec![(lhs, rhs, self.new_edge_context(FlowReason::Root(expl_span)))];
+        let mut pending_edges = vec![(lhs, rhs, self.new_edge_context(FlowReason::Root(expl_span), scopelvl))];
         let mut type_pairs_to_check = Vec::new();
         while let Some((lhs, rhs, edge_context)) = pending_edges.pop() {
             // Check for top/bottom types
@@ -528,7 +535,7 @@ impl TypeCheckerCore {
 
                         // Handle any followup operations that require mutation
                         // e.g. function instantation
-                        self.flow_sub_mut(res, &mut pending_edges);
+                        self.flow_sub_mut(res, &mut pending_edges, scopelvl);
                     }
                 }
             }
@@ -537,7 +544,7 @@ impl TypeCheckerCore {
         Ok(())
     }
 
-    fn flow_sub_mut(&mut self, res: CheckHeadsResult, out: &mut Vec<(Value, Use, TypeEdge)>) {
+    fn flow_sub_mut(&mut self, res: CheckHeadsResult, out: &mut Vec<(Value, Use, TypeEdge)>, scopelvl: ScopeLvl) {
         match res {
             CheckHeadsResult::Done => {}
             CheckHeadsResult::Instantiate {
@@ -556,7 +563,7 @@ impl TypeCheckerCore {
                     // println!("inserting var for {}", name.into_inner());
                     params_mut
                         .entry(name)
-                        .or_insert_with(|| self.var(HoleSrc::Instantiation(src_template, name)));
+                        .or_insert_with(|| self.var(HoleSrc::Instantiation(src_template, name), scopelvl));
                 }
                 drop(params_mut);
 
@@ -570,11 +577,11 @@ impl TypeCheckerCore {
                     PolyKind::Universal => {
                         let new = ctx.instantiate_val(lhs_sub);
                         // println!("instantiate {}->{}", lhs_sub.0.0, new.0.0);
-                        out.push((new, rhs_sub, self.new_edge_context(reason)));
+                        out.push((new, rhs_sub, self.new_edge_context(reason, scopelvl)));
                     }
                     PolyKind::Existential => {
                         let new = ctx.instantiate_use(rhs_sub);
-                        out.push((lhs_sub, new, self.new_edge_context(reason)));
+                        out.push((lhs_sub, new, self.new_edge_context(reason, scopelvl)));
                     }
                 }
             }
@@ -591,11 +598,8 @@ impl TypeCheckerCore {
         Use(self.r.add_node(TypeNode::Use((constraint, span, deps.unwrap_or_default()))))
     }
 
-    pub fn var(&mut self, src: HoleSrc) -> (Value, Use) {
-        let data = InferenceVarData {
-            scopelvl: self.scopelvl,
-            src,
-        };
+    pub fn var(&mut self, src: HoleSrc, scopelvl: ScopeLvl) -> (Value, Use) {
+        let data = InferenceVarData { scopelvl, src };
         let i = self.r.add_node(TypeNode::Var(data));
         self.varcount += 1;
         // println!("var #{}: {} {:?}", self.flowcount, i.0, data);

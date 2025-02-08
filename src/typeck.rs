@@ -248,7 +248,7 @@ impl TypeckState {
                 // Span is just an arbitrary span (usually that of the current expression) used
                 // to help users diagnose cause of a type error that doesn't go through any holes.
                 let t = self.infer_expr(strings, expr)?;
-                self.core.flow(strings, t, bound, *span)?;
+                self.core.flow(strings, t, bound, *span, self.core.scopelvl)?;
             }
         };
         Ok(())
@@ -425,7 +425,7 @@ impl TypeckState {
             | Loop(_, span)
             | InstantiateUni(_, _, _, span)
             | Match(_, _, span) => {
-                let (v, u) = self.core.var(HoleSrc::CheckedExpr(*span));
+                let (v, u) = self.core.var(HoleSrc::CheckedExpr(*span), self.core.scopelvl);
                 self.check_expr(strings, expr, u)?;
                 Ok(v)
             }
