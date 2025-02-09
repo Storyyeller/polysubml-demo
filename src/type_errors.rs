@@ -24,7 +24,7 @@ pub enum HoleSrc {
     Instantiation((Span, InstantiateSourceKind), StringId),
     /// Wrap the given expr in an explicit type annotation
     CheckedExpr(Span),
-    BareFuncArg(Span), // Same as CheckedExpr but with higher priority
+    BareVarPattern(Span), // Same as CheckedExpr but with higher priority
 }
 impl HoleSrc {
     fn priority(&self) -> usize {
@@ -32,7 +32,7 @@ impl HoleSrc {
         match self {
             Explicit(..) => 100,
             OptAscribe(..) => 81,
-            BareFuncArg(..) => 81,
+            BareVarPattern(..) => 81,
             Instantiation(..) => 64,
             CheckedExpr(..) => 0,
         }
@@ -95,7 +95,7 @@ impl PartialTypeError {
 
                     self.0.push_insert("", span, s);
                 }
-                CheckedExpr(span) | BareFuncArg(span) => self.0.push_insert("(", span, ": _)"),
+                CheckedExpr(span) | BareVarPattern(span) => self.0.push_insert("(", span, ": _)"),
             }
         } else {
             // If there were no type inference variables we could hint for, try flow roots instead

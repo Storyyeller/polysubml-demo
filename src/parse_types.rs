@@ -633,7 +633,7 @@ impl<'a> TypeParser<'a> {
         &mut self,
         pat: &ast::LetPattern,
         out: &mut ParsedBindings,
-        is_bare_func_arg: bool,
+        no_typed_var_allowed: bool,
     ) -> Result<RcParsedType> {
         use ast::LetPattern::*;
 
@@ -643,10 +643,10 @@ impl<'a> TypeParser<'a> {
                     self.parse_type_sub(tyexpr)?
                 } else {
                     let head = if name.is_some() {
-                        // If pattern is a bare function arg, it needs to be
-                        // surrounded in pathenthesis when adding a type annotation
-                        let src = if is_bare_func_arg {
-                            HoleSrc::BareFuncArg(span)
+                        // If pattern does not allow unpathenthesized typed vars, it needs to be
+                        // surrounded in pathenthesis when adding a type annotation.
+                        let src = if no_typed_var_allowed {
+                            HoleSrc::BareVarPattern(span)
                         } else {
                             HoleSrc::OptAscribe(span)
                         };
@@ -663,7 +663,7 @@ impl<'a> TypeParser<'a> {
             }
 
             &Case((tag, span), ref val_pat) => {
-                let sub = self.parse_let_pattern_sub(val_pat, out, false)?;
+                let sub = self.parse_let_pattern_sub(val_pat, out, true)?;
 
                 let deps = sub.0.clone();
                 let mut m = HashMap::new();
