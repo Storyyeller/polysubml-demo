@@ -109,6 +109,15 @@ print (add_curried 4) 22; // 26;
 (`Foo 3: [`Foo of int | `Bar float]);
 
 
+let {type t; a: t; b: t->t} = {a=3; b=fun x->x+1};
+let ref = loop `Break {mut v=`None 0};
+
+ref.v <- `Some a;
+match ref.v with 
+| `Some (a: t) -> b a
+| `None _ -> 0
+;
+
 
 
 
@@ -177,3 +186,34 @@ let x = {a=4; mut b=6; c=9};
 print x; // {a=4; b=6; c=9}
 x.b <= x.b + 11;
 print x; // {a=4; b=17; c=9}
+
+### Bad
+let ref = {mut v=`None 0};
+let {type t; a: t; b: t->t} = {a=3; b=fun x->x+1};
+
+ref.v <- `Some a;
+match ref.v with
+| `Some a -> b a
+| `None _ -> 0
+;
+
+### Bad
+let {type t; a: t; b: t->t; ref: _} = {a=3; b=fun x->x+1; ref={mut v=`None 0}};
+
+ref.v <- `Some a;
+match ref.v with
+| `Some a -> b a
+| `None _ -> 0
+;
+
+
+### Bad
+let ref = loop `Break {mut v=`None 0};
+
+let {type t; a: t; b: t->t} = {a=3; b=fun x->x+1};
+
+ref.v <- `Some a;
+match ref.v with
+| `Some (a: t) -> b a
+| `None _ -> 0
+;

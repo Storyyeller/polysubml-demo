@@ -451,7 +451,6 @@ pub struct TypeCheckerCore {
     // Only public for instantiation.rs
     pub r: reachability::Reachability<TypeNode, TypeEdge>,
     pub type_ctors: Vec<TypeCtor>,
-    pub scopelvl: ScopeLvl,
     pub flowcount: u32,
     pub varcount: u32,
 }
@@ -460,7 +459,6 @@ impl TypeCheckerCore {
         Self {
             r: Reachability::new(),
             type_ctors: Vec::new(),
-            scopelvl: ScopeLvl(0),
             flowcount: 0,
             varcount: 0,
         }
@@ -474,9 +472,9 @@ impl TypeCheckerCore {
     pub fn add_builtin_type(&mut self, name: StringId) -> TypeCtorInd {
         self.add_type_ctor(TypeCtor::new(name, None, ScopeLvl(0)))
     }
-    pub fn add_abstract_type(&mut self, name: StringId, span: Span) -> TypeCtorInd {
+    pub fn add_abstract_type(&mut self, name: StringId, span: Span, scopelvl: ScopeLvl) -> TypeCtorInd {
         // println!("new abs ctor {} {}", name.into_inner(), self.type_ctors.len());
-        self.add_type_ctor(TypeCtor::new(name, Some(span), self.scopelvl))
+        self.add_type_ctor(TypeCtor::new(name, Some(span), scopelvl))
     }
 
     fn new_edge_context(&self, reason: FlowReason, scopelvl: ScopeLvl) -> TypeEdge {

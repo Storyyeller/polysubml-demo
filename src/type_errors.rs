@@ -259,7 +259,7 @@ pub fn type_escape_error(
 
     parts.push(
         format!(
-            "TypeError: Type {} defined here escapes its containing function or loop",
+            "TypeError: Type {} defined here escapes its scope",
             strings.resolve(&ty_ctor.name),
         ),
         ty_ctor.span.unwrap(),

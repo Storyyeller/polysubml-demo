@@ -24,26 +24,29 @@ use VTypeHead::*;
 
 type Result<T> = std::result::Result<T, SyntaxError>;
 
-type BindingsUnwindPoint = (UnwindPoint, UnwindPoint);
+type BindingsUnwindPoint = (UnwindPoint, UnwindPoint, ScopeLvl);
 pub struct Bindings {
     pub vars: UnwindMap<StringId, Value>,
     pub types: UnwindMap<StringId, TypeCtorInd>,
+    pub scopelvl: ScopeLvl,
 }
 impl Bindings {
     fn new() -> Self {
         Self {
             vars: UnwindMap::new(),
             types: UnwindMap::new(),
+            scopelvl: ScopeLvl(0),
         }
     }
 
     fn unwind_point(&mut self) -> BindingsUnwindPoint {
-        (self.vars.unwind_point(), self.types.unwind_point())
+        (self.vars.unwind_point(), self.types.unwind_point(), self.scopelvl)
     }
 
     fn unwind(&mut self, n: BindingsUnwindPoint) {
         self.vars.unwind(n.0);
         self.types.unwind(n.1);
+        self.scopelvl = n.2;
     }
 
     fn make_permanent(&mut self, n: BindingsUnwindPoint) {
@@ -92,13 +95,13 @@ impl TypeckState {
 
     fn parse_type_signature(&mut self, tyexpr: &ast::STypeExpr) -> Result<(Value, Use)> {
         let temp = TypeParser::new(&self.bindings.types).parse_type(tyexpr)?;
-        let mut mat = TreeMaterializerState::new();
+        let mut mat = TreeMaterializerState::new(self.bindings.scopelvl);
         Ok(mat.with(&mut self.core).add_type(temp))
     }
 
     fn process_let_pattern(&mut self, pat: &ast::LetPattern) -> Result<Use> {
         let temp = TypeParser::new(&self.bindings.types).parse_let_pattern(pat)?;
-        let mut mat = TreeMaterializerState::new();
+        let mut mat = TreeMaterializerState::new(self.bindings.scopelvl);
         Ok(mat.with(&mut self.core).add_pattern(temp, &mut self.bindings))
     }
 
@@ -169,9 +172,7 @@ impl TypeckState {
                     None,
                     full_span,
                 );
-                self.core.scopelvl.0 += 1;
                 self.check_expr(strings, expr, bound)?;
-                self.core.scopelvl.0 -= 1;
             }
             &Match((ref match_expr, arg_span), ref cases, full_span) => {
                 // Bounds from the match arms
@@ -248,7 +249,7 @@ impl TypeckState {
                 // Span is just an arbitrary span (usually that of the current expression) used
                 // to help users diagnose cause of a type error that doesn't go through any holes.
                 let t = self.infer_expr(strings, expr)?;
-                self.core.flow(strings, t, bound, *span, self.core.scopelvl)?;
+                self.core.flow(strings, t, bound, *span, self.bindings.scopelvl)?;
             }
         };
         Ok(())
@@ -312,15 +313,13 @@ impl TypeckState {
                 )?;
 
                 let mark = self.bindings.unwind_point();
-                self.core.scopelvl.0 += 1;
-                let mut mat = TreeMaterializerState::new();
+                let mut mat = TreeMaterializerState::new(self.bindings.scopelvl);
                 let mut mat = mat.with(&mut self.core);
                 let func_type = mat.add_func_type(&parsed);
                 let ret_bound = mat.add_func_sig(parsed, &mut self.bindings);
 
                 self.check_expr(strings, body_expr, ret_bound)?;
 
-                self.core.scopelvl.0 -= 1;
                 self.bindings.unwind(mark);
                 Ok(func_type)
             }
@@ -383,7 +382,7 @@ impl TypeckState {
                     if *mutable {
                         let temp =
                             TypeParser::new(&self.bindings.types).parse_type_or_hole(type_annot.as_ref(), *name_span)?;
-                        let mut mat = TreeMaterializerState::new();
+                        let mut mat = TreeMaterializerState::new(self.bindings.scopelvl);
                         let (v, u) = mat.with(&mut self.core).add_type(temp);
 
                         self.check_expr(strings, expr, u)?;
@@ -425,7 +424,7 @@ impl TypeckState {
             | Loop(_, span)
             | InstantiateUni(_, _, _, span)
             | Match(_, _, span) => {
-                let (v, u) = self.core.var(HoleSrc::CheckedExpr(*span), self.core.scopelvl);
+                let (v, u) = self.core.var(HoleSrc::CheckedExpr(*span), self.bindings.scopelvl);
                 self.check_expr(strings, expr, u)?;
                 Ok(v)
             }
@@ -452,7 +451,7 @@ impl TypeckState {
         }
 
         let parsed = TypeParser::new(&self.bindings.types).parse_let_pattern(lhs)?;
-        let mut mat = TreeMaterializerState::new();
+        let mut mat = TreeMaterializerState::new(self.bindings.scopelvl);
 
         // Important: The RHS of a let needs to be evaluated *before* we add the bindings from the LHS
         // However, we need to compute the bound (use type) of the lhs pattern so that we can check
@@ -468,7 +467,7 @@ impl TypeckState {
 
     fn check_let_rec_defs(&mut self, strings: &mut lasso::Rodeo, defs: &Vec<ast::LetRecDefinition>) -> Result<()> {
         // Important: Must use the same materializer state when materializing the outer and inner function types
-        let mut mat = TreeMaterializerState::new();
+        let mut mat = TreeMaterializerState::new(self.bindings.scopelvl);
 
         let mut temp = Vec::new();
         // Parse the function signatures
@@ -500,12 +499,10 @@ impl TypeckState {
         // Now process the body of each function definition one by one
         for (parsed, body) in temp {
             let mark = self.bindings.unwind_point();
-            self.core.scopelvl.0 += 1;
 
             let ret_bound = mat.with(&mut self.core).add_func_sig(parsed, &mut self.bindings);
             self.check_expr(strings, body, ret_bound)?;
 
-            self.core.scopelvl.0 -= 1;
             self.bindings.unwind(mark);
         }
 

@@ -94,12 +94,15 @@ pub struct ParsedFuncSig {
 pub struct TreeMaterializerState {
     cache: HashMap<*const ParsedType, (Value, Use)>,
     rec_types: HashMap<SourceLoc, ((Value, Use), PolyDeps)>,
+    /// ScopeLvl to use when creating holes - note that this will be lower than for abstract types that are added
+    scopelvl: ScopeLvl,
 }
 impl TreeMaterializerState {
-    pub fn new() -> Self {
+    pub fn new(scopelvl: ScopeLvl) -> Self {
         Self {
             cache: HashMap::new(),
             rec_types: HashMap::new(),
+            scopelvl,
         }
     }
 
@@ -108,6 +111,7 @@ impl TreeMaterializerState {
             core,
             cache: &mut self.cache,
             rec_types: &mut self.rec_types,
+            scopelvl: self.scopelvl,
         }
     }
 }
@@ -116,6 +120,7 @@ pub struct TreeMaterializer<'a> {
     core: &'a mut TypeCheckerCore,
     cache: &'a mut HashMap<*const ParsedType, (Value, Use)>,
     rec_types: &'a mut HashMap<SourceLoc, ((Value, Use), PolyDeps)>,
+    scopelvl: ScopeLvl,
 }
 impl<'a> TreeMaterializer<'a> {
     fn eval(&self, deps: &PolyAndRecDeps) -> PolyDeps {
@@ -250,7 +255,7 @@ impl<'a> TreeMaterializer<'a> {
 
             &Bot => (self.core.bot(), self.core.new_use(UTypeHead::UBot, ty.1, None)),
             &Top => (self.core.new_val(VTypeHead::VTop, ty.1, None), self.core.top_use()),
-            &Hole(src) => self.core.var(src, self.core.scopelvl),
+            &Hole(src) => self.core.var(src, self.scopelvl),
         }
     }
 
@@ -284,6 +289,10 @@ impl<'a> TreeMaterializer<'a> {
             .collect();
         let mut ret_type = self.materialize_tree(&ret_type).1;
 
+        if !parsed.types.is_empty() {
+            bindings.scopelvl.0 += 1;
+        }
+
         let mut new_types = HashMap::new();
         // Now see if we have to instantiate type parameters to local abstract types
         for spec in parsed.poly_heads {
@@ -291,7 +300,7 @@ impl<'a> TreeMaterializer<'a> {
                 .params
                 .iter()
                 .copied()
-                .map(|(name, span)| (name, self.core.add_abstract_type(name, span)))
+                .map(|(name, span)| (name, self.core.add_abstract_type(name, span, bindings.scopelvl)))
                 .collect();
 
             let mut ctx = InstantionContext::new(self.core, Substitutions::Abs(&subs), spec.loc);
