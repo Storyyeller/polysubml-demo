@@ -99,8 +99,8 @@ impl TypeckState {
         Ok(mat.with(&mut self.core).add_type(temp))
     }
 
-    fn process_let_pattern(&mut self, pat: &ast::LetPattern) -> Result<Use> {
-        let temp = TypeParser::new(&self.bindings.types).parse_let_pattern(pat)?;
+    fn process_let_pattern(&mut self, pat: &ast::LetPattern, no_typed_var_allowed: bool) -> Result<Use> {
+        let temp = TypeParser::new(&self.bindings.types).parse_let_pattern(pat, no_typed_var_allowed)?;
         let mut mat = TreeMaterializerState::new(self.bindings.scopelvl);
         Ok(mat.with(&mut self.core).add_pattern(temp, &mut self.bindings))
     }
@@ -197,7 +197,7 @@ impl TypeckState {
                             }
 
                             let mark = self.bindings.unwind_point();
-                            let pattern_bound = self.process_let_pattern(val_pat)?;
+                            let pattern_bound = self.process_let_pattern(val_pat, true)?;
                             // Note: bound is bound for the result types, not the pattern
                             self.check_expr(strings, rhs_expr, bound)?;
                             case_type_pairs.push((*tag, pattern_bound));
@@ -224,7 +224,7 @@ impl TypeckState {
                             wildcard = Some(*pattern_span);
 
                             let mark = self.bindings.unwind_point();
-                            let pattern_bound = self.process_let_pattern(pattern)?;
+                            let pattern_bound = self.process_let_pattern(pattern, true)?;
                             // Note: bound is bound for the result types, not the pattern
                             self.check_expr(strings, rhs_expr, bound)?;
                             wildcard_type = Some(pattern_bound);
@@ -450,7 +450,7 @@ impl TypeckState {
             };
         }
 
-        let parsed = TypeParser::new(&self.bindings.types).parse_let_pattern(lhs)?;
+        let parsed = TypeParser::new(&self.bindings.types).parse_let_pattern(lhs, false)?;
         let mut mat = TreeMaterializerState::new(self.bindings.scopelvl);
 
         // Important: The RHS of a let needs to be evaluated *before* we add the bindings from the LHS

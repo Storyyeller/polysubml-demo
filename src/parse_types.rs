@@ -706,9 +706,9 @@ impl<'a> TypeParser<'a> {
         })
     }
 
-    pub fn parse_let_pattern(&mut self, pat: &ast::LetPattern) -> Result<ParsedLetPattern> {
+    pub fn parse_let_pattern(&mut self, pat: &ast::LetPattern, no_typed_var_allowed: bool) -> Result<ParsedLetPattern> {
         let mut out = ParsedBindings::default();
-        let ty = self.parse_let_pattern_sub(pat, &mut out, false)?;
+        let ty = self.parse_let_pattern_sub(pat, &mut out, no_typed_var_allowed)?;
         Ok(ParsedLetPattern(ty, out))
     }
 
