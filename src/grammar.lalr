@@ -19,10 +19,9 @@ match {
 }
 
 
-
-Ident: ast::StringId = <r"[a-z_]\w*"> => ctx.strings.get_or_intern(<>);
-Tag: ast::StringId = <r"`[A-Z0-9]\w*"> => ctx.strings.get_or_intern(&<>[1..]);
-StringIdent: String = r"[a-z_]\w*"=> String::from(<>);
+StringIdent: &'input str = r"[A-Za-z_]\w*"=> <>;
+Ident: ast::StringId = StringIdent => ctx.strings.get_or_intern(<>);
+Tag: ast::StringId = "`" <Ident>;
 
 IntLiteral: String = {
     <l: @L> <s: r"-?(?:[0-9]+)"> <r: @R> =>? {
@@ -221,15 +220,15 @@ Record: ast::Expr = {
 }
 
 VarOrLiteral: ast::Expr = {
-    Spanned<StringIdent> =>
-        match <>.0.as_str() {
-            "false" | "true" => ast::Expr::Literal(ast::Literal::Bool, <>),
-            _ => {
-                let (s, span) = <>;
+    Spanned<StringIdent> => {
+        let (s, span) = <>;
+        match s {
+            "false" | "true" => ast::Expr::Literal(ast::Literal::Bool, (String::from(s), span)),
+            _ => {        
                 ast::Expr::Variable((ctx.strings.get_or_intern(s), span))
             }
         }
-    ,
+    },
 
     Spanned<FloatLiteral> => ast::Expr::Literal(ast::Literal::Float, <>),
     Spanned<IntLiteral> => ast::Expr::Literal(ast::Literal::Int, <>),

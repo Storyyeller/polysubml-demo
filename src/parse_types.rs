@@ -530,10 +530,13 @@ impl<'a> TypeParser<'a> {
             &Poly(ref params, ref def, kind) => {
                 let loc = SourceLoc(span);
                 let mark = self.local_types.unwind_point();
-                self.join_allowed.insert(loc, match kind {
-                    PolyKind::Universal => JoinKind::Union,
-                    PolyKind::Existential => JoinKind::Intersect,
-                });
+                self.join_allowed.insert(
+                    loc,
+                    match kind {
+                        PolyKind::Universal => JoinKind::Union,
+                        PolyKind::Existential => JoinKind::Intersect,
+                    },
+                );
 
                 let mut parsed_params = HashMap::new();
                 for param in params.iter().copied() {
