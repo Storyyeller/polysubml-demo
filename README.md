@@ -111,7 +111,7 @@ false
 
 PolySubML is an expression oriented language where nearly everything is an expression, including conditionals, loops, function definitions, and more. However, it also has statement-like syntax.
 
-In Ocaml, the basic assignment expression is `let v = expr1 in expr2`, where variable `v` is in scope for `expr2`. This works all right in simple cases, but becomes annoying when you have a long sequence of assignments (e.g. `let a = 4 in let b = a + 3 in let c = a * b in let d = c / b in d + a`). 
+In OCaml, the basic assignment expression is `let v = expr1 in expr2`, where variable `v` is in scope for `expr2`. This works all right in simple cases, but becomes annoying when you have a long sequence of assignments (e.g. `let a = 4 in let b = a + 3 in let c = a * b in let d = c / b in d + a`). 
 
 PolySubML supports the traditional `let v = expr1 in expr2` syntax, but it *also* allows you to use a `;` in place of `in`, e.g. `let v = expr1; expr2`. The two are exactly equivalent, except for parsing precedence (`;` has the lowest precedence, so you'll usually have to surround the block in parenthesis). This is much more convenient when chaining assignments and allows you to write imperative-style code like this:
 
@@ -127,7 +127,7 @@ let x = (
 
 > *You can also group expressions using `begin ... end` instead of `( ... )` if you want.*
 
-Note that everything is still an expression, which means that these statement-block like expressions still have to end in an expression. For example, `(let a = 3; let b = 3;)` is not valid because there's no trailing expression in the block. The exception is at the top level of a source file. At the top level, a source file consists of zero or more statements with no trailing expression.
+Note that everything is still an expression, which means that these "statement block" expressions still have to end in an expression. For example, `(let a = 3; let b = 3;)` is not valid because there's no trailing expression in the block. The exception is at the top level of a source file. At the top level, a source file consists of zero or more statements with no trailing expression.
 
 For convenience, PolySubML also includes a print "statement", which prints one or more comma separated expressions to the console:
 
@@ -151,7 +151,7 @@ Records are a grouping of zero or more named values similar to "objects" or "str
 
 There is a special shorthand syntax for fields with the same name as their value - `{a; b; c=4}` is equivalent to `{a=a; b=b; c=4}`.
 
-Unlike in Ocaml, records in PolySubML are anonymous and structurally typed. A record with more fields is a subtype of a record with fewer fields, leading to a "compile time duck typing" effect.
+Unlike in OCaml, records in PolySubML are anonymous and structurally typed. A record with more fields is a subtype of a record with fewer fields, leading to a "compile time duck typing" effect.
 
 For example, this code typechecks even though the branches of the if expression are records with different sets of fields. 
 
@@ -317,7 +317,7 @@ evaluates to `"Hello"`, while
 
 evaluates to `"Bob"`. 
 
-> *Note: Unlike in Ocaml, function application is right-associative rather than left-associative. In other words, `a b c` is parsed as `a (b c)`, rather than `(a b) c` like it would be in Ocaml.
+> Note: Unlike in OCaml, function application is right-associative rather than left-associative. In other words, `a b c` is parsed as `a (b c)`, rather than `(a b) c` like it would be in OCaml.
 
 #### Multiple arguments
 
@@ -446,7 +446,7 @@ calculate_area2 `Square {len=9.17};
 
 #### Match ordering
 
-Unlike in some languages, PolySubML requires match expressions to be *exhaustive*, meaning that any unhandled variants result in a compile time error (unless you include a wildcard match). 
+PolySubML requires match expressions to be *exhaustive*, meaning that any unhandled variants result in a compile time error (unless you include a wildcard match). 
 
 Furthermore, PolySubML **matches are order-independent and match exactly one level of tags** per match expression. For example, consider this code:
 
@@ -489,7 +489,7 @@ match x with
 | `Foo _ -> "hello"
 ```
 
-In languages with order-dependent match expressions, this would evaluate to "world" because everything matches the wildcard and all other arms are unreachable. However, in PolySubML, matching is order independent, so this evaluates to "hello" instead. Additionally, in PolySubML, it is a compile error if the same variant is matched twice in a match expression, or if there are multiple wildcards, rather than extra arms just being silently unreachable like they are in other languages.
+In languages with order-dependent match expressions, this would evaluate to "world" because everything matches the wildcard and all other arms are unreachable. However, in PolySubML, matching is order independent, so this evaluates to "hello" instead. Additionally, in PolySubML, it is a compile error if the same variant is matched twice in a match expression, or if there are multiple wildcards.
 
 
 
@@ -505,7 +505,7 @@ PolySubML's powerful type inference means that no type annotations are required 
 
 First off, expressions can manually be annotated with a type via `(expr : type)`, e.g. `(24 : int)` or `(fun x -> x : str -> str)`.
 
-Second, type annotations can be added to any variable pattern, e.g. `let a: int = 43;`. This applies to anywhere that variable patterns can appear, including `let`, `match` arms, function arguments, and nested in other patterns.
+Second, type annotations can be added to any variable pattern, e.g. `let a: int = 43;`. This applies to anywhere that variable patterns can appear, including `let`, `match` arms, function arguments, and nested in other patterns. 
 
 ```ocaml
 let (a: int, b: str, c, d: float) = 1, "", "", 3.2;
@@ -517,6 +517,8 @@ match `Foo {x=32} with
 
 let add = fun {a: int; b: int} -> a + b;
 ```
+
+You can even add type annotations to `_` variable patterns, e.g. (`let _: int = 42;`). They don't actually bind a variable, but the type constraint will still be applied.
 
 When adding a type annotation to a bare variable pattern in a match arm or function argument, it has to be surrounded in parenthesis:
 
@@ -541,7 +543,7 @@ let r = {
 };
 ```
 
-Lastly, you can also annotation the return type of a function definition. This goes after the argument pattern and before the `->`:
+Lastly, you can also annotate the return type of a function definition. This goes after the argument pattern and before the `->`:
 
 ```ocaml
 let add = fun {a: int; b: int} : int -> a + b;
@@ -559,7 +561,7 @@ let add_curried = fun (a: int) : (int -> int) ->
 print (add_curried 4) 22; // 26
 ```
 
-This is necessary to avoid ambiguity with the `->` indicating the function body. Ocaml requires types and expressions to use different capitalization so they are syntactically distinct and there is no ambiguity. However, PolySubML has no such restriction on capitalization, so parenthesis are needed to disambiguate this specific case.
+This is necessary to avoid ambiguity with the `->` indicating the function body. OCaml requires types and expressions to use different capitalization so they are syntactically distinct and there is no ambiguity. However, PolySubML has no such restriction on capitalization, so parenthesis are needed to disambiguate this specific case.
 
 #### How do I write type annotations?
 
@@ -582,7 +584,7 @@ In rare cases, you may want to specify separate read and write types, which can 
 
 * Variant types: ``[`Foo int | `Bar float]``
 
-> Note: Ocaml requires an "of" between the tag and type, e.g. ``[`Foo of int]``. In PolySubML, the "of" is optional.
+> Note: OCaml requires an "of" between the tag and type, e.g. ``[`Foo of int]``. In PolySubML, the "of" is optional.
 
 > Note: The list of cases cannot be empty. `[]` is not a valid type. Use `never` instead.
 
