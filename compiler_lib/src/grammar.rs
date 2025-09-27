@@ -1,8 +1,8 @@
 // auto-generated: "lalrpop 0.22.0"
 // sha3: aea5d7caf2c097e002ecd45e6420e8d45851e877b2fa8f5d5a413a40ada39c70
-use lalrpop_util::ParseError;
 use super::ast;
 use super::spans;
+use lalrpop_util::ParseError;
 #[allow(unused_extern_crates)]
 extern crate lalrpop_util as ___lalrpop_util;
 #[allow(unused_imports)]
@@ -12677,74 +12677,59 @@ pub(crate) use self::___lalrpop_util::lexer::Token;
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action0<
-    'input,
->(
+fn ___action0<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, Vec<ast::Statement>, usize),
-) -> Vec<ast::Statement>
-{
+) -> Vec<ast::Statement> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action1<
-    'input,
->(
+fn ___action1<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, &'input str, usize),
-) -> &'input str
-{
+) -> &'input str {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action2<
-    'input,
->(
+fn ___action2<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, &'input str, usize),
-) -> ast::StringId
-{
+) -> ast::StringId {
     ctx.strings.get_or_intern(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action3<
-    'input,
->(
+fn ___action3<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, ast::StringId, usize),
-) -> ast::StringId
-{
+) -> ast::StringId {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action4<
-    'input,
->(
+fn ___action4<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, s, _): (usize, &'input str, usize),
     (_, r, _): (usize, usize, usize),
-) -> Result<String,___lalrpop_util::ParseError<usize,Token<'input>,(&'static str, spans::Span)>>
-{
+) -> Result<String, ___lalrpop_util::ParseError<usize, Token<'input>, (&'static str, spans::Span)>> {
     {
         let s2 = s.trim_start_matches('-');
         if s2 != "0" && s2.starts_with("0") {
             Err(ParseError::User {
-                error: ("SyntaxError: Numbers can't contain leading 0s", ctx.span_maker.span(l, r))
+                error: ("SyntaxError: Numbers can't contain leading 0s", ctx.span_maker.span(l, r)),
             })
         } else {
             Ok(String::from(s))
@@ -12754,79 +12739,62 @@ fn ___action4<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action5<
-    'input,
->(
+fn ___action5<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, &'input str, usize),
-) -> String
-{
+) -> String {
     String::from(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action6<
-    'input,
->(
+fn ___action6<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, &'input str, usize),
-) -> String
-{
+) -> String {
     String::from(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action7<
-    'input,
->(
+fn ___action7<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, &'input str, usize),
-) -> &'input str
-{
+) -> &'input str {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action8<
-    'input,
->(
+fn ___action8<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, name, _): (usize, spans::Spanned<ast::StringId>, usize),
     (_, _, _): (usize, &'input str, usize),
     (_, ty, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> ast::KeyPairType
-{
+) -> ast::KeyPairType {
     (name, ast::FieldTypeDecl::Imm(ty))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action9<
-    'input,
->(
+fn ___action9<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, name, _): (usize, spans::Spanned<ast::StringId>, usize),
     (_, _, _): (usize, &'input str, usize),
     (_, ty, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> ast::KeyPairType
-{
+) -> ast::KeyPairType {
     (name, ast::FieldTypeDecl::RWSame(ty))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action10<
-    'input,
->(
+fn ___action10<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
@@ -12835,50 +12803,44 @@ fn ___action10<
     (_, ty, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
     (_, _, _): (usize, &'input str, usize),
     (_, ty2, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> ast::KeyPairType
-{
+) -> ast::KeyPairType {
     (name, ast::FieldTypeDecl::RWPair(ty, ty2))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action11<
-    'input,
->(
+fn ___action11<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, alloc::vec::Vec<ast::TypeParam>, usize),
-) -> alloc::vec::Vec<ast::TypeParam>
-{
+) -> alloc::vec::Vec<ast::TypeParam> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action12<
-    'input,
->(
+fn ___action12<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, alloc::vec::Vec<ast::TypeParam>, usize),
     (_, ___1, _): (usize, Vec<ast::KeyPairType>, usize),
     (_, _, _): (usize, &'input str, usize),
-) -> (alloc::vec::Vec<ast::TypeParam>, Vec<ast::KeyPairType>)
-{
+) -> (alloc::vec::Vec<ast::TypeParam>, Vec<ast::KeyPairType>) {
     (___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action13<
-    'input,
->(
+fn ___action13<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    (_, ___0, _): (usize, spans::Spanned<(alloc::vec::Vec<ast::TypeParam>, Vec<ast::KeyPairType>)>, usize),
-) -> ast::TypeExpr
-{
+    (_, ___0, _): (
+        usize,
+        spans::Spanned<(alloc::vec::Vec<ast::TypeParam>, Vec<ast::KeyPairType>)>,
+        usize,
+    ),
+) -> ast::TypeExpr {
     {
         let ((types, fields), span) = ___0;
         let base_type = ast::TypeExpr::Record(fields);
@@ -12886,51 +12848,46 @@ fn ___action13<
         if !types.is_empty() {
             ast::TypeExpr::Poly(types, Box::new((base_type, span)), ast::PolyKind::Existential)
         } else {
-            base_type 
+            base_type
         }
     }
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action14<
-    'input,
->(
+fn ___action14<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::StringId>, usize),
     (_, _, _): (usize, Option<&'input str>, usize),
     (_, ___1, _): (usize, Box<spans::Spanned<ast::TypeExpr>>, usize),
-) -> (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)
-{
+) -> (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>) {
     (___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action15<
-    'input,
->(
+fn ___action15<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
-    (_, ___0, _): (usize, Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>, usize),
+    (_, ___0, _): (
+        usize,
+        Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>,
+        usize,
+    ),
     (_, _, _): (usize, &'input str, usize),
-) -> ast::TypeExpr
-{
+) -> ast::TypeExpr {
     ast::TypeExpr::Case(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action16<
-    'input,
->(
+fn ___action16<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::StringId, usize),
-) -> ast::TypeExpr
-{
+) -> ast::TypeExpr {
     {
         match ctx.strings.resolve(&___0) {
             "any" => ast::TypeExpr::Top,
@@ -12943,183 +12900,159 @@ fn ___action16<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action17<
-    'input,
->(
+fn ___action17<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::TypeExpr, usize),
-) -> ast::TypeExpr
-{
+) -> ast::TypeExpr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action18<
-    'input,
->(
+fn ___action18<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::TypeExpr, usize),
-) -> ast::TypeExpr
-{
+) -> ast::TypeExpr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action19<
-    'input,
->(
+fn ___action19<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, ast::TypeExpr, usize),
     (_, _, _): (usize, &'input str, usize),
-) -> ast::TypeExpr
-{
+) -> ast::TypeExpr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action20<
-    'input,
->(
+fn ___action20<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<Vec<spans::Spanned<ast::TypeExpr>>>, usize),
-) -> ast::TypeExpr
-{
+) -> ast::TypeExpr {
     {
-        ast::make_tuple_ast(___0, &mut ctx.strings, 
+        ast::make_tuple_ast(
+            ___0,
+            &mut ctx.strings,
             |name, sub| (name, ast::FieldTypeDecl::Imm((sub, name.1))),
-            |fields, full_span| ast::TypeExpr::Record(fields))
+            |fields, full_span| ast::TypeExpr::Record(fields),
+        )
     }
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action21<
-    'input,
->(
+fn ___action21<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, Vec<spans::Spanned<ast::TypeExpr>>, usize),
-) -> ast::TypeExpr
-{
+) -> ast::TypeExpr {
     ast::make_join_ast(ast::JoinKind::Intersect, ___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action22<
-    'input,
->(
+fn ___action22<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, Vec<spans::Spanned<ast::TypeExpr>>, usize),
-) -> ast::TypeExpr
-{
+) -> ast::TypeExpr {
     ast::make_join_ast(ast::JoinKind::Union, ___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action23<
-    'input,
->(
+fn ___action23<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::TypeExpr, usize),
-) -> ast::TypeExpr
-{
+) -> ast::TypeExpr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action24<
-    'input,
->(
+fn ___action24<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action25<
-    'input,
->(
+fn ___action25<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, spans::Spanned<ast::StringId>, usize),
-) -> spans::Spanned<ast::StringId>
-{
+) -> spans::Spanned<ast::StringId> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action26<
-    'input,
->(
+fn ___action26<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::StringId>, usize),
     (_, ___1, _): (usize, Option<spans::Spanned<ast::StringId>>, usize),
-) -> ast::TypeParam
-{
+) -> ast::TypeParam {
     ast::TypeParam::new(___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action27<
-    'input,
->(
+fn ___action27<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, alloc::vec::Vec<ast::TypeParam>, usize),
     (_, _, _): (usize, &'input str, usize),
-) -> alloc::vec::Vec<ast::TypeParam>
-{
+) -> alloc::vec::Vec<ast::TypeParam> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action28<
-    'input,
->(
+fn ___action28<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, Option<alloc::vec::Vec<ast::TypeParam>>, usize),
     (_, ___1, _): (usize, Box<spans::Spanned<ast::TypeExpr>>, usize),
     (_, _, _): (usize, &'input str, usize),
     (_, ___2, _): (usize, Box<spans::Spanned<ast::TypeExpr>>, usize),
-) -> (Option<alloc::vec::Vec<ast::TypeParam>>, Box<spans::Spanned<ast::TypeExpr>>, Box<spans::Spanned<ast::TypeExpr>>)
-{
+) -> (
+    Option<alloc::vec::Vec<ast::TypeParam>>,
+    Box<spans::Spanned<ast::TypeExpr>>,
+    Box<spans::Spanned<ast::TypeExpr>>,
+) {
     (___0, ___1, ___2)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action29<
-    'input,
->(
+fn ___action29<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    (_, ___0, _): (usize, spans::Spanned<(Option<alloc::vec::Vec<ast::TypeParam>>, Box<spans::Spanned<ast::TypeExpr>>, Box<spans::Spanned<ast::TypeExpr>>)>, usize),
-) -> ast::TypeExpr
-{
+    (_, ___0, _): (
+        usize,
+        spans::Spanned<(
+            Option<alloc::vec::Vec<ast::TypeParam>>,
+            Box<spans::Spanned<ast::TypeExpr>>,
+            Box<spans::Spanned<ast::TypeExpr>>,
+        )>,
+        usize,
+    ),
+) -> ast::TypeExpr {
     {
         let ((types, arg, ret), span) = ___0;
         let base_type = ast::TypeExpr::Func(arg, ret);
@@ -13127,89 +13060,71 @@ fn ___action29<
         if let Some(types) = types {
             ast::TypeExpr::Poly(types, Box::new((base_type, span)), ast::PolyKind::Universal)
         } else {
-            base_type 
+            base_type
         }
     }
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action30<
-    'input,
->(
+fn ___action30<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::TypeExpr, usize),
-) -> ast::TypeExpr
-{
+) -> ast::TypeExpr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action31<
-    'input,
->(
+fn ___action31<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::TypeExpr, usize),
-) -> ast::TypeExpr
-{
+) -> ast::TypeExpr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action32<
-    'input,
->(
+fn ___action32<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, ast::StringId, usize),
     (_, _, _): (usize, &'input str, usize),
     (_, ___1, _): (usize, Box<spans::Spanned<ast::TypeExpr>>, usize),
-) -> ast::TypeExpr
-{
+) -> ast::TypeExpr {
     ast::TypeExpr::RecursiveDef(___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action33<
-    'input,
->(
+fn ___action33<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action34<
-    'input,
->(
+fn ___action34<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::StringId>, usize),
-) -> spans::Spanned<ast::StringId>
-{
+) -> spans::Spanned<ast::StringId> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action35<
-    'input,
->(
+fn ___action35<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>)>, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     {
         let ((lhs, rhs), full_span) = ___0;
         ast::Expr::FieldAccess(lhs, rhs, full_span)
@@ -13218,44 +13133,46 @@ fn ___action35<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action36<
-    'input,
->(
+fn ___action36<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::StringId, usize),
     (_, _, _): (usize, &'input str, usize),
     (_, ___1, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> (ast::StringId, spans::Spanned<ast::TypeExpr>)
-{
+) -> (ast::StringId, spans::Spanned<ast::TypeExpr>) {
     (___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action37<
-    'input,
->(
+fn ___action37<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
-    (_, ___0, _): (usize, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, usize),
+    (_, ___0, _): (
+        usize,
+        spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+        usize,
+    ),
     (_, _, _): (usize, &'input str, usize),
-) -> spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>
-{
+) -> spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action38<
-    'input,
->(
+fn ___action38<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    (_, ___0, _): (usize, spans::Spanned<(spans::Spanned<Box<ast::Expr>>, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>)>, usize),
-) -> ast::Expr
-{
+    (_, ___0, _): (
+        usize,
+        spans::Spanned<(
+            spans::Spanned<Box<ast::Expr>>,
+            spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+        )>,
+        usize,
+    ),
+) -> ast::Expr {
     {
         let ((sub, types), span) = ___0;
         let kind = ast::InstantiateSourceKind::ExplicitParams(types.0.is_empty());
@@ -13265,14 +13182,18 @@ fn ___action38<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action39<
-    'input,
->(
+fn ___action39<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    (_, ___0, _): (usize, spans::Spanned<(spans::Spanned<Box<ast::Expr>>, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>)>, usize),
-) -> ast::Expr
-{
+    (_, ___0, _): (
+        usize,
+        spans::Spanned<(
+            spans::Spanned<Box<ast::Expr>>,
+            spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+        )>,
+        usize,
+    ),
+) -> ast::Expr {
     {
         // sub is only spanned here for compatibility with InstantiateUni rule, we don't actually need it
         let (((sub, _), types), full_span) = ___0;
@@ -13288,31 +13209,25 @@ fn ___action39<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action40<
-    'input,
->(
+fn ___action40<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, Box<ast::Expr>, usize),
-) -> Box<ast::Expr>
-{
+) -> Box<ast::Expr> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action41<
-    'input,
->(
+fn ___action41<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ismut, _): (usize, Option<&'input str>, usize),
     (_, name, _): (usize, spans::Spanned<ast::StringId>, usize),
     (_, ty, _): (usize, Option<spans::Spanned<ast::TypeExpr>>, usize),
     (_, expr, _): (usize, Option<Box<ast::Expr>>, usize),
-) -> ast::KeyPairExpr
-{
+) -> ast::KeyPairExpr {
     {
         let ismut = ismut.is_some();
         let expr = expr.unwrap_or_else(|| Box::new(ast::Expr::Variable(name)));
@@ -13322,59 +13237,61 @@ fn ___action41<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action42<
-    'input,
->(
+fn ___action42<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, ast::StringId, usize),
     (_, _, _): (usize, &'input str, usize),
     (_, ___1, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> (ast::StringId, spans::Spanned<ast::TypeExpr>)
-{
+) -> (ast::StringId, spans::Spanned<ast::TypeExpr>) {
     (___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action43<
-    'input,
->(
+fn ___action43<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action44<
-    'input,
->(
+fn ___action44<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
-    (_, ___0, _): (usize, spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, usize),
+    (_, ___0, _): (
+        usize,
+        spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+        usize,
+    ),
     (_, ___1, _): (usize, Vec<ast::KeyPairExpr>, usize),
     (_, _, _): (usize, &'input str, usize),
-) -> (spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, Vec<ast::KeyPairExpr>)
-{
+) -> (
+    spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+    Vec<ast::KeyPairExpr>,
+) {
     (___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action45<
-    'input,
->(
+fn ___action45<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    (_, ___0, _): (usize, spans::Spanned<(spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, Vec<ast::KeyPairExpr>)>, usize),
-) -> ast::Expr
-{
+    (_, ___0, _): (
+        usize,
+        spans::Spanned<(
+            spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+            Vec<ast::KeyPairExpr>,
+        )>,
+        usize,
+    ),
+) -> ast::Expr {
     {
         let ((types, fields), span) = ___0;
         let sub = ast::Expr::Record(fields, span);
@@ -13384,149 +13301,115 @@ fn ___action45<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action46<
-    'input,
->(
+fn ___action46<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<&'input str>, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     {
         let (s, span) = ___0;
         match s {
             "false" | "true" => ast::Expr::Literal(ast::Literal::Bool, (String::from(s), span)),
-            _ => {        
-                ast::Expr::Variable((ctx.strings.get_or_intern(s), span))
-            }
+            _ => ast::Expr::Variable((ctx.strings.get_or_intern(s), span)),
         }
     }
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action47<
-    'input,
->(
+fn ___action47<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<String>, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ast::Expr::Literal(ast::Literal::Float, ___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action48<
-    'input,
->(
+fn ___action48<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<String>, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ast::Expr::Literal(ast::Literal::Int, ___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action49<
-    'input,
->(
+fn ___action49<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<String>, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ast::Expr::Literal(ast::Literal::Str, ___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action50<
-    'input,
->(
+fn ___action50<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action51<
-    'input,
->(
+fn ___action51<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action52<
-    'input,
->(
+fn ___action52<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action53<
-    'input,
->(
+fn ___action53<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action54<
-    'input,
->(
+fn ___action54<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action55<
-    'input,
->(
+fn ___action55<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, ast::Expr, usize),
     (_, _, _): (usize, &'input str, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action56<
-    'input,
->(
+fn ___action56<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
@@ -13534,41 +13417,39 @@ fn ___action56<
     (_, _, _): (usize, &'input str, usize),
     (_, ___1, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
     (_, _, _): (usize, &'input str, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ast::Expr::Typed(___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action57<
-    'input,
->(
+fn ___action57<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, ast::Expr, usize),
     (_, _, _): (usize, &'input str, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action58<
-    'input,
->(
+fn ___action58<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<(spans::Spanned<ast::Expr>, Box<ast::Expr>)>, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     {
         let (((lhs, lhs_span), rhs), full_span) = ___0;
         let lhs = match lhs {
             ast::Expr::InstantiateUni(..) => lhs,
-            _ => ast::Expr::InstantiateUni((Box::new(lhs), lhs_span), (vec![], lhs_span), ast::InstantiateSourceKind::ImplicitCall, lhs_span),
+            _ => ast::Expr::InstantiateUni(
+                (Box::new(lhs), lhs_span),
+                (vec![], lhs_span),
+                ast::InstantiateSourceKind::ImplicitCall,
+                lhs_span,
+            ),
         };
         ast::Expr::Call(Box::new(lhs), rhs, full_span)
     }
@@ -13576,82 +13457,64 @@ fn ___action58<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action59<
-    'input,
->(
+fn ___action59<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::StringId>, usize),
     (_, ___1, _): (usize, Box<ast::Expr>, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ast::Expr::Case(___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action60<
-    'input,
->(
+fn ___action60<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action61<
-    'input,
->(
+fn ___action61<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action62<
-    'input,
->(
+fn ___action62<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action63<
-    'input,
->(
+fn ___action63<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, &'input str, usize),
-) -> (ast::OpType, ast::Op)
-{
+) -> (ast::OpType, ast::Op) {
     (ast::INT_OP, ast::Op::Mult)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action64<
-    'input,
->(
+fn ___action64<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, op, _): (usize, &'input str, usize),
     (_, r, _): (usize, usize, usize),
-) -> (ast::OpType, ast::Op)
-{
+) -> (ast::OpType, ast::Op) {
     {
         match op {
             // "*" => (ast::INT_OP, ast::Op::Mult),
@@ -13667,29 +13530,23 @@ fn ___action64<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action65<
-    'input,
->(
+fn ___action65<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action66<
-    'input,
->(
+fn ___action66<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, op, _): (usize, &'input str, usize),
     (_, r, _): (usize, usize, usize),
-) -> (ast::OpType, ast::Op)
-{
+) -> (ast::OpType, ast::Op) {
     {
         match op {
             "+" => (ast::INT_OP, ast::Op::Add),
@@ -13704,35 +13561,29 @@ fn ___action66<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action67<
-    'input,
->(
+fn ___action67<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action68<
-    'input,
->(
+fn ___action68<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, op, _): (usize, &'input str, usize),
     (_, r, _): (usize, usize, usize),
-) -> (ast::OpType, ast::Op)
-{
+) -> (ast::OpType, ast::Op) {
     {
         match op {
             "<" => (ast::INT_CMP, ast::Op::Lt),
             "<=" => (ast::INT_CMP, ast::Op::Lte),
             ">" => (ast::INT_CMP, ast::Op::Gt),
-            ">=" => (ast::INT_CMP, ast::Op::Gte), 
+            ">=" => (ast::INT_CMP, ast::Op::Gte),
 
             "<." => (ast::FLOAT_CMP, ast::Op::Lt),
             "<=." => (ast::FLOAT_CMP, ast::Op::Lte),
@@ -13748,321 +13599,272 @@ fn ___action68<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action69<
-    'input,
->(
+fn ___action69<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action70<
-    'input,
->(
+fn ___action70<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action71<
-    'input,
->(
+fn ___action71<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action72<
-    'input,
->(
+fn ___action72<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action73<
-    'input,
->(
+fn ___action73<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action74<
-    'input,
->(
+fn ___action74<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action75<
-    'input,
->(
+fn ___action75<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action76<
-    'input,
->(
+fn ___action76<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::StringId>, usize),
-) -> (Option<ast::StringId>, spans::Span)
-{
+) -> (Option<ast::StringId>, spans::Span) {
     {
         let (name, span) = ___0;
-        let name = if ctx.strings.resolve(&name) == "_" {None} else {Some(name)};
+        let name = if ctx.strings.resolve(&name) == "_" { None } else { Some(name) };
         (name, span)
     }
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action77<
-    'input,
->(
+fn ___action77<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action78<
-    'input,
->(
+fn ___action78<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, name, _): (usize, spans::Spanned<ast::StringId>, usize),
     (_, _, _): (usize, &'input str, usize),
     (_, pat, _): (usize, ast::LetPattern, usize),
-) -> (spans::Spanned<ast::StringId>, Box<ast::LetPattern>)
-{
+) -> (spans::Spanned<ast::StringId>, Box<ast::LetPattern>) {
     (name, Box::new(pat))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action79<
-    'input,
->(
+fn ___action79<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, name, _): (usize, spans::Spanned<ast::StringId>, usize),
     (_, ty, _): (usize, Option<spans::Spanned<ast::TypeExpr>>, usize),
-) -> (spans::Spanned<ast::StringId>, Box<ast::LetPattern>)
-{
+) -> (spans::Spanned<ast::StringId>, Box<ast::LetPattern>) {
     (name, Box::new(ast::LetPattern::Var((Some(name.0), name.1), ty)))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action80<
-    'input,
->(
+fn ___action80<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, alloc::vec::Vec<ast::TypeParam>, usize),
-) -> alloc::vec::Vec<ast::TypeParam>
-{
+) -> alloc::vec::Vec<ast::TypeParam> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action81<
-    'input,
->(
+fn ___action81<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, alloc::vec::Vec<ast::TypeParam>, usize),
     (_, ___1, _): (usize, Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>, usize),
     (_, _, _): (usize, &'input str, usize),
-) -> (alloc::vec::Vec<ast::TypeParam>, Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>)
-{
+) -> (
+    alloc::vec::Vec<ast::TypeParam>,
+    Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>,
+) {
     (___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action82<
-    'input,
->(
+fn ___action82<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<Vec<spans::Spanned<ast::LetPattern>>>, usize),
-) -> ast::LetPattern
-{
+) -> ast::LetPattern {
     {
-        ast::make_tuple_ast(___0, &mut ctx.strings, 
+        ast::make_tuple_ast(
+            ___0,
+            &mut ctx.strings,
             |name, sub| (name, Box::new(sub)),
-            |fields, full_span| ast::LetPattern::Record(((vec![], fields), full_span)))
+            |fields, full_span| ast::LetPattern::Record(((vec![], fields), full_span)),
+        )
     }
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action83<
-    'input,
->(
+fn ___action83<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::StringId>, usize),
     (_, ___1, _): (usize, Box<ast::LetPattern>, usize),
-) -> ast::LetPattern
-{
+) -> ast::LetPattern {
     ast::LetPattern::Case(___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action84<
-    'input,
->(
+fn ___action84<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    (_, ___0, _): (usize, spans::Spanned<(alloc::vec::Vec<ast::TypeParam>, Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>)>, usize),
-) -> ast::LetPattern
-{
+    (_, ___0, _): (
+        usize,
+        spans::Spanned<(
+            alloc::vec::Vec<ast::TypeParam>,
+            Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>,
+        )>,
+        usize,
+    ),
+) -> ast::LetPattern {
     ast::LetPattern::Record(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action85<
-    'input,
->(
+fn ___action85<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::LetPattern, usize),
-) -> ast::LetPattern
-{
+) -> ast::LetPattern {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action86<
-    'input,
->(
+fn ___action86<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, (Option<ast::StringId>, spans::Span), usize),
-) -> ast::LetPattern
-{
+) -> ast::LetPattern {
     ast::LetPattern::Var(___0, None)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action87<
-    'input,
->(
+fn ___action87<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::LetPattern, usize),
-) -> ast::LetPattern
-{
+) -> ast::LetPattern {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action88<
-    'input,
->(
+fn ___action88<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, (Option<ast::StringId>, spans::Span), usize),
     (_, ___1, _): (usize, Option<spans::Spanned<ast::TypeExpr>>, usize),
-) -> ast::LetPattern
-{
+) -> ast::LetPattern {
     ast::LetPattern::Var(___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action89<
-    'input,
->(
+fn ___action89<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::LetPattern, usize),
-) -> ast::LetPattern
-{
+) -> ast::LetPattern {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action90<
-    'input,
->(
+fn ___action90<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<Vec<spans::Spanned<ast::Expr>>>, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     {
-        ast::make_tuple_ast(___0, &mut ctx.strings, 
+        ast::make_tuple_ast(
+            ___0,
+            &mut ctx.strings,
             |name, sub| (name, Box::new(sub), false, None),
-            |fields, full_span| ast::Expr::Record(fields, full_span))
+            |fields, full_span| ast::Expr::Record(fields, full_span),
+        )
     }
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action91<
-    'input,
->(
+fn ___action91<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    (_, ___0, _): (usize, spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>, Box<ast::Expr>)>, usize),
-) -> ast::Expr
-{
+    (_, ___0, _): (
+        usize,
+        spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>, Box<ast::Expr>)>,
+        usize,
+    ),
+) -> ast::Expr {
     {
         let ((lhs, field, rhs), span) = ___0;
         ast::Expr::FieldSet(lhs, field, rhs, span)
@@ -14071,39 +13873,31 @@ fn ___action91<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action92<
-    'input,
->(
+fn ___action92<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, alloc::vec::Vec<ast::TypeParam>, usize),
     (_, _, _): (usize, &'input str, usize),
-) -> alloc::vec::Vec<ast::TypeParam>
-{
+) -> alloc::vec::Vec<ast::TypeParam> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action93<
-    'input,
->(
+fn ___action93<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action94<
-    'input,
->(
+fn ___action94<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
@@ -14112,29 +13906,37 @@ fn ___action94<
     (_, ___2, _): (usize, Option<spans::Spanned<ast::TypeExpr>>, usize),
     (_, _, _): (usize, &'input str, usize),
     (_, ___3, _): (usize, Box<ast::Expr>, usize),
-) -> (Option<alloc::vec::Vec<ast::TypeParam>>, spans::Spanned<ast::LetPattern>, Option<spans::Spanned<ast::TypeExpr>>, Box<ast::Expr>)
-{
+) -> (
+    Option<alloc::vec::Vec<ast::TypeParam>>,
+    spans::Spanned<ast::LetPattern>,
+    Option<spans::Spanned<ast::TypeExpr>>,
+    Box<ast::Expr>,
+) {
     (___0, ___1, ___2, ___3)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action95<
-    'input,
->(
+fn ___action95<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    (_, ___0, _): (usize, spans::Spanned<(Option<alloc::vec::Vec<ast::TypeParam>>, spans::Spanned<ast::LetPattern>, Option<spans::Spanned<ast::TypeExpr>>, Box<ast::Expr>)>, usize),
-) -> ast::Expr
-{
+    (_, ___0, _): (
+        usize,
+        spans::Spanned<(
+            Option<alloc::vec::Vec<ast::TypeParam>>,
+            spans::Spanned<ast::LetPattern>,
+            Option<spans::Spanned<ast::TypeExpr>>,
+            Box<ast::Expr>,
+        )>,
+        usize,
+    ),
+) -> ast::Expr {
     ast::Expr::FuncDef(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action96<
-    'input,
->(
+fn ___action96<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
@@ -14143,109 +13945,87 @@ fn ___action96<
     (_, ___1, _): (usize, Box<ast::Expr>, usize),
     (_, _, _): (usize, &'input str, usize),
     (_, ___2, _): (usize, Box<ast::Expr>, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ast::Expr::If(___0, ___1, ___2)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action97<
-    'input,
->(
+fn ___action97<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, ast::LetPattern, usize),
     (_, _, _): (usize, &'input str, usize),
     (_, ___1, _): (usize, Box<ast::Expr>, usize),
-) -> (ast::LetPattern, Box<ast::Expr>)
-{
+) -> (ast::LetPattern, Box<ast::Expr>) {
     (___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action98<
-    'input,
->(
+fn ___action98<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, Box<ast::Expr>, usize),
-) -> Box<ast::Expr>
-{
+) -> Box<ast::Expr> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action99<
-    'input,
->(
+fn ___action99<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, lhs, _): (usize, (ast::LetPattern, Box<ast::Expr>), usize),
     (_, rhs, _): (usize, Box<ast::Expr>, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ast::Expr::Block(vec![ast::Statement::LetDef(lhs)], rhs)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action100<
-    'input,
->(
+fn ___action100<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::StringId, usize),
     (_, _, _): (usize, &'input str, usize),
     (_, ___1, _): (usize, spans::Spanned<ast::Expr>, usize),
-) -> (ast::StringId, spans::Spanned<ast::Expr>)
-{
+) -> (ast::StringId, spans::Spanned<ast::Expr>) {
     (___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action101<
-    'input,
->(
+fn ___action101<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, Vec<(ast::StringId, spans::Spanned<ast::Expr>)>, usize),
-) -> Vec<(ast::StringId, spans::Spanned<ast::Expr>)>
-{
+) -> Vec<(ast::StringId, spans::Spanned<ast::Expr>)> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action102<
-    'input,
->(
+fn ___action102<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, lhs, _): (usize, Vec<(ast::StringId, spans::Spanned<ast::Expr>)>, usize),
     (_, rhs, _): (usize, Box<ast::Expr>, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ast::Expr::Block(vec![ast::Statement::LetRecDef(lhs)], rhs)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action103<
-    'input,
->(
+fn ___action103<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<Box<ast::Expr>>, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     {
         let (expr, span) = ___0;
         ast::Expr::Loop(expr, span)
@@ -14254,44 +14034,42 @@ fn ___action103<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action104<
-    'input,
->(
+fn ___action104<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, spans::Spanned<ast::LetPattern>, usize),
     (_, _, _): (usize, &'input str, usize),
     (_, ___1, _): (usize, Box<ast::Expr>, usize),
-) -> (spans::Spanned<ast::LetPattern>, Box<ast::Expr>)
-{
+) -> (spans::Spanned<ast::LetPattern>, Box<ast::Expr>) {
     (___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action105<
-    'input,
->(
+fn ___action105<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, Box<ast::Expr>, usize),
-) -> Box<ast::Expr>
-{
+) -> Box<ast::Expr> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action106<
-    'input,
->(
+fn ___action106<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    (_, ___0, _): (usize, spans::Spanned<(spans::Spanned<Box<ast::Expr>>, alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>)>, usize),
-) -> ast::Expr
-{
+    (_, ___0, _): (
+        usize,
+        spans::Spanned<(
+            spans::Spanned<Box<ast::Expr>>,
+            alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>,
+        )>,
+        usize,
+    ),
+) -> ast::Expr {
     {
         let ((lhs, arms), span) = ___0;
         ast::Expr::Match(lhs, arms, span)
@@ -14300,119 +14078,92 @@ fn ___action106<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action107<
-    'input,
->(
+fn ___action107<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action108<
-    'input,
->(
+fn ___action108<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action109<
-    'input,
->(
+fn ___action109<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action110<
-    'input,
->(
+fn ___action110<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action111<
-    'input,
->(
+fn ___action111<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action112<
-    'input,
->(
+fn ___action112<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action113<
-    'input,
->(
+fn ___action113<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action114<
-    'input,
->(
+fn ___action114<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action115<
-    'input,
->(
+fn ___action115<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, stmts, _): (usize, alloc::vec::Vec<ast::Statement>, usize),
     (_, rest, _): (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     {
         if stmts.is_empty() {
             rest
@@ -14424,95 +14175,74 @@ fn ___action115<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action116<
-    'input,
->(
+fn ___action116<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, (ast::LetPattern, Box<ast::Expr>), usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     ast::Statement::LetDef(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action117<
-    'input,
->(
+fn ___action117<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, Vec<(ast::StringId, spans::Spanned<ast::Expr>)>, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     ast::Statement::LetRecDef(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action118<
-    'input,
->(
+fn ___action118<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     ast::Statement::Expr(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action119<
-    'input,
->(
+fn ___action119<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, Vec<ast::Expr>, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     ast::Statement::Println(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action120<
-    'input,
->(
+fn ___action120<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> ast::Statement
-{
+) -> ast::Statement {
     ast::Statement::Empty
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action121<
-    'input,
->(
+fn ___action121<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, Vec<ast::Statement>, usize),
-) -> Vec<ast::Statement>
-{
+) -> Vec<ast::Statement> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action122<
-    'input,
->(
+fn ___action122<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<ast::Statement>, usize),
     (_, e, _): (usize, ast::Statement, usize),
-) -> Vec<ast::Statement>
-{
+) -> Vec<ast::Statement> {
     {
         let mut v = v;
         v.push(e);
@@ -14522,197 +14252,120 @@ fn ___action122<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action123<
-    'input,
->(
+fn ___action123<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, Vec<ast::Expr>, usize),
-) -> Vec<ast::Expr>
-{
+) -> Vec<ast::Expr> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action124<
-    'input,
->(
+fn ___action124<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> Vec<ast::Expr>
-{
+) -> Vec<ast::Expr> {
     Vec::new()
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action125<
-    'input,
->(
+fn ___action125<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> alloc::vec::Vec<ast::Statement>
-{
+) -> alloc::vec::Vec<ast::Statement> {
     alloc::vec![]
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action126<
-    'input,
->(
+fn ___action126<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<ast::Statement>, usize),
-) -> alloc::vec::Vec<ast::Statement>
-{
+) -> alloc::vec::Vec<ast::Statement> {
     v
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action127<
-    'input,
->(
+fn ___action127<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Statement, usize),
     (_, _, _): (usize, &'input str, usize),
-) -> ast::Statement
-{
+) -> ast::Statement {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action128<
-    'input,
->(
+fn ___action128<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
-    (_, val, _): (usize, (spans::Spanned<Box<ast::Expr>>, alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>), usize),
+    (_, val, _): (
+        usize,
+        (
+            spans::Spanned<Box<ast::Expr>>,
+            alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>,
+        ),
+        usize,
+    ),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<(spans::Spanned<Box<ast::Expr>>, alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>)>
-{
+) -> spans::Spanned<(
+    spans::Spanned<Box<ast::Expr>>,
+    alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>,
+)> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action129<
-    'input,
->(
+fn ___action129<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<Box<ast::Expr>>, usize),
     (_, _, _): (usize, &'input str, usize),
-    (_, ___1, _): (usize, alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>, usize),
-) -> (spans::Spanned<Box<ast::Expr>>, alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>)
-{
+    (_, ___1, _): (
+        usize,
+        alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>,
+        usize,
+    ),
+) -> (
+    spans::Spanned<Box<ast::Expr>>,
+    alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>,
+) {
     (___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action130<
-    'input,
->(
+fn ___action130<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, (spans::Spanned<ast::LetPattern>, Box<ast::Expr>), usize),
-) -> alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>
-{
+) -> alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)> {
     alloc::vec![___0]
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action131<
-    'input,
->(
+fn ___action131<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>, usize),
+    (_, v, _): (
+        usize,
+        alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>,
+        usize,
+    ),
     (_, e, _): (usize, (spans::Spanned<ast::LetPattern>, Box<ast::Expr>), usize),
-) -> alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>
-{
-    { let mut v = v; v.push(e); v }
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action132<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, l, _): (usize, usize, usize),
-    (_, val, _): (usize, Box<ast::Expr>, usize),
-    (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<Box<ast::Expr>>
-{
-    (val, ctx.span_maker.span(l, r))
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action133<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, ast::Expr, usize),
-) -> Box<ast::Expr>
-{
-    Box::new(___0)
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action134<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, l, _): (usize, usize, usize),
-    (_, val, _): (usize, Box<ast::Expr>, usize),
-    (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<Box<ast::Expr>>
-{
-    (val, ctx.span_maker.span(l, r))
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action135<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, _, _): (usize, &'input str, usize),
-    (_, ___0, _): (usize, Box<ast::Expr>, usize),
-) -> Box<ast::Expr>
-{
-    ___0
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action136<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)>, usize),
-    (_, e, _): (usize, (ast::StringId, spans::Spanned<ast::Expr>), usize),
-) -> Vec<(ast::StringId, spans::Spanned<ast::Expr>)>
-{
+) -> alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)> {
     {
         let mut v = v;
         v.push(e);
@@ -14722,175 +14375,213 @@ fn ___action136<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action137<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, l, _): (usize, usize, usize),
-    (_, val, _): (usize, ast::Expr, usize),
-    (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<ast::Expr>
-{
-    (val, ctx.span_maker.span(l, r))
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action138<
-    'input,
->(
+fn ___action132<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, Box<ast::Expr>, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<Box<ast::Expr>>
-{
+) -> spans::Spanned<Box<ast::Expr>> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action139<
-    'input,
->(
+fn ___action133<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (usize, ast::Expr, usize),
+) -> Box<ast::Expr> {
+    Box::new(___0)
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action134<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
-    (_, val, _): (usize, (Option<alloc::vec::Vec<ast::TypeParam>>, spans::Spanned<ast::LetPattern>, Option<spans::Spanned<ast::TypeExpr>>, Box<ast::Expr>), usize),
+    (_, val, _): (usize, Box<ast::Expr>, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<(Option<alloc::vec::Vec<ast::TypeParam>>, spans::Spanned<ast::LetPattern>, Option<spans::Spanned<ast::TypeExpr>>, Box<ast::Expr>)>
-{
+) -> spans::Spanned<Box<ast::Expr>> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action140<
-    'input,
->(
+fn ___action135<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, _, _): (usize, &'input str, usize),
+    (_, ___0, _): (usize, Box<ast::Expr>, usize),
+) -> Box<ast::Expr> {
+    ___0
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action136<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)>, usize),
+    (_, e, _): (usize, (ast::StringId, spans::Spanned<ast::Expr>), usize),
+) -> Vec<(ast::StringId, spans::Spanned<ast::Expr>)> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action137<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, l, _): (usize, usize, usize),
+    (_, val, _): (usize, ast::Expr, usize),
+    (_, r, _): (usize, usize, usize),
+) -> spans::Spanned<ast::Expr> {
+    (val, ctx.span_maker.span(l, r))
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action138<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, l, _): (usize, usize, usize),
+    (_, val, _): (usize, Box<ast::Expr>, usize),
+    (_, r, _): (usize, usize, usize),
+) -> spans::Spanned<Box<ast::Expr>> {
+    (val, ctx.span_maker.span(l, r))
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action139<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, l, _): (usize, usize, usize),
+    (_, val, _): (
+        usize,
+        (
+            Option<alloc::vec::Vec<ast::TypeParam>>,
+            spans::Spanned<ast::LetPattern>,
+            Option<spans::Spanned<ast::TypeExpr>>,
+            Box<ast::Expr>,
+        ),
+        usize,
+    ),
+    (_, r, _): (usize, usize, usize),
+) -> spans::Spanned<(
+    Option<alloc::vec::Vec<ast::TypeParam>>,
+    spans::Spanned<ast::LetPattern>,
+    Option<spans::Spanned<ast::TypeExpr>>,
+    Box<ast::Expr>,
+)> {
+    (val, ctx.span_maker.span(l, r))
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action140<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> Option<spans::Spanned<ast::TypeExpr>>
-{
+) -> Option<spans::Spanned<ast::TypeExpr>> {
     Some(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action141<
-    'input,
->(
+fn ___action141<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> Option<spans::Spanned<ast::TypeExpr>>
-{
+) -> Option<spans::Spanned<ast::TypeExpr>> {
     None
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action142<
-    'input,
->(
+fn ___action142<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, ast::LetPattern, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<ast::LetPattern>
-{
+) -> spans::Spanned<ast::LetPattern> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action143<
-    'input,
->(
+fn ___action143<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, alloc::vec::Vec<ast::TypeParam>, usize),
-) -> Option<alloc::vec::Vec<ast::TypeParam>>
-{
+) -> Option<alloc::vec::Vec<ast::TypeParam>> {
     Some(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action144<
-    'input,
->(
+fn ___action144<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> Option<alloc::vec::Vec<ast::TypeParam>>
-{
+) -> Option<alloc::vec::Vec<ast::TypeParam>> {
     None
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action145<
-    'input,
->(
+fn ___action145<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, (Box<ast::Expr>, spans::Spanned<ast::StringId>, Box<ast::Expr>), usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>, Box<ast::Expr>)>
-{
+) -> spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>, Box<ast::Expr>)> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action146<
-    'input,
->(
+fn ___action146<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, Box<ast::Expr>, usize),
     (_, ___1, _): (usize, spans::Spanned<ast::StringId>, usize),
     (_, _, _): (usize, &'input str, usize),
     (_, ___2, _): (usize, Box<ast::Expr>, usize),
-) -> (Box<ast::Expr>, spans::Spanned<ast::StringId>, Box<ast::Expr>)
-{
+) -> (Box<ast::Expr>, spans::Spanned<ast::StringId>, Box<ast::Expr>) {
     (___0, ___1, ___2)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action147<
-    'input,
->(
+fn ___action147<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, Vec<spans::Spanned<ast::Expr>>, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<Vec<spans::Spanned<ast::Expr>>>
-{
+) -> spans::Spanned<Vec<spans::Spanned<ast::Expr>>> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action148<
-    'input,
->(
+fn ___action148<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::Expr>>, usize),
     (_, e, _): (usize, spans::Spanned<ast::Expr>, usize),
-) -> Vec<spans::Spanned<ast::Expr>>
-{
+) -> Vec<spans::Spanned<ast::Expr>> {
     {
         let mut v = v;
         v.push(e);
@@ -14900,88 +14591,80 @@ fn ___action148<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action149<
-    'input,
->(
+fn ___action149<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, ast::Expr, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<ast::Expr>
-{
+) -> spans::Spanned<ast::Expr> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action150<
-    'input,
->(
+fn ___action150<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
-    (_, val, _): (usize, (alloc::vec::Vec<ast::TypeParam>, Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>), usize),
+    (_, val, _): (
+        usize,
+        (
+            alloc::vec::Vec<ast::TypeParam>,
+            Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>,
+        ),
+        usize,
+    ),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<(alloc::vec::Vec<ast::TypeParam>, Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>)>
-{
+) -> spans::Spanned<(
+    alloc::vec::Vec<ast::TypeParam>,
+    Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>,
+)> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action151<
-    'input,
->(
+fn ___action151<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::LetPattern, usize),
-) -> Box<ast::LetPattern>
-{
+) -> Box<ast::LetPattern> {
     Box::new(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action152<
-    'input,
->(
+fn ___action152<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, Vec<spans::Spanned<ast::LetPattern>>, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<Vec<spans::Spanned<ast::LetPattern>>>
-{
+) -> spans::Spanned<Vec<spans::Spanned<ast::LetPattern>>> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action153<
-    'input,
->(
+fn ___action153<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, Vec<spans::Spanned<ast::LetPattern>>, usize),
     (_, _, _): (usize, &'input str, usize),
-) -> Vec<spans::Spanned<ast::LetPattern>>
-{
+) -> Vec<spans::Spanned<ast::LetPattern>> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action154<
-    'input,
->(
+fn ___action154<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::LetPattern>>, usize),
     (_, e, _): (usize, spans::Spanned<ast::LetPattern>, usize),
-) -> Vec<spans::Spanned<ast::LetPattern>>
-{
+) -> Vec<spans::Spanned<ast::LetPattern>> {
     {
         let mut v = v;
         v.push(e);
@@ -14991,51 +14674,40 @@ fn ___action154<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action155<
-    'input,
->(
+fn ___action155<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, ast::LetPattern, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<ast::LetPattern>
-{
+) -> spans::Spanned<ast::LetPattern> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action156<
-    'input,
->(
+fn ___action156<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>, usize),
-) -> Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>
-{
+) -> Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action157<
-    'input,
->(
+fn ___action157<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>
-{
+) -> Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)> {
     Vec::new()
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action158<
-    'input,
->(
+fn ___action158<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, p1, _): (usize, usize, usize),
@@ -15045,8 +14717,7 @@ fn ___action158<
     (_, p3, _): (usize, usize, usize),
     (_, rhs, _): (usize, Box<ast::Expr>, usize),
     (_, p4, _): (usize, usize, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     {
         let lhs_span = ctx.span_maker.span(p1, p3);
         let rhs_span = ctx.span_maker.span(p2, p4);
@@ -15058,9 +14729,7 @@ fn ___action158<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action159<
-    'input,
->(
+fn ___action159<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, p1, _): (usize, usize, usize),
@@ -15070,8 +14739,7 @@ fn ___action159<
     (_, p3, _): (usize, usize, usize),
     (_, rhs, _): (usize, Box<ast::Expr>, usize),
     (_, p4, _): (usize, usize, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     {
         let lhs_span = ctx.span_maker.span(p1, p3);
         let rhs_span = ctx.span_maker.span(p2, p4);
@@ -15083,9 +14751,7 @@ fn ___action159<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action160<
-    'input,
->(
+fn ___action160<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, p1, _): (usize, usize, usize),
@@ -15095,8 +14761,7 @@ fn ___action160<
     (_, p3, _): (usize, usize, usize),
     (_, rhs, _): (usize, Box<ast::Expr>, usize),
     (_, p4, _): (usize, usize, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     {
         let lhs_span = ctx.span_maker.span(p1, p3);
         let rhs_span = ctx.span_maker.span(p2, p4);
@@ -15108,677 +14773,593 @@ fn ___action160<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action161<
-    'input,
->(
+fn ___action161<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, (spans::Spanned<ast::Expr>, Box<ast::Expr>), usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<(spans::Spanned<ast::Expr>, Box<ast::Expr>)>
-{
+) -> spans::Spanned<(spans::Spanned<ast::Expr>, Box<ast::Expr>)> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action162<
-    'input,
->(
+fn ___action162<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::Expr>, usize),
     (_, ___1, _): (usize, Box<ast::Expr>, usize),
-) -> (spans::Spanned<ast::Expr>, Box<ast::Expr>)
-{
+) -> (spans::Spanned<ast::Expr>, Box<ast::Expr>) {
     (___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action163<
-    'input,
->(
+fn ___action163<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> Box<ast::Expr>
-{
+) -> Box<ast::Expr> {
     Box::new(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action164<
-    'input,
->(
+fn ___action164<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, ast::Expr, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<ast::Expr>
-{
+) -> spans::Spanned<ast::Expr> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action165<
-    'input,
->(
+fn ___action165<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> Box<ast::Expr>
-{
+) -> Box<ast::Expr> {
     Box::new(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action166<
-    'input,
->(
+fn ___action166<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, String, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<String>
-{
+) -> spans::Spanned<String> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action167<
-    'input,
->(
+fn ___action167<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, String, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<String>
-{
+) -> spans::Spanned<String> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action168<
-    'input,
->(
+fn ___action168<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, String, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<String>
-{
+) -> spans::Spanned<String> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action169<
-    'input,
->(
+fn ___action169<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, &'input str, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<&'input str>
-{
+) -> spans::Spanned<&'input str> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action170<
-    'input,
->(
+fn ___action170<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
-    (_, val, _): (usize, (spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, Vec<ast::KeyPairExpr>), usize),
+    (_, val, _): (
+        usize,
+        (
+            spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+            Vec<ast::KeyPairExpr>,
+        ),
+        usize,
+    ),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<(spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, Vec<ast::KeyPairExpr>)>
-{
+) -> spans::Spanned<(
+    spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+    Vec<ast::KeyPairExpr>,
+)> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action171<
-    'input,
->(
+fn ___action171<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, Vec<ast::KeyPairExpr>, usize),
-) -> Vec<ast::KeyPairExpr>
-{
+) -> Vec<ast::KeyPairExpr> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action172<
-    'input,
->(
+fn ___action172<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> Vec<ast::KeyPairExpr>
-{
+) -> Vec<ast::KeyPairExpr> {
     Vec::new()
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action173<
-    'input,
->(
+fn ___action173<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>
-{
+) -> spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action174<
-    'input,
->(
+fn ___action174<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
     alloc::vec![]
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action175<
-    'input,
->(
+fn ___action175<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
     v
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action176<
-    'input,
->(
+fn ___action176<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, (ast::StringId, spans::Spanned<ast::TypeExpr>), usize),
     (_, _, _): (usize, &'input str, usize),
-) -> (ast::StringId, spans::Spanned<ast::TypeExpr>)
-{
+) -> (ast::StringId, spans::Spanned<ast::TypeExpr>) {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action177<
-    'input,
->(
+fn ___action177<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, Box<ast::Expr>, usize),
-) -> Option<Box<ast::Expr>>
-{
+) -> Option<Box<ast::Expr>> {
     Some(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action178<
-    'input,
->(
+fn ___action178<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> Option<Box<ast::Expr>>
-{
+) -> Option<Box<ast::Expr>> {
     None
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action179<
-    'input,
->(
+fn ___action179<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> Option<spans::Spanned<ast::TypeExpr>>
-{
+) -> Option<spans::Spanned<ast::TypeExpr>> {
     Some(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action180<
-    'input,
->(
+fn ___action180<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> Option<spans::Spanned<ast::TypeExpr>>
-{
+) -> Option<spans::Spanned<ast::TypeExpr>> {
     None
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action181<
-    'input,
->(
+fn ___action181<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, &'input str, usize),
-) -> Option<&'input str>
-{
+) -> Option<&'input str> {
     Some(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action182<
-    'input,
->(
+fn ___action182<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> Option<&'input str>
-{
+) -> Option<&'input str> {
     None
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action183<
-    'input,
->(
+fn ___action183<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> Box<ast::Expr>
-{
+) -> Box<ast::Expr> {
     Box::new(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action184<
-    'input,
->(
+fn ___action184<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
-    (_, val, _): (usize, (spans::Spanned<Box<ast::Expr>>, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>), usize),
+    (_, val, _): (
+        usize,
+        (
+            spans::Spanned<Box<ast::Expr>>,
+            spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+        ),
+        usize,
+    ),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<(spans::Spanned<Box<ast::Expr>>, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>)>
-{
+) -> spans::Spanned<(
+    spans::Spanned<Box<ast::Expr>>,
+    spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+)> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action185<
-    'input,
->(
+fn ___action185<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<Box<ast::Expr>>, usize),
     (_, _, _): (usize, &'input str, usize),
-    (_, ___1, _): (usize, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, usize),
+    (_, ___1, _): (
+        usize,
+        spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+        usize,
+    ),
     (_, _, _): (usize, &'input str, usize),
-) -> (spans::Spanned<Box<ast::Expr>>, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>)
-{
+) -> (
+    spans::Spanned<Box<ast::Expr>>,
+    spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+) {
     (___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action186<
-    'input,
->(
+fn ___action186<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
-    (_, val, _): (usize, (spans::Spanned<Box<ast::Expr>>, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>), usize),
+    (_, val, _): (
+        usize,
+        (
+            spans::Spanned<Box<ast::Expr>>,
+            spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+        ),
+        usize,
+    ),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<(spans::Spanned<Box<ast::Expr>>, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>)>
-{
+) -> spans::Spanned<(
+    spans::Spanned<Box<ast::Expr>>,
+    spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+)> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action187<
-    'input,
->(
+fn ___action187<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<Box<ast::Expr>>, usize),
-    (_, ___1, _): (usize, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, usize),
-) -> (spans::Spanned<Box<ast::Expr>>, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>)
-{
+    (_, ___1, _): (
+        usize,
+        spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+        usize,
+    ),
+) -> (
+    spans::Spanned<Box<ast::Expr>>,
+    spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+) {
     (___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action188<
-    'input,
->(
+fn ___action188<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, Box<ast::Expr>, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<Box<ast::Expr>>
-{
+) -> spans::Spanned<Box<ast::Expr>> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action189<
-    'input,
->(
+fn ___action189<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>
-{
+) -> spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action190<
-    'input,
->(
+fn ___action190<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
-) -> Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
+) -> Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action191<
-    'input,
->(
+fn ___action191<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
+) -> Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
     Vec::new()
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action192<
-    'input,
->(
+fn ___action192<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, (Box<ast::Expr>, spans::Spanned<ast::StringId>), usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>)>
-{
+) -> spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>)> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action193<
-    'input,
->(
+fn ___action193<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, Box<ast::Expr>, usize),
     (_, ___1, _): (usize, spans::Spanned<ast::StringId>, usize),
-) -> (Box<ast::Expr>, spans::Spanned<ast::StringId>)
-{
+) -> (Box<ast::Expr>, spans::Spanned<ast::StringId>) {
     (___0, ___1)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action194<
-    'input,
->(
+fn ___action194<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> Box<ast::Expr>
-{
+) -> Box<ast::Expr> {
     Box::new(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action195<
-    'input,
->(
+fn ___action195<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, ast::StringId, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<ast::StringId>
-{
+) -> spans::Spanned<ast::StringId> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action196<
-    'input,
->(
+fn ___action196<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, ast::StringId, usize),
-) -> ast::StringId
-{
+) -> ast::StringId {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action197<
-    'input,
->(
+fn ___action197<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, ast::TypeExpr, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action198<
-    'input,
->(
+fn ___action198<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
-    (_, val, _): (usize, (Option<alloc::vec::Vec<ast::TypeParam>>, Box<spans::Spanned<ast::TypeExpr>>, Box<spans::Spanned<ast::TypeExpr>>), usize),
+    (_, val, _): (
+        usize,
+        (
+            Option<alloc::vec::Vec<ast::TypeParam>>,
+            Box<spans::Spanned<ast::TypeExpr>>,
+            Box<spans::Spanned<ast::TypeExpr>>,
+        ),
+        usize,
+    ),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<(Option<alloc::vec::Vec<ast::TypeParam>>, Box<spans::Spanned<ast::TypeExpr>>, Box<spans::Spanned<ast::TypeExpr>>)>
-{
+) -> spans::Spanned<(
+    Option<alloc::vec::Vec<ast::TypeParam>>,
+    Box<spans::Spanned<ast::TypeExpr>>,
+    Box<spans::Spanned<ast::TypeExpr>>,
+)> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action199<
-    'input,
->(
+fn ___action199<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> Box<spans::Spanned<ast::TypeExpr>>
-{
+) -> Box<spans::Spanned<ast::TypeExpr>> {
     Box::new(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action200<
-    'input,
->(
+fn ___action200<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> Box<spans::Spanned<ast::TypeExpr>>
-{
+) -> Box<spans::Spanned<ast::TypeExpr>> {
     Box::new(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action201<
-    'input,
->(
+fn ___action201<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, alloc::vec::Vec<ast::TypeParam>, usize),
-) -> Option<alloc::vec::Vec<ast::TypeParam>>
-{
+) -> Option<alloc::vec::Vec<ast::TypeParam>> {
     Some(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action202<
-    'input,
->(
+fn ___action202<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> Option<alloc::vec::Vec<ast::TypeParam>>
-{
+) -> Option<alloc::vec::Vec<ast::TypeParam>> {
     None
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action203<
-    'input,
->(
+fn ___action203<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::TypeParam, usize),
-) -> alloc::vec::Vec<ast::TypeParam>
-{
+) -> alloc::vec::Vec<ast::TypeParam> {
     alloc::vec![___0]
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action204<
-    'input,
->(
+fn ___action204<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<ast::TypeParam>, usize),
     (_, e, _): (usize, ast::TypeParam, usize),
-) -> alloc::vec::Vec<ast::TypeParam>
-{
-    { let mut v = v; v.push(e); v }
+) -> alloc::vec::Vec<ast::TypeParam> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action205<
-    'input,
->(
+fn ___action205<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::StringId>, usize),
-) -> Option<spans::Spanned<ast::StringId>>
-{
+) -> Option<spans::Spanned<ast::StringId>> {
     Some(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action206<
-    'input,
->(
+fn ___action206<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> Option<spans::Spanned<ast::StringId>>
-{
+) -> Option<spans::Spanned<ast::StringId>> {
     None
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action207<
-    'input,
->(
+fn ___action207<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, ast::TypeExpr, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action208<
-    'input,
->(
+fn ___action208<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
     (_, e, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> Vec<spans::Spanned<ast::TypeExpr>> {
     {
         let mut v = v;
         v.push(e);
@@ -15788,30 +15369,24 @@ fn ___action208<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action209<
-    'input,
->(
+fn ___action209<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, ast::TypeExpr, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action210<
-    'input,
->(
+fn ___action210<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
     (_, e, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> Vec<spans::Spanned<ast::TypeExpr>> {
     {
         let mut v = v;
         v.push(e);
@@ -15821,30 +15396,24 @@ fn ___action210<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action211<
-    'input,
->(
+fn ___action211<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, Vec<spans::Spanned<ast::TypeExpr>>, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<Vec<spans::Spanned<ast::TypeExpr>>>
-{
+) -> spans::Spanned<Vec<spans::Spanned<ast::TypeExpr>>> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action212<
-    'input,
->(
+fn ___action212<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
     (_, e, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> Vec<spans::Spanned<ast::TypeExpr>> {
     {
         let mut v = v;
         v.push(e);
@@ -15854,30 +15423,32 @@ fn ___action212<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action213<
-    'input,
->(
+fn ___action213<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, ast::TypeExpr, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action214<
-    'input,
->(
+fn ___action214<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>, usize),
-    (_, e, _): (usize, (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>), usize),
-) -> Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>
-{
+    (_, v, _): (
+        usize,
+        alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>,
+        usize,
+    ),
+    (_, e, _): (
+        usize,
+        (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>),
+        usize,
+    ),
+) -> Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)> {
     {
         let mut v = v;
         v.push(e);
@@ -15887,239 +15458,192 @@ fn ___action214<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action215<
-    'input,
->(
+fn ___action215<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> Box<spans::Spanned<ast::TypeExpr>>
-{
+) -> Box<spans::Spanned<ast::TypeExpr>> {
     Box::new(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action216<
-    'input,
->(
+fn ___action216<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, ast::TypeExpr, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action217<
-    'input,
->(
+fn ___action217<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, &'input str, usize),
-) -> Option<&'input str>
-{
+) -> Option<&'input str> {
     Some(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action218<
-    'input,
->(
+fn ___action218<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> Option<&'input str>
-{
+) -> Option<&'input str> {
     None
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action219<
-    'input,
->(
+fn ___action219<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, ast::StringId, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<ast::StringId>
-{
+) -> spans::Spanned<ast::StringId> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action220<
-    'input,
->(
+fn ___action220<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, (alloc::vec::Vec<ast::TypeParam>, Vec<ast::KeyPairType>), usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<(alloc::vec::Vec<ast::TypeParam>, Vec<ast::KeyPairType>)>
-{
+) -> spans::Spanned<(alloc::vec::Vec<ast::TypeParam>, Vec<ast::KeyPairType>)> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action221<
-    'input,
->(
+fn ___action221<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, Vec<ast::KeyPairType>, usize),
-) -> Vec<ast::KeyPairType>
-{
+) -> Vec<ast::KeyPairType> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action222<
-    'input,
->(
+fn ___action222<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> Vec<ast::KeyPairType>
-{
+) -> Vec<ast::KeyPairType> {
     Vec::new()
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action223<
-    'input,
->(
+fn ___action223<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> alloc::vec::Vec<ast::TypeParam>
-{
+) -> alloc::vec::Vec<ast::TypeParam> {
     alloc::vec![]
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action224<
-    'input,
->(
+fn ___action224<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<ast::TypeParam>, usize),
-) -> alloc::vec::Vec<ast::TypeParam>
-{
+) -> alloc::vec::Vec<ast::TypeParam> {
     v
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action225<
-    'input,
->(
+fn ___action225<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, _, _): (usize, &'input str, usize),
     (_, ___0, _): (usize, ast::TypeParam, usize),
     (_, _, _): (usize, &'input str, usize),
-) -> ast::TypeParam
-{
+) -> ast::TypeParam {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action226<
-    'input,
->(
+fn ___action226<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, l, _): (usize, usize, usize),
     (_, val, _): (usize, ast::StringId, usize),
     (_, r, _): (usize, usize, usize),
-) -> spans::Spanned<ast::StringId>
-{
+) -> spans::Spanned<ast::StringId> {
     (val, ctx.span_maker.span(l, r))
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::needless_lifetimes)]
-fn ___action227<
-    'input,
->(
+fn ___action227<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> usize
-{
+) -> usize {
     *___lookbehind
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::needless_lifetimes)]
-fn ___action228<
-    'input,
->(
+fn ___action228<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> usize
-{
+) -> usize {
     *___lookahead
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action229<
-    'input,
->(
+fn ___action229<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::TypeParam, usize),
-) -> alloc::vec::Vec<ast::TypeParam>
-{
+) -> alloc::vec::Vec<ast::TypeParam> {
     alloc::vec![___0]
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action230<
-    'input,
->(
+fn ___action230<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<ast::TypeParam>, usize),
     (_, e, _): (usize, ast::TypeParam, usize),
-) -> alloc::vec::Vec<ast::TypeParam>
-{
-    { let mut v = v; v.push(e); v }
+) -> alloc::vec::Vec<ast::TypeParam> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action231<
-    'input,
->(
+fn ___action231<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<ast::KeyPairType>, usize),
     (_, e, _): (usize, ast::KeyPairType, usize),
-) -> Vec<ast::KeyPairType>
-{
+) -> Vec<ast::KeyPairType> {
     {
         let mut v = v;
         v.push(e);
@@ -16129,179 +15653,148 @@ fn ___action231<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action232<
-    'input,
->(
+fn ___action232<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>
-{
+) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)> {
     alloc::vec![]
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action233<
-    'input,
->(
+fn ___action233<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>, usize),
-) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>
-{
+    (_, v, _): (
+        usize,
+        alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>,
+        usize,
+    ),
+) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)> {
     v
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action234<
-    'input,
->(
+fn ___action234<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    (_, ___0, _): (usize, (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>), usize),
+    (_, ___0, _): (
+        usize,
+        (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>),
+        usize,
+    ),
     (_, _, _): (usize, &'input str, usize),
-) -> (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)
-{
+) -> (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>) {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action235<
-    'input,
->(
+fn ___action235<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
     alloc::vec![]
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action236<
-    'input,
->(
+fn ___action236<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
     v
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action237<
-    'input,
->(
+fn ___action237<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
     (_, _, _): (usize, &'input str, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action238<
-    'input,
->(
+fn ___action238<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
     alloc::vec![]
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action239<
-    'input,
->(
+fn ___action239<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
     v
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action240<
-    'input,
->(
+fn ___action240<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
     (_, _, _): (usize, &'input str, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action241<
-    'input,
->(
+fn ___action241<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
     alloc::vec![]
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action242<
-    'input,
->(
+fn ___action242<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
     v
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action243<
-    'input,
->(
+fn ___action243<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
     (_, _, _): (usize, &'input str, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action244<
-    'input,
->(
+fn ___action244<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
     (_, e, _): (usize, (ast::StringId, spans::Spanned<ast::TypeExpr>), usize),
-) -> Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
+) -> Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
     {
         let mut v = v;
         v.push(e);
@@ -16311,42 +15804,37 @@ fn ___action244<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action245<
-    'input,
->(
+fn ___action245<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, (ast::StringId, spans::Spanned<ast::TypeExpr>), usize),
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
     alloc::vec![___0]
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action246<
-    'input,
->(
+fn ___action246<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
     (_, e, _): (usize, (ast::StringId, spans::Spanned<ast::TypeExpr>), usize),
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
-    { let mut v = v; v.push(e); v }
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action247<
-    'input,
->(
+fn ___action247<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<ast::KeyPairExpr>, usize),
     (_, e, _): (usize, ast::KeyPairExpr, usize),
-) -> Vec<ast::KeyPairExpr>
-{
+) -> Vec<ast::KeyPairExpr> {
     {
         let mut v = v;
         v.push(e);
@@ -16356,41 +15844,36 @@ fn ___action247<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action248<
-    'input,
->(
+fn ___action248<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> Box<ast::Expr>
-{
+) -> Box<ast::Expr> {
     Box::new(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action249<
-    'input,
->(
+fn ___action249<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Expr, usize),
-) -> Box<ast::Expr>
-{
+) -> Box<ast::Expr> {
     Box::new(___0)
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action250<
-    'input,
->(
+fn ___action250<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>, usize),
+    (_, v, _): (
+        usize,
+        alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>,
+        usize,
+    ),
     (_, e, _): (usize, (spans::Spanned<ast::StringId>, Box<ast::LetPattern>), usize),
-) -> Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>
-{
+) -> Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)> {
     {
         let mut v = v;
         v.push(e);
@@ -16400,165 +15883,118 @@ fn ___action250<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action251<
-    'input,
->(
+fn ___action251<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> alloc::vec::Vec<spans::Spanned<ast::LetPattern>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::LetPattern>> {
     alloc::vec![]
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action252<
-    'input,
->(
+fn ___action252<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::LetPattern>>, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::LetPattern>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::LetPattern>> {
     v
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action253<
-    'input,
->(
+fn ___action253<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::LetPattern>, usize),
     (_, _, _): (usize, &'input str, usize),
-) -> spans::Spanned<ast::LetPattern>
-{
+) -> spans::Spanned<ast::LetPattern> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action254<
-    'input,
->(
+fn ___action254<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> alloc::vec::Vec<spans::Spanned<ast::Expr>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::Expr>> {
     alloc::vec![]
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action255<
-    'input,
->(
+fn ___action255<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::Expr>>, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::Expr>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::Expr>> {
     v
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action256<
-    'input,
->(
+fn ___action256<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, spans::Spanned<ast::Expr>, usize),
     (_, _, _): (usize, &'input str, usize),
-) -> spans::Spanned<ast::Expr>
-{
+) -> spans::Spanned<ast::Expr> {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action257<
-    'input,
->(
+fn ___action257<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)>
-{
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)> {
     alloc::vec![]
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action258<
-    'input,
->(
+fn ___action258<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)>, usize),
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)>
-{
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)> {
     v
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action259<
-    'input,
->(
+fn ___action259<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, (ast::StringId, spans::Spanned<ast::Expr>), usize),
     (_, _, _): (usize, &'input str, usize),
-) -> (ast::StringId, spans::Spanned<ast::Expr>)
-{
+) -> (ast::StringId, spans::Spanned<ast::Expr>) {
     ___0
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action260<
-    'input,
->(
+fn ___action260<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, ___0, _): (usize, ast::Statement, usize),
-) -> alloc::vec::Vec<ast::Statement>
-{
+) -> alloc::vec::Vec<ast::Statement> {
     alloc::vec![___0]
 }
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action261<
-    'input,
->(
+fn ___action261<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<ast::Statement>, usize),
     (_, e, _): (usize, ast::Statement, usize),
-) -> alloc::vec::Vec<ast::Statement>
-{
-    { let mut v = v; v.push(e); v }
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action262<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<ast::Expr>, usize),
-    (_, e, _): (usize, ast::Expr, usize),
-) -> Vec<ast::Expr>
-{
+) -> alloc::vec::Vec<ast::Statement> {
     {
         let mut v = v;
         v.push(e);
@@ -16568,663 +16004,566 @@ fn ___action262<
 
 #[allow(unused_variables)]
 #[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action263<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    ___lookbehind: &usize,
-    ___lookahead: &usize,
-) -> alloc::vec::Vec<ast::Expr>
-{
-    alloc::vec![]
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action264<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<ast::Expr>, usize),
-) -> alloc::vec::Vec<ast::Expr>
-{
-    v
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action265<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, ast::Expr, usize),
-    (_, _, _): (usize, &'input str, usize),
-) -> ast::Expr
-{
-    ___0
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action266<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, (ast::StringId, spans::Spanned<ast::Expr>), usize),
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)>
-{
-    alloc::vec![___0]
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action267<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)>, usize),
-    (_, e, _): (usize, (ast::StringId, spans::Spanned<ast::Expr>), usize),
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)>
-{
-    { let mut v = v; v.push(e); v }
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action268<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, spans::Spanned<ast::Expr>, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::Expr>>
-{
-    alloc::vec![___0]
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action269<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::Expr>>, usize),
-    (_, e, _): (usize, spans::Spanned<ast::Expr>, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::Expr>>
-{
-    { let mut v = v; v.push(e); v }
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action270<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, spans::Spanned<ast::LetPattern>, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::LetPattern>>
-{
-    alloc::vec![___0]
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action271<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::LetPattern>>, usize),
-    (_, e, _): (usize, spans::Spanned<ast::LetPattern>, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::LetPattern>>
-{
-    { let mut v = v; v.push(e); v }
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action272<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    ___lookbehind: &usize,
-    ___lookahead: &usize,
-) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>
-{
-    alloc::vec![]
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action273<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>, usize),
-) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>
-{
-    v
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action274<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, (spans::Spanned<ast::StringId>, Box<ast::LetPattern>), usize),
-    (_, _, _): (usize, &'input str, usize),
-) -> (spans::Spanned<ast::StringId>, Box<ast::LetPattern>)
-{
-    ___0
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action275<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    ___lookbehind: &usize,
-    ___lookahead: &usize,
-) -> alloc::vec::Vec<ast::KeyPairExpr>
-{
-    alloc::vec![]
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action276<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<ast::KeyPairExpr>, usize),
-) -> alloc::vec::Vec<ast::KeyPairExpr>
-{
-    v
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action277<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, ast::KeyPairExpr, usize),
-    (_, _, _): (usize, &'input str, usize),
-) -> ast::KeyPairExpr
-{
-    ___0
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action278<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    ___lookbehind: &usize,
-    ___lookahead: &usize,
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
-    alloc::vec![]
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action279<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
-    v
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action280<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, (ast::StringId, spans::Spanned<ast::TypeExpr>), usize),
-    (_, _, _): (usize, &'input str, usize),
-) -> (ast::StringId, spans::Spanned<ast::TypeExpr>)
-{
-    ___0
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action281<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
-    alloc::vec![___0]
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action282<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
-    (_, e, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
-    { let mut v = v; v.push(e); v }
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action283<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
-    alloc::vec![___0]
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action284<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
-    (_, e, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
-    { let mut v = v; v.push(e); v }
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action285<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
-    alloc::vec![___0]
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action286<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
-    (_, e, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
-    { let mut v = v; v.push(e); v }
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action287<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>), usize),
-) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>
-{
-    alloc::vec![___0]
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action288<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>, usize),
-    (_, e, _): (usize, (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>), usize),
-) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>
-{
-    { let mut v = v; v.push(e); v }
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action289<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    ___lookbehind: &usize,
-    ___lookahead: &usize,
-) -> alloc::vec::Vec<ast::KeyPairType>
-{
-    alloc::vec![]
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action290<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<ast::KeyPairType>, usize),
-) -> alloc::vec::Vec<ast::KeyPairType>
-{
-    v
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action291<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, ast::KeyPairType, usize),
-    (_, _, _): (usize, &'input str, usize),
-) -> ast::KeyPairType
-{
-    ___0
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action292<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, ast::KeyPairType, usize),
-) -> alloc::vec::Vec<ast::KeyPairType>
-{
-    alloc::vec![___0]
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action293<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<ast::KeyPairType>, usize),
-    (_, e, _): (usize, ast::KeyPairType, usize),
-) -> alloc::vec::Vec<ast::KeyPairType>
-{
-    { let mut v = v; v.push(e); v }
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action294<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, (ast::StringId, spans::Spanned<ast::TypeExpr>), usize),
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
-    alloc::vec![___0]
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action295<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
-    (_, e, _): (usize, (ast::StringId, spans::Spanned<ast::TypeExpr>), usize),
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
-    { let mut v = v; v.push(e); v }
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action296<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, ast::KeyPairExpr, usize),
-) -> alloc::vec::Vec<ast::KeyPairExpr>
-{
-    alloc::vec![___0]
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action297<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<ast::KeyPairExpr>, usize),
-    (_, e, _): (usize, ast::KeyPairExpr, usize),
-) -> alloc::vec::Vec<ast::KeyPairExpr>
-{
-    { let mut v = v; v.push(e); v }
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action298<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, (spans::Spanned<ast::StringId>, Box<ast::LetPattern>), usize),
-) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>
-{
-    alloc::vec![___0]
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action299<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, v, _): (usize, alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>, usize),
-    (_, e, _): (usize, (spans::Spanned<ast::StringId>, Box<ast::LetPattern>), usize),
-) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>
-{
-    { let mut v = v; v.push(e); v }
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action300<
-    'input,
->(
-    ctx: &mut ast::ParserContext<'_, 'input>,
-    input: &'input str,
-    (_, ___0, _): (usize, ast::Expr, usize),
-) -> alloc::vec::Vec<ast::Expr>
-{
-    alloc::vec![___0]
-}
-
-#[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
-fn ___action301<
-    'input,
->(
+fn ___action262<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     (_, v, _): (usize, alloc::vec::Vec<ast::Expr>, usize),
     (_, e, _): (usize, ast::Expr, usize),
-) -> alloc::vec::Vec<ast::Expr>
-{
-    { let mut v = v; v.push(e); v }
+) -> Vec<ast::Expr> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action302<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action263<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    ___lookbehind: &usize,
+    ___lookahead: &usize,
+) -> alloc::vec::Vec<ast::Expr> {
+    alloc::vec![]
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action264<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (usize, alloc::vec::Vec<ast::Expr>, usize),
+) -> alloc::vec::Vec<ast::Expr> {
+    v
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action265<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (usize, ast::Expr, usize),
+    (_, _, _): (usize, &'input str, usize),
+) -> ast::Expr {
+    ___0
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action266<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (usize, (ast::StringId, spans::Spanned<ast::Expr>), usize),
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)> {
+    alloc::vec![___0]
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action267<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)>, usize),
+    (_, e, _): (usize, (ast::StringId, spans::Spanned<ast::Expr>), usize),
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action268<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (usize, spans::Spanned<ast::Expr>, usize),
+) -> alloc::vec::Vec<spans::Spanned<ast::Expr>> {
+    alloc::vec![___0]
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action269<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::Expr>>, usize),
+    (_, e, _): (usize, spans::Spanned<ast::Expr>, usize),
+) -> alloc::vec::Vec<spans::Spanned<ast::Expr>> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action270<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (usize, spans::Spanned<ast::LetPattern>, usize),
+) -> alloc::vec::Vec<spans::Spanned<ast::LetPattern>> {
+    alloc::vec![___0]
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action271<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::LetPattern>>, usize),
+    (_, e, _): (usize, spans::Spanned<ast::LetPattern>, usize),
+) -> alloc::vec::Vec<spans::Spanned<ast::LetPattern>> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action272<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    ___lookbehind: &usize,
+    ___lookahead: &usize,
+) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)> {
+    alloc::vec![]
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action273<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (
+        usize,
+        alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>,
+        usize,
+    ),
+) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)> {
+    v
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action274<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (usize, (spans::Spanned<ast::StringId>, Box<ast::LetPattern>), usize),
+    (_, _, _): (usize, &'input str, usize),
+) -> (spans::Spanned<ast::StringId>, Box<ast::LetPattern>) {
+    ___0
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action275<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    ___lookbehind: &usize,
+    ___lookahead: &usize,
+) -> alloc::vec::Vec<ast::KeyPairExpr> {
+    alloc::vec![]
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action276<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (usize, alloc::vec::Vec<ast::KeyPairExpr>, usize),
+) -> alloc::vec::Vec<ast::KeyPairExpr> {
+    v
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action277<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (usize, ast::KeyPairExpr, usize),
+    (_, _, _): (usize, &'input str, usize),
+) -> ast::KeyPairExpr {
+    ___0
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action278<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    ___lookbehind: &usize,
+    ___lookahead: &usize,
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
+    alloc::vec![]
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action279<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
+    v
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action280<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (usize, (ast::StringId, spans::Spanned<ast::TypeExpr>), usize),
+    (_, _, _): (usize, &'input str, usize),
+) -> (ast::StringId, spans::Spanned<ast::TypeExpr>) {
+    ___0
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action281<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
+    alloc::vec![___0]
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action282<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
+    (_, e, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action283<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
+    alloc::vec![___0]
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action284<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
+    (_, e, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action285<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
+    alloc::vec![___0]
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action286<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
+    (_, e, _): (usize, spans::Spanned<ast::TypeExpr>, usize),
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action287<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (
+        usize,
+        (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>),
+        usize,
+    ),
+) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)> {
+    alloc::vec![___0]
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action288<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (
+        usize,
+        alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>,
+        usize,
+    ),
+    (_, e, _): (
+        usize,
+        (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>),
+        usize,
+    ),
+) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action289<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    ___lookbehind: &usize,
+    ___lookahead: &usize,
+) -> alloc::vec::Vec<ast::KeyPairType> {
+    alloc::vec![]
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action290<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (usize, alloc::vec::Vec<ast::KeyPairType>, usize),
+) -> alloc::vec::Vec<ast::KeyPairType> {
+    v
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action291<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (usize, ast::KeyPairType, usize),
+    (_, _, _): (usize, &'input str, usize),
+) -> ast::KeyPairType {
+    ___0
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action292<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (usize, ast::KeyPairType, usize),
+) -> alloc::vec::Vec<ast::KeyPairType> {
+    alloc::vec![___0]
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action293<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (usize, alloc::vec::Vec<ast::KeyPairType>, usize),
+    (_, e, _): (usize, ast::KeyPairType, usize),
+) -> alloc::vec::Vec<ast::KeyPairType> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action294<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (usize, (ast::StringId, spans::Spanned<ast::TypeExpr>), usize),
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
+    alloc::vec![___0]
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action295<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
+    (_, e, _): (usize, (ast::StringId, spans::Spanned<ast::TypeExpr>), usize),
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action296<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (usize, ast::KeyPairExpr, usize),
+) -> alloc::vec::Vec<ast::KeyPairExpr> {
+    alloc::vec![___0]
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action297<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (usize, alloc::vec::Vec<ast::KeyPairExpr>, usize),
+    (_, e, _): (usize, ast::KeyPairExpr, usize),
+) -> alloc::vec::Vec<ast::KeyPairExpr> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action298<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (usize, (spans::Spanned<ast::StringId>, Box<ast::LetPattern>), usize),
+) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)> {
+    alloc::vec![___0]
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action299<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (
+        usize,
+        alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>,
+        usize,
+    ),
+    (_, e, _): (usize, (spans::Spanned<ast::StringId>, Box<ast::LetPattern>), usize),
+) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action300<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, ___0, _): (usize, ast::Expr, usize),
+) -> alloc::vec::Vec<ast::Expr> {
+    alloc::vec![___0]
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action301<'input>(
+    ctx: &mut ast::ParserContext<'_, 'input>,
+    input: &'input str,
+    (_, v, _): (usize, alloc::vec::Vec<ast::Expr>, usize),
+    (_, e, _): (usize, ast::Expr, usize),
+) -> alloc::vec::Vec<ast::Expr> {
+    {
+        let mut v = v;
+        v.push(e);
+        v
+    }
+}
+
+#[allow(unused_variables)]
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action302<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, spans::Spanned<ast::StringId>, usize),
     ___2: (usize, Option<spans::Spanned<ast::TypeExpr>>, usize),
     ___3: (usize, Option<Box<ast::Expr>>, usize),
-) -> ast::KeyPairExpr
-{
+) -> ast::KeyPairExpr {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action181(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action181(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action41(
-        ctx,
-        input,
-        ___temp0,
-        ___1,
-        ___2,
-        ___3,
-    )
+    ___action41(ctx, input, ___temp0, ___1, ___2, ___3)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action303<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action303<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::StringId>, usize),
     ___1: (usize, Option<spans::Spanned<ast::TypeExpr>>, usize),
     ___2: (usize, Option<Box<ast::Expr>>, usize),
-) -> ast::KeyPairExpr
-{
+) -> ast::KeyPairExpr {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action182(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action182(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action41(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-        ___2,
-    )
+    ___action41(ctx, input, ___temp0, ___0, ___1, ___2)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action304<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action304<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::StringId>, usize),
     ___1: (usize, &'input str, usize),
     ___2: (usize, Box<spans::Spanned<ast::TypeExpr>>, usize),
-) -> (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)
-{
+) -> (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>) {
     let ___start0 = ___1.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action217(
-        ctx,
-        input,
-        ___1,
-    );
+    let ___temp0 = ___action217(ctx, input, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action14(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-        ___2,
-    )
+    ___action14(ctx, input, ___0, ___temp0, ___2)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action305<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action305<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::StringId>, usize),
     ___1: (usize, Box<spans::Spanned<ast::TypeExpr>>, usize),
-) -> (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)
-{
+) -> (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>) {
     let ___start0 = ___0.2;
     let ___end0 = ___1.0;
-    let ___temp0 = ___action218(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action218(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action14(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-        ___1,
-    )
+    ___action14(ctx, input, ___0, ___temp0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action306<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action306<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, usize, usize),
@@ -17232,267 +16571,142 @@ fn ___action306<
     ___2: (usize, Vec<spans::Spanned<ast::LetPattern>>, usize),
     ___3: (usize, &'input str, usize),
     ___4: (usize, usize, usize),
-) -> spans::Spanned<Vec<spans::Spanned<ast::LetPattern>>>
-{
+) -> spans::Spanned<Vec<spans::Spanned<ast::LetPattern>>> {
     let ___start0 = ___1.0;
     let ___end0 = ___3.2;
-    let ___temp0 = ___action153(
-        ctx,
-        input,
-        ___1,
-        ___2,
-        ___3,
-    );
+    let ___temp0 = ___action153(ctx, input, ___1, ___2, ___3);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action152(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-        ___4,
-    )
+    ___action152(ctx, input, ___0, ___temp0, ___4)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action307<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action307<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, usize, usize),
     ___1: (usize, &'input str, usize),
     ___2: (usize, ast::StringId, usize),
     ___3: (usize, usize, usize),
-) -> spans::Spanned<ast::StringId>
-{
+) -> spans::Spanned<ast::StringId> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action196(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action196(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action195(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-        ___3,
-    )
+    ___action195(ctx, input, ___0, ___temp0, ___3)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action308<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action308<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, usize, usize),
     ___1: (usize, &'input str, usize),
     ___2: (usize, Box<ast::Expr>, usize),
     ___3: (usize, usize, usize),
-) -> spans::Spanned<Box<ast::Expr>>
-{
+) -> spans::Spanned<Box<ast::Expr>> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action135(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action135(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action134(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-        ___3,
-    )
+    ___action134(ctx, input, ___0, ___temp0, ___3)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action309<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action309<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, ast::TypeParam, usize),
     ___2: (usize, &'input str, usize),
-) -> alloc::vec::Vec<ast::TypeParam>
-{
+) -> alloc::vec::Vec<ast::TypeParam> {
     let ___start0 = ___0.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action225(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action225(ctx, input, ___0, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action229(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action229(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action310<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action310<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<ast::TypeParam>, usize),
     ___1: (usize, &'input str, usize),
     ___2: (usize, ast::TypeParam, usize),
     ___3: (usize, &'input str, usize),
-) -> alloc::vec::Vec<ast::TypeParam>
-{
+) -> alloc::vec::Vec<ast::TypeParam> {
     let ___start0 = ___1.0;
     let ___end0 = ___3.2;
-    let ___temp0 = ___action225(
-        ctx,
-        input,
-        ___1,
-        ___2,
-        ___3,
-    );
+    let ___temp0 = ___action225(ctx, input, ___1, ___2, ___3);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action230(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action230(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action311<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action311<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> alloc::vec::Vec<ast::TypeParam>
-{
+) -> alloc::vec::Vec<ast::TypeParam> {
     let ___start0 = *___lookbehind;
     let ___end0 = *___lookahead;
-    let ___temp0 = ___action223(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action223(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action80(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action80(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action312<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action312<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<ast::TypeParam>, usize),
-) -> alloc::vec::Vec<ast::TypeParam>
-{
+) -> alloc::vec::Vec<ast::TypeParam> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action224(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action224(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action80(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action80(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action313<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action313<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> alloc::vec::Vec<ast::TypeParam>
-{
+) -> alloc::vec::Vec<ast::TypeParam> {
     let ___start0 = *___lookbehind;
     let ___end0 = *___lookahead;
-    let ___temp0 = ___action223(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action223(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action11(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action11(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action314<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action314<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<ast::TypeParam>, usize),
-) -> alloc::vec::Vec<ast::TypeParam>
-{
+) -> alloc::vec::Vec<ast::TypeParam> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action224(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action224(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action11(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action11(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action315<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action315<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, usize, usize),
@@ -17501,1880 +16715,1042 @@ fn ___action315<
     ___3: (usize, &'input str, usize),
     ___4: (usize, Box<ast::Expr>, usize),
     ___5: (usize, usize, usize),
-) -> spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>, Box<ast::Expr>)>
-{
+) -> spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>, Box<ast::Expr>)> {
     let ___start0 = ___1.0;
     let ___end0 = ___4.2;
-    let ___temp0 = ___action146(
-        ctx,
-        input,
-        ___1,
-        ___2,
-        ___3,
-        ___4,
-    );
+    let ___temp0 = ___action146(ctx, input, ___1, ___2, ___3, ___4);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action145(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-        ___5,
-    )
+    ___action145(ctx, input, ___0, ___temp0, ___5)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action316<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action316<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::Expr, usize),
     ___1: (usize, &'input str, usize),
-) -> alloc::vec::Vec<ast::Expr>
-{
+) -> alloc::vec::Vec<ast::Expr> {
     let ___start0 = ___0.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action265(
-        ctx,
-        input,
-        ___0,
-        ___1,
-    );
+    let ___temp0 = ___action265(ctx, input, ___0, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action300(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action300(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action317<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action317<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<ast::Expr>, usize),
     ___1: (usize, ast::Expr, usize),
     ___2: (usize, &'input str, usize),
-) -> alloc::vec::Vec<ast::Expr>
-{
+) -> alloc::vec::Vec<ast::Expr> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action265(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action265(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action301(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action301(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action318<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action318<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::Expr, usize),
-) -> Vec<ast::Expr>
-{
+) -> Vec<ast::Expr> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action263(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action263(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action262(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-    )
+    ___action262(ctx, input, ___temp0, ___0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action319<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action319<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<ast::Expr>, usize),
     ___1: (usize, ast::Expr, usize),
-) -> Vec<ast::Expr>
-{
+) -> Vec<ast::Expr> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action264(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action264(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action262(
-        ctx,
-        input,
-        ___temp0,
-        ___1,
-    )
+    ___action262(ctx, input, ___temp0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action320<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action320<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, (ast::StringId, spans::Spanned<ast::TypeExpr>), usize),
     ___1: (usize, &'input str, usize),
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action280(
-        ctx,
-        input,
-        ___0,
-        ___1,
-    );
+    let ___temp0 = ___action280(ctx, input, ___0, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action294(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action294(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action321<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action321<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
     ___1: (usize, (ast::StringId, spans::Spanned<ast::TypeExpr>), usize),
     ___2: (usize, &'input str, usize),
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action280(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action280(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action295(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action295(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action322<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action322<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, (ast::StringId, spans::Spanned<ast::TypeExpr>), usize),
-) -> Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
+) -> Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action278(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action278(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action244(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-    )
+    ___action244(ctx, input, ___temp0, ___0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action323<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action323<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
     ___1: (usize, (ast::StringId, spans::Spanned<ast::TypeExpr>), usize),
-) -> Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
+) -> Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action279(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action279(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action244(
-        ctx,
-        input,
-        ___temp0,
-        ___1,
-    )
+    ___action244(ctx, input, ___temp0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action324<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action324<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::KeyPairExpr, usize),
     ___1: (usize, &'input str, usize),
-) -> alloc::vec::Vec<ast::KeyPairExpr>
-{
+) -> alloc::vec::Vec<ast::KeyPairExpr> {
     let ___start0 = ___0.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action277(
-        ctx,
-        input,
-        ___0,
-        ___1,
-    );
+    let ___temp0 = ___action277(ctx, input, ___0, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action296(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action296(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action325<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action325<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<ast::KeyPairExpr>, usize),
     ___1: (usize, ast::KeyPairExpr, usize),
     ___2: (usize, &'input str, usize),
-) -> alloc::vec::Vec<ast::KeyPairExpr>
-{
+) -> alloc::vec::Vec<ast::KeyPairExpr> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action277(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action277(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action297(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action297(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action326<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action326<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::KeyPairExpr, usize),
-) -> Vec<ast::KeyPairExpr>
-{
+) -> Vec<ast::KeyPairExpr> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action275(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action275(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action247(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-    )
+    ___action247(ctx, input, ___temp0, ___0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action327<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action327<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<ast::KeyPairExpr>, usize),
     ___1: (usize, ast::KeyPairExpr, usize),
-) -> Vec<ast::KeyPairExpr>
-{
+) -> Vec<ast::KeyPairExpr> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action276(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action276(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action247(
-        ctx,
-        input,
-        ___temp0,
-        ___1,
-    )
+    ___action247(ctx, input, ___temp0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action328<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action328<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, (spans::Spanned<ast::StringId>, Box<ast::LetPattern>), usize),
     ___1: (usize, &'input str, usize),
-) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>
-{
+) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action274(
-        ctx,
-        input,
-        ___0,
-        ___1,
-    );
+    let ___temp0 = ___action274(ctx, input, ___0, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action298(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action298(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action329<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action329<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    ___0: (usize, alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>, usize),
+    ___0: (
+        usize,
+        alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>,
+        usize,
+    ),
     ___1: (usize, (spans::Spanned<ast::StringId>, Box<ast::LetPattern>), usize),
     ___2: (usize, &'input str, usize),
-) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>
-{
+) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action274(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action274(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action299(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action299(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action330<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action330<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, (spans::Spanned<ast::StringId>, Box<ast::LetPattern>), usize),
-) -> Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>
-{
+) -> Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action272(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action272(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action250(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-    )
+    ___action250(ctx, input, ___temp0, ___0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action331<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action331<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    ___0: (usize, alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>, usize),
+    ___0: (
+        usize,
+        alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>,
+        usize,
+    ),
     ___1: (usize, (spans::Spanned<ast::StringId>, Box<ast::LetPattern>), usize),
-) -> Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>
-{
+) -> Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action273(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action273(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action250(
-        ctx,
-        input,
-        ___temp0,
-        ___1,
-    )
+    ___action250(ctx, input, ___temp0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action332<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action332<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::KeyPairType, usize),
     ___1: (usize, &'input str, usize),
-) -> alloc::vec::Vec<ast::KeyPairType>
-{
+) -> alloc::vec::Vec<ast::KeyPairType> {
     let ___start0 = ___0.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action291(
-        ctx,
-        input,
-        ___0,
-        ___1,
-    );
+    let ___temp0 = ___action291(ctx, input, ___0, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action292(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action292(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action333<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action333<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<ast::KeyPairType>, usize),
     ___1: (usize, ast::KeyPairType, usize),
     ___2: (usize, &'input str, usize),
-) -> alloc::vec::Vec<ast::KeyPairType>
-{
+) -> alloc::vec::Vec<ast::KeyPairType> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action291(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action291(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action293(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action293(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action334<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action334<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::KeyPairType, usize),
-) -> Vec<ast::KeyPairType>
-{
+) -> Vec<ast::KeyPairType> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action289(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action289(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action231(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-    )
+    ___action231(ctx, input, ___temp0, ___0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action335<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action335<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<ast::KeyPairType>, usize),
     ___1: (usize, ast::KeyPairType, usize),
-) -> Vec<ast::KeyPairType>
-{
+) -> Vec<ast::KeyPairType> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action290(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action290(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action231(
-        ctx,
-        input,
-        ___temp0,
-        ___1,
-    )
+    ___action231(ctx, input, ___temp0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action336<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action336<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, (ast::StringId, spans::Spanned<ast::Expr>), usize),
     ___1: (usize, &'input str, usize),
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)>
-{
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action259(
-        ctx,
-        input,
-        ___0,
-        ___1,
-    );
+    let ___temp0 = ___action259(ctx, input, ___0, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action266(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action266(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action337<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action337<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)>, usize),
     ___1: (usize, (ast::StringId, spans::Spanned<ast::Expr>), usize),
     ___2: (usize, &'input str, usize),
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)>
-{
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action259(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action259(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action267(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action267(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action338<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action338<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, (ast::StringId, spans::Spanned<ast::Expr>), usize),
-) -> Vec<(ast::StringId, spans::Spanned<ast::Expr>)>
-{
+) -> Vec<(ast::StringId, spans::Spanned<ast::Expr>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action257(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action257(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action136(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-    )
+    ___action136(ctx, input, ___temp0, ___0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action339<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action339<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::Expr>)>, usize),
     ___1: (usize, (ast::StringId, spans::Spanned<ast::Expr>), usize),
-) -> Vec<(ast::StringId, spans::Spanned<ast::Expr>)>
-{
+) -> Vec<(ast::StringId, spans::Spanned<ast::Expr>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action258(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action258(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action136(
-        ctx,
-        input,
-        ___temp0,
-        ___1,
-    )
+    ___action136(ctx, input, ___temp0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action340<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action340<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, (ast::StringId, spans::Spanned<ast::TypeExpr>), usize),
     ___1: (usize, &'input str, usize),
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action176(
-        ctx,
-        input,
-        ___0,
-        ___1,
-    );
+    let ___temp0 = ___action176(ctx, input, ___0, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action245(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action245(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action341<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action341<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
     ___1: (usize, (ast::StringId, spans::Spanned<ast::TypeExpr>), usize),
     ___2: (usize, &'input str, usize),
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action176(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action176(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action246(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action246(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action342<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action342<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___lookbehind: &usize,
     ___lookahead: &usize,
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
     let ___start0 = *___lookbehind;
     let ___end0 = *___lookahead;
-    let ___temp0 = ___action174(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action174(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action43(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action43(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action343<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action343<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
-) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>
-{
+) -> alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action175(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action175(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action43(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action43(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action344<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action344<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, usize, usize),
     ___1: (usize, spans::Spanned<Box<ast::Expr>>, usize),
     ___2: (usize, &'input str, usize),
-    ___3: (usize, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, usize),
+    ___3: (
+        usize,
+        spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+        usize,
+    ),
     ___4: (usize, &'input str, usize),
     ___5: (usize, usize, usize),
-) -> spans::Spanned<(spans::Spanned<Box<ast::Expr>>, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>)>
-{
+) -> spans::Spanned<(
+    spans::Spanned<Box<ast::Expr>>,
+    spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+)> {
     let ___start0 = ___1.0;
     let ___end0 = ___4.2;
-    let ___temp0 = ___action185(
-        ctx,
-        input,
-        ___1,
-        ___2,
-        ___3,
-        ___4,
-    );
+    let ___temp0 = ___action185(ctx, input, ___1, ___2, ___3, ___4);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action184(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-        ___5,
-    )
+    ___action184(ctx, input, ___0, ___temp0, ___5)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action345<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action345<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::Expr>, usize),
     ___1: (usize, &'input str, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::Expr>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::Expr>> {
     let ___start0 = ___0.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action256(
-        ctx,
-        input,
-        ___0,
-        ___1,
-    );
+    let ___temp0 = ___action256(ctx, input, ___0, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action268(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action268(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action346<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action346<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<spans::Spanned<ast::Expr>>, usize),
     ___1: (usize, spans::Spanned<ast::Expr>, usize),
     ___2: (usize, &'input str, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::Expr>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::Expr>> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action256(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action256(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action269(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action269(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action347<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action347<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::Expr>, usize),
-) -> Vec<spans::Spanned<ast::Expr>>
-{
+) -> Vec<spans::Spanned<ast::Expr>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action254(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action254(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action148(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-    )
+    ___action148(ctx, input, ___temp0, ___0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action348<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action348<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<spans::Spanned<ast::Expr>>, usize),
     ___1: (usize, spans::Spanned<ast::Expr>, usize),
-) -> Vec<spans::Spanned<ast::Expr>>
-{
+) -> Vec<spans::Spanned<ast::Expr>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action255(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action255(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action148(
-        ctx,
-        input,
-        ___temp0,
-        ___1,
-    )
+    ___action148(ctx, input, ___temp0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action349<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action349<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::TypeExpr>, usize),
     ___1: (usize, &'input str, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
     let ___start0 = ___0.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action243(
-        ctx,
-        input,
-        ___0,
-        ___1,
-    );
+    let ___temp0 = ___action243(ctx, input, ___0, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action281(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action281(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action350<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action350<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
     ___1: (usize, spans::Spanned<ast::TypeExpr>, usize),
     ___2: (usize, &'input str, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action243(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action243(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action282(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action282(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action351<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action351<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> Vec<spans::Spanned<ast::TypeExpr>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action241(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action241(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action208(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-    )
+    ___action208(ctx, input, ___temp0, ___0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action352<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action352<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
     ___1: (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> Vec<spans::Spanned<ast::TypeExpr>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action242(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action242(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action208(
-        ctx,
-        input,
-        ___temp0,
-        ___1,
-    )
+    ___action208(ctx, input, ___temp0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action353<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action353<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::LetPattern>, usize),
     ___1: (usize, &'input str, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::LetPattern>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::LetPattern>> {
     let ___start0 = ___0.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action253(
-        ctx,
-        input,
-        ___0,
-        ___1,
-    );
+    let ___temp0 = ___action253(ctx, input, ___0, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action270(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action270(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action354<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action354<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<spans::Spanned<ast::LetPattern>>, usize),
     ___1: (usize, spans::Spanned<ast::LetPattern>, usize),
     ___2: (usize, &'input str, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::LetPattern>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::LetPattern>> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action253(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action253(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action271(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action271(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action355<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action355<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::LetPattern>, usize),
-) -> Vec<spans::Spanned<ast::LetPattern>>
-{
+) -> Vec<spans::Spanned<ast::LetPattern>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action251(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action251(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action154(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-    )
+    ___action154(ctx, input, ___temp0, ___0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action356<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action356<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<spans::Spanned<ast::LetPattern>>, usize),
     ___1: (usize, spans::Spanned<ast::LetPattern>, usize),
-) -> Vec<spans::Spanned<ast::LetPattern>>
-{
+) -> Vec<spans::Spanned<ast::LetPattern>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action252(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action252(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action154(
-        ctx,
-        input,
-        ___temp0,
-        ___1,
-    )
+    ___action154(ctx, input, ___temp0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action357<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action357<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, usize, usize),
     ___1: (usize, spans::Spanned<Box<ast::Expr>>, usize),
     ___2: (usize, &'input str, usize),
-    ___3: (usize, alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>, usize),
+    ___3: (
+        usize,
+        alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>,
+        usize,
+    ),
     ___4: (usize, usize, usize),
-) -> spans::Spanned<(spans::Spanned<Box<ast::Expr>>, alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>)>
-{
+) -> spans::Spanned<(
+    spans::Spanned<Box<ast::Expr>>,
+    alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>,
+)> {
     let ___start0 = ___1.0;
     let ___end0 = ___3.2;
-    let ___temp0 = ___action129(
-        ctx,
-        input,
-        ___1,
-        ___2,
-        ___3,
-    );
+    let ___temp0 = ___action129(ctx, input, ___1, ___2, ___3);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action128(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-        ___4,
-    )
+    ___action128(ctx, input, ___0, ___temp0, ___4)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action358<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action358<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::TypeExpr>, usize),
     ___1: (usize, &'input str, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
     let ___start0 = ___0.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action237(
-        ctx,
-        input,
-        ___0,
-        ___1,
-    );
+    let ___temp0 = ___action237(ctx, input, ___0, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action285(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action285(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action359<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action359<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
     ___1: (usize, spans::Spanned<ast::TypeExpr>, usize),
     ___2: (usize, &'input str, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action237(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action237(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action286(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action286(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action360<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action360<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> Vec<spans::Spanned<ast::TypeExpr>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action235(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action235(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action212(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-    )
+    ___action212(ctx, input, ___temp0, ___0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action361<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action361<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
     ___1: (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> Vec<spans::Spanned<ast::TypeExpr>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action236(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action236(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action212(
-        ctx,
-        input,
-        ___temp0,
-        ___1,
-    )
+    ___action212(ctx, input, ___temp0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action362<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action362<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::TypeExpr>, usize),
     ___1: (usize, &'input str, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
     let ___start0 = ___0.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action240(
-        ctx,
-        input,
-        ___0,
-        ___1,
-    );
+    let ___temp0 = ___action240(ctx, input, ___0, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action283(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action283(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action363<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action363<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
     ___1: (usize, spans::Spanned<ast::TypeExpr>, usize),
     ___2: (usize, &'input str, usize),
-) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> alloc::vec::Vec<spans::Spanned<ast::TypeExpr>> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action240(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action240(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action284(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action284(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action364<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action364<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> Vec<spans::Spanned<ast::TypeExpr>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action238(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action238(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action210(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-    )
+    ___action210(ctx, input, ___temp0, ___0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action365<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action365<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<spans::Spanned<ast::TypeExpr>>, usize),
     ___1: (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> Vec<spans::Spanned<ast::TypeExpr>>
-{
+) -> Vec<spans::Spanned<ast::TypeExpr>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action239(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action239(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action210(
-        ctx,
-        input,
-        ___temp0,
-        ___1,
-    )
+    ___action210(ctx, input, ___temp0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action366<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action366<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::Statement, usize),
     ___1: (usize, &'input str, usize),
-) -> alloc::vec::Vec<ast::Statement>
-{
+) -> alloc::vec::Vec<ast::Statement> {
     let ___start0 = ___0.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action127(
-        ctx,
-        input,
-        ___0,
-        ___1,
-    );
+    let ___temp0 = ___action127(ctx, input, ___0, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action260(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action260(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action367<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action367<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<ast::Statement>, usize),
     ___1: (usize, ast::Statement, usize),
     ___2: (usize, &'input str, usize),
-) -> alloc::vec::Vec<ast::Statement>
-{
+) -> alloc::vec::Vec<ast::Statement> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action127(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action127(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action261(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action261(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action368<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action368<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action125(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action125(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action115(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-    )
+    ___action115(ctx, input, ___temp0, ___0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action369<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action369<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<ast::Statement>, usize),
     ___1: (usize, ast::Expr, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action126(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action126(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action115(
-        ctx,
-        input,
-        ___temp0,
-        ___1,
-    )
+    ___action115(ctx, input, ___temp0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action370<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action370<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::Statement, usize),
-) -> Vec<ast::Statement>
-{
+) -> Vec<ast::Statement> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action125(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action125(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action122(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-    )
+    ___action122(ctx, input, ___temp0, ___0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action371<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action371<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<ast::Statement>, usize),
     ___1: (usize, ast::Statement, usize),
-) -> Vec<ast::Statement>
-{
+) -> Vec<ast::Statement> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action126(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action126(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action122(
-        ctx,
-        input,
-        ___temp0,
-        ___1,
-    )
+    ___action122(ctx, input, ___temp0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action372<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action372<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    ___0: (usize, (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>), usize),
+    ___0: (
+        usize,
+        (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>),
+        usize,
+    ),
     ___1: (usize, &'input str, usize),
-) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>
-{
+) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action234(
-        ctx,
-        input,
-        ___0,
-        ___1,
-    );
+    let ___temp0 = ___action234(ctx, input, ___0, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action287(
-        ctx,
-        input,
-        ___temp0,
-    )
+    ___action287(ctx, input, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action373<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action373<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    ___0: (usize, alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>, usize),
-    ___1: (usize, (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>), usize),
+    ___0: (
+        usize,
+        alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>,
+        usize,
+    ),
+    ___1: (
+        usize,
+        (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>),
+        usize,
+    ),
     ___2: (usize, &'input str, usize),
-) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>
-{
+) -> alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action234(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action234(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action288(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action288(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action374<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action374<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    ___0: (usize, (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>), usize),
-) -> Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>
-{
+    ___0: (
+        usize,
+        (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>),
+        usize,
+    ),
+) -> Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action232(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action232(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action214(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-    )
+    ___action214(ctx, input, ___temp0, ___0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action375<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action375<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    ___0: (usize, alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>, usize),
-    ___1: (usize, (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>), usize),
-) -> Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>
-{
+    ___0: (
+        usize,
+        alloc::vec::Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)>,
+        usize,
+    ),
+    ___1: (
+        usize,
+        (spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>),
+        usize,
+    ),
+) -> Vec<(spans::Spanned<ast::StringId>, Box<spans::Spanned<ast::TypeExpr>>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action233(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action233(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action214(
-        ctx,
-        input,
-        ___temp0,
-        ___1,
-    )
+    ___action214(ctx, input, ___temp0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action376<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action376<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, usize, usize),
     ___1: (usize, Box<ast::Expr>, usize),
     ___2: (usize, spans::Spanned<ast::StringId>, usize),
     ___3: (usize, usize, usize),
-) -> spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>)>
-{
+) -> spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>)> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action193(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action193(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action192(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-        ___3,
-    )
+    ___action192(ctx, input, ___0, ___temp0, ___3)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action377<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action377<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, usize, usize),
     ___1: (usize, spans::Spanned<Box<ast::Expr>>, usize),
-    ___2: (usize, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, usize),
+    ___2: (
+        usize,
+        spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+        usize,
+    ),
     ___3: (usize, usize, usize),
-) -> spans::Spanned<(spans::Spanned<Box<ast::Expr>>, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>)>
-{
+) -> spans::Spanned<(
+    spans::Spanned<Box<ast::Expr>>,
+    spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+)> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action187(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action187(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action186(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-        ___3,
-    )
+    ___action186(ctx, input, ___0, ___temp0, ___3)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action378<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action378<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, usize, usize),
     ___1: (usize, spans::Spanned<ast::Expr>, usize),
     ___2: (usize, Box<ast::Expr>, usize),
     ___3: (usize, usize, usize),
-) -> spans::Spanned<(spans::Spanned<ast::Expr>, Box<ast::Expr>)>
-{
+) -> spans::Spanned<(spans::Spanned<ast::Expr>, Box<ast::Expr>)> {
     let ___start0 = ___1.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action162(
-        ctx,
-        input,
-        ___1,
-        ___2,
-    );
+    let ___temp0 = ___action162(ctx, input, ___1, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action161(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-        ___3,
-    )
+    ___action161(ctx, input, ___0, ___temp0, ___3)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action379<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action379<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, usize, usize),
-) -> (ast::OpType, ast::Op)
-{
+) -> (ast::OpType, ast::Op) {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action66(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action66(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action380<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action380<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Box<ast::Expr>, usize),
@@ -19382,45 +17758,21 @@ fn ___action380<
     ___2: (usize, usize, usize),
     ___3: (usize, Box<ast::Expr>, usize),
     ___4: (usize, usize, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
     let ___start1 = ___0.2;
     let ___end1 = ___1.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    let ___temp1 = ___action228(
-        ctx,
-        input,
-        &___start1,
-        &___end1,
-    );
+    let ___temp1 = ___action228(ctx, input, &___start1, &___end1);
     let ___temp1 = (___start1, ___temp1, ___end1);
-    ___action159(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___temp1,
-        ___1,
-        ___2,
-        ___3,
-        ___4,
-    )
+    ___action159(ctx, input, ___temp0, ___0, ___temp1, ___1, ___2, ___3, ___4)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action381<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action381<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Box<ast::Expr>, usize),
@@ -19428,45 +17780,21 @@ fn ___action381<
     ___2: (usize, usize, usize),
     ___3: (usize, Box<ast::Expr>, usize),
     ___4: (usize, usize, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
     let ___start1 = ___0.2;
     let ___end1 = ___1.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    let ___temp1 = ___action228(
-        ctx,
-        input,
-        &___start1,
-        &___end1,
-    );
+    let ___temp1 = ___action228(ctx, input, &___start1, &___end1);
     let ___temp1 = (___start1, ___temp1, ___end1);
-    ___action158(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___temp1,
-        ___1,
-        ___2,
-        ___3,
-        ___4,
-    )
+    ___action158(ctx, input, ___temp0, ___0, ___temp1, ___1, ___2, ___3, ___4)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action382<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action382<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Box<ast::Expr>, usize),
@@ -19474,233 +17802,115 @@ fn ___action382<
     ___2: (usize, usize, usize),
     ___3: (usize, Box<ast::Expr>, usize),
     ___4: (usize, usize, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
     let ___start1 = ___0.2;
     let ___end1 = ___1.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    let ___temp1 = ___action228(
-        ctx,
-        input,
-        &___start1,
-        &___end1,
-    );
+    let ___temp1 = ___action228(ctx, input, &___start1, &___end1);
     let ___temp1 = (___start1, ___temp1, ___end1);
-    ___action160(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___temp1,
-        ___1,
-        ___2,
-        ___3,
-        ___4,
-    )
+    ___action160(ctx, input, ___temp0, ___0, ___temp1, ___1, ___2, ___3, ___4)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action383<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action383<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, usize, usize),
-) -> (ast::OpType, ast::Op)
-{
+) -> (ast::OpType, ast::Op) {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action68(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action68(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action384<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action384<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, usize, usize),
-) -> Result<String,___lalrpop_util::ParseError<usize,Token<'input>,(&'static str, spans::Span)>>
-{
+) -> Result<String, ___lalrpop_util::ParseError<usize, Token<'input>, (&'static str, spans::Span)>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action4(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action4(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action385<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action385<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, usize, usize),
-) -> (ast::OpType, ast::Op)
-{
+) -> (ast::OpType, ast::Op) {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action64(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action64(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action386<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action386<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, Vec<spans::Spanned<ast::LetPattern>>, usize),
     ___2: (usize, &'input str, usize),
     ___3: (usize, usize, usize),
-) -> spans::Spanned<Vec<spans::Spanned<ast::LetPattern>>>
-{
+) -> spans::Spanned<Vec<spans::Spanned<ast::LetPattern>>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action306(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-        ___2,
-        ___3,
-    )
+    ___action306(ctx, input, ___temp0, ___0, ___1, ___2, ___3)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action387<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action387<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, ast::StringId, usize),
     ___2: (usize, usize, usize),
-) -> spans::Spanned<ast::StringId>
-{
+) -> spans::Spanned<ast::StringId> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action307(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-        ___2,
-    )
+    ___action307(ctx, input, ___temp0, ___0, ___1, ___2)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action388<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action388<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, Box<ast::Expr>, usize),
     ___2: (usize, usize, usize),
-) -> spans::Spanned<Box<ast::Expr>>
-{
+) -> spans::Spanned<Box<ast::Expr>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action308(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-        ___2,
-    )
+    ___action308(ctx, input, ___temp0, ___0, ___1, ___2)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action389<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action389<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Box<ast::Expr>, usize),
@@ -19708,2345 +17918,1303 @@ fn ___action389<
     ___2: (usize, &'input str, usize),
     ___3: (usize, Box<ast::Expr>, usize),
     ___4: (usize, usize, usize),
-) -> spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>, Box<ast::Expr>)>
-{
+) -> spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>, Box<ast::Expr>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action315(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-        ___2,
-        ___3,
-        ___4,
-    )
+    ___action315(ctx, input, ___temp0, ___0, ___1, ___2, ___3, ___4)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action390<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action390<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<Box<ast::Expr>>, usize),
     ___1: (usize, &'input str, usize),
-    ___2: (usize, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, usize),
+    ___2: (
+        usize,
+        spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+        usize,
+    ),
     ___3: (usize, &'input str, usize),
     ___4: (usize, usize, usize),
-) -> spans::Spanned<(spans::Spanned<Box<ast::Expr>>, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>)>
-{
+) -> spans::Spanned<(
+    spans::Spanned<Box<ast::Expr>>,
+    spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action344(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-        ___2,
-        ___3,
-        ___4,
-    )
+    ___action344(ctx, input, ___temp0, ___0, ___1, ___2, ___3, ___4)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action391<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action391<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<Box<ast::Expr>>, usize),
     ___1: (usize, &'input str, usize),
-    ___2: (usize, alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>, usize),
+    ___2: (
+        usize,
+        alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>,
+        usize,
+    ),
     ___3: (usize, usize, usize),
-) -> spans::Spanned<(spans::Spanned<Box<ast::Expr>>, alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>)>
-{
+) -> spans::Spanned<(
+    spans::Spanned<Box<ast::Expr>>,
+    alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>,
+)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action357(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-        ___2,
-        ___3,
-    )
+    ___action357(ctx, input, ___temp0, ___0, ___1, ___2, ___3)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action392<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action392<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Box<ast::Expr>, usize),
     ___1: (usize, spans::Spanned<ast::StringId>, usize),
     ___2: (usize, usize, usize),
-) -> spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>)>
-{
+) -> spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action376(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-        ___2,
-    )
+    ___action376(ctx, input, ___temp0, ___0, ___1, ___2)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action393<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action393<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<Box<ast::Expr>>, usize),
-    ___1: (usize, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, usize),
+    ___1: (
+        usize,
+        spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+        usize,
+    ),
     ___2: (usize, usize, usize),
-) -> spans::Spanned<(spans::Spanned<Box<ast::Expr>>, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>)>
-{
+) -> spans::Spanned<(
+    spans::Spanned<Box<ast::Expr>>,
+    spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action377(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-        ___2,
-    )
+    ___action377(ctx, input, ___temp0, ___0, ___1, ___2)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action394<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action394<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::Expr>, usize),
     ___1: (usize, Box<ast::Expr>, usize),
     ___2: (usize, usize, usize),
-) -> spans::Spanned<(spans::Spanned<ast::Expr>, Box<ast::Expr>)>
-{
+) -> spans::Spanned<(spans::Spanned<ast::Expr>, Box<ast::Expr>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action378(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-        ___2,
-    )
+    ___action378(ctx, input, ___temp0, ___0, ___1, ___2)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action395<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action395<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Box<ast::Expr>, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<Box<ast::Expr>>
-{
+) -> spans::Spanned<Box<ast::Expr>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action138(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action138(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action396<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action396<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Box<ast::Expr>, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<Box<ast::Expr>>
-{
+) -> spans::Spanned<Box<ast::Expr>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action188(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action188(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action397<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action397<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::Expr, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<ast::Expr>
-{
+) -> spans::Spanned<ast::Expr> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action149(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action149(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action398<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action398<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, String, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<String>
-{
+) -> spans::Spanned<String> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action168(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action168(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action399<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action399<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    ___0: (usize, (Option<alloc::vec::Vec<ast::TypeParam>>, spans::Spanned<ast::LetPattern>, Option<spans::Spanned<ast::TypeExpr>>, Box<ast::Expr>), usize),
+    ___0: (
+        usize,
+        (
+            Option<alloc::vec::Vec<ast::TypeParam>>,
+            spans::Spanned<ast::LetPattern>,
+            Option<spans::Spanned<ast::TypeExpr>>,
+            Box<ast::Expr>,
+        ),
+        usize,
+    ),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<(Option<alloc::vec::Vec<ast::TypeParam>>, spans::Spanned<ast::LetPattern>, Option<spans::Spanned<ast::TypeExpr>>, Box<ast::Expr>)>
-{
+) -> spans::Spanned<(
+    Option<alloc::vec::Vec<ast::TypeParam>>,
+    spans::Spanned<ast::LetPattern>,
+    Option<spans::Spanned<ast::TypeExpr>>,
+    Box<ast::Expr>,
+)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action139(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action139(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action400<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action400<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    ___0: (usize, (Option<alloc::vec::Vec<ast::TypeParam>>, Box<spans::Spanned<ast::TypeExpr>>, Box<spans::Spanned<ast::TypeExpr>>), usize),
+    ___0: (
+        usize,
+        (
+            Option<alloc::vec::Vec<ast::TypeParam>>,
+            Box<spans::Spanned<ast::TypeExpr>>,
+            Box<spans::Spanned<ast::TypeExpr>>,
+        ),
+        usize,
+    ),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<(Option<alloc::vec::Vec<ast::TypeParam>>, Box<spans::Spanned<ast::TypeExpr>>, Box<spans::Spanned<ast::TypeExpr>>)>
-{
+) -> spans::Spanned<(
+    Option<alloc::vec::Vec<ast::TypeParam>>,
+    Box<spans::Spanned<ast::TypeExpr>>,
+    Box<spans::Spanned<ast::TypeExpr>>,
+)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action198(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action198(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action401<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action401<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::StringId, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<ast::StringId>
-{
+) -> spans::Spanned<ast::StringId> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action226(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action226(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action402<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action402<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, String, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<String>
-{
+) -> spans::Spanned<String> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action167(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action167(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action403<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action403<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::TypeExpr, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action209(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action209(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action404<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action404<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::LetPattern, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<ast::LetPattern>
-{
+) -> spans::Spanned<ast::LetPattern> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action155(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action155(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action405<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action405<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::LetPattern, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<ast::LetPattern>
-{
+) -> spans::Spanned<ast::LetPattern> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action142(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action142(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action406<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action406<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Box<ast::Expr>, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<Box<ast::Expr>>
-{
+) -> spans::Spanned<Box<ast::Expr>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action132(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action132(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action407<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action407<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::TypeExpr, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action207(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action207(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action408<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action408<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::Expr, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<ast::Expr>
-{
+) -> spans::Spanned<ast::Expr> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action137(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action137(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action409<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action409<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    ___0: (usize, (alloc::vec::Vec<ast::TypeParam>, Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>), usize),
+    ___0: (
+        usize,
+        (
+            alloc::vec::Vec<ast::TypeParam>,
+            Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>,
+        ),
+        usize,
+    ),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<(alloc::vec::Vec<ast::TypeParam>, Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>)>
-{
+) -> spans::Spanned<(
+    alloc::vec::Vec<ast::TypeParam>,
+    Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>,
+)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action150(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action150(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action410<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action410<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    ___0: (usize, (spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, Vec<ast::KeyPairExpr>), usize),
+    ___0: (
+        usize,
+        (
+            spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+            Vec<ast::KeyPairExpr>,
+        ),
+        usize,
+    ),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<(spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, Vec<ast::KeyPairExpr>)>
-{
+) -> spans::Spanned<(
+    spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+    Vec<ast::KeyPairExpr>,
+)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action170(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action170(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action411<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action411<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, (alloc::vec::Vec<ast::TypeParam>, Vec<ast::KeyPairType>), usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<(alloc::vec::Vec<ast::TypeParam>, Vec<ast::KeyPairType>)>
-{
+) -> spans::Spanned<(alloc::vec::Vec<ast::TypeParam>, Vec<ast::KeyPairType>)> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action220(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action220(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action412<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action412<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>
-{
+) -> spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action173(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action173(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action413<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action413<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Vec<spans::Spanned<ast::Expr>>, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<Vec<spans::Spanned<ast::Expr>>>
-{
+) -> spans::Spanned<Vec<spans::Spanned<ast::Expr>>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action147(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action147(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action414<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action414<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Vec<spans::Spanned<ast::TypeExpr>>, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<Vec<spans::Spanned<ast::TypeExpr>>>
-{
+) -> spans::Spanned<Vec<spans::Spanned<ast::TypeExpr>>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action211(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action211(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action415<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action415<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>
-{
+) -> spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action189(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action189(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action416<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action416<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::Expr, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<ast::Expr>
-{
+) -> spans::Spanned<ast::Expr> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action164(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action164(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action417<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action417<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::TypeExpr, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action213(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action213(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action418<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action418<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<&'input str>
-{
+) -> spans::Spanned<&'input str> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action169(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action169(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action419<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action419<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, String, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<String>
-{
+) -> spans::Spanned<String> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action166(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action166(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action420<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action420<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::StringId, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<ast::StringId>
-{
+) -> spans::Spanned<ast::StringId> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action219(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action219(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action421<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action421<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::TypeExpr, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action216(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action216(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action422<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action422<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::TypeExpr, usize),
     ___1: (usize, usize, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action228(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action228(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action197(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-    )
+    ___action197(ctx, input, ___temp0, ___0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action423<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action423<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
-) -> (ast::OpType, ast::Op)
-{
+) -> (ast::OpType, ast::Op) {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action379(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action379(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action424<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action424<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Box<ast::Expr>, usize),
     ___1: (usize, (ast::OpType, ast::Op), usize),
     ___2: (usize, Box<ast::Expr>, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     let ___start0 = ___1.2;
     let ___end0 = ___2.0;
     let ___start1 = ___2.2;
     let ___end1 = ___2.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    let ___temp1 = ___action227(
-        ctx,
-        input,
-        &___start1,
-        &___end1,
-    );
+    let ___temp1 = ___action227(ctx, input, &___start1, &___end1);
     let ___temp1 = (___start1, ___temp1, ___end1);
-    ___action380(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___temp0,
-        ___2,
-        ___temp1,
-    )
+    ___action380(ctx, input, ___0, ___1, ___temp0, ___2, ___temp1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action425<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action425<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Box<ast::Expr>, usize),
     ___1: (usize, (ast::OpType, ast::Op), usize),
     ___2: (usize, Box<ast::Expr>, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     let ___start0 = ___1.2;
     let ___end0 = ___2.0;
     let ___start1 = ___2.2;
     let ___end1 = ___2.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    let ___temp1 = ___action227(
-        ctx,
-        input,
-        &___start1,
-        &___end1,
-    );
+    let ___temp1 = ___action227(ctx, input, &___start1, &___end1);
     let ___temp1 = (___start1, ___temp1, ___end1);
-    ___action381(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___temp0,
-        ___2,
-        ___temp1,
-    )
+    ___action381(ctx, input, ___0, ___1, ___temp0, ___2, ___temp1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action426<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action426<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Box<ast::Expr>, usize),
     ___1: (usize, (ast::OpType, ast::Op), usize),
     ___2: (usize, Box<ast::Expr>, usize),
-) -> ast::Expr
-{
+) -> ast::Expr {
     let ___start0 = ___1.2;
     let ___end0 = ___2.0;
     let ___start1 = ___2.2;
     let ___end1 = ___2.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    let ___temp1 = ___action227(
-        ctx,
-        input,
-        &___start1,
-        &___end1,
-    );
+    let ___temp1 = ___action227(ctx, input, &___start1, &___end1);
     let ___temp1 = (___start1, ___temp1, ___end1);
-    ___action382(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___temp0,
-        ___2,
-        ___temp1,
-    )
+    ___action382(ctx, input, ___0, ___1, ___temp0, ___2, ___temp1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action427<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action427<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
-) -> (ast::OpType, ast::Op)
-{
+) -> (ast::OpType, ast::Op) {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action383(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action383(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action428<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action428<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
-) -> Result<String,___lalrpop_util::ParseError<usize,Token<'input>,(&'static str, spans::Span)>>
-{
+) -> Result<String, ___lalrpop_util::ParseError<usize, Token<'input>, (&'static str, spans::Span)>> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action384(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action384(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action429<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action429<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
-) -> (ast::OpType, ast::Op)
-{
+) -> (ast::OpType, ast::Op) {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action385(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action385(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action430<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action430<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, Vec<spans::Spanned<ast::LetPattern>>, usize),
     ___2: (usize, &'input str, usize),
-) -> spans::Spanned<Vec<spans::Spanned<ast::LetPattern>>>
-{
+) -> spans::Spanned<Vec<spans::Spanned<ast::LetPattern>>> {
     let ___start0 = ___2.2;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action386(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___2,
-        ___temp0,
-    )
+    ___action386(ctx, input, ___0, ___1, ___2, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action431<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action431<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, ast::StringId, usize),
-) -> spans::Spanned<ast::StringId>
-{
+) -> spans::Spanned<ast::StringId> {
     let ___start0 = ___1.2;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action387(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___temp0,
-    )
+    ___action387(ctx, input, ___0, ___1, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action432<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action432<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, Box<ast::Expr>, usize),
-) -> spans::Spanned<Box<ast::Expr>>
-{
+) -> spans::Spanned<Box<ast::Expr>> {
     let ___start0 = ___1.2;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action388(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___temp0,
-    )
+    ___action388(ctx, input, ___0, ___1, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action433<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action433<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Box<ast::Expr>, usize),
     ___1: (usize, spans::Spanned<ast::StringId>, usize),
     ___2: (usize, &'input str, usize),
     ___3: (usize, Box<ast::Expr>, usize),
-) -> spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>, Box<ast::Expr>)>
-{
+) -> spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>, Box<ast::Expr>)> {
     let ___start0 = ___3.2;
     let ___end0 = ___3.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action389(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___2,
-        ___3,
-        ___temp0,
-    )
+    ___action389(ctx, input, ___0, ___1, ___2, ___3, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action434<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action434<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<Box<ast::Expr>>, usize),
     ___1: (usize, &'input str, usize),
-    ___2: (usize, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, usize),
+    ___2: (
+        usize,
+        spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+        usize,
+    ),
     ___3: (usize, &'input str, usize),
-) -> spans::Spanned<(spans::Spanned<Box<ast::Expr>>, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>)>
-{
+) -> spans::Spanned<(
+    spans::Spanned<Box<ast::Expr>>,
+    spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+)> {
     let ___start0 = ___3.2;
     let ___end0 = ___3.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action390(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___2,
-        ___3,
-        ___temp0,
-    )
+    ___action390(ctx, input, ___0, ___1, ___2, ___3, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action435<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action435<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<Box<ast::Expr>>, usize),
     ___1: (usize, &'input str, usize),
-    ___2: (usize, alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>, usize),
-) -> spans::Spanned<(spans::Spanned<Box<ast::Expr>>, alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>)>
-{
+    ___2: (
+        usize,
+        alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>,
+        usize,
+    ),
+) -> spans::Spanned<(
+    spans::Spanned<Box<ast::Expr>>,
+    alloc::vec::Vec<(spans::Spanned<ast::LetPattern>, Box<ast::Expr>)>,
+)> {
     let ___start0 = ___2.2;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action391(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___2,
-        ___temp0,
-    )
+    ___action391(ctx, input, ___0, ___1, ___2, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action436<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action436<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Box<ast::Expr>, usize),
     ___1: (usize, spans::Spanned<ast::StringId>, usize),
-) -> spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>)>
-{
+) -> spans::Spanned<(Box<ast::Expr>, spans::Spanned<ast::StringId>)> {
     let ___start0 = ___1.2;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action392(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___temp0,
-    )
+    ___action392(ctx, input, ___0, ___1, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action437<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action437<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<Box<ast::Expr>>, usize),
-    ___1: (usize, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, usize),
-) -> spans::Spanned<(spans::Spanned<Box<ast::Expr>>, spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>)>
-{
+    ___1: (
+        usize,
+        spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+        usize,
+    ),
+) -> spans::Spanned<(
+    spans::Spanned<Box<ast::Expr>>,
+    spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+)> {
     let ___start0 = ___1.2;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action393(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___temp0,
-    )
+    ___action393(ctx, input, ___0, ___1, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action438<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action438<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::Expr>, usize),
     ___1: (usize, Box<ast::Expr>, usize),
-) -> spans::Spanned<(spans::Spanned<ast::Expr>, Box<ast::Expr>)>
-{
+) -> spans::Spanned<(spans::Spanned<ast::Expr>, Box<ast::Expr>)> {
     let ___start0 = ___1.2;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action394(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___temp0,
-    )
+    ___action394(ctx, input, ___0, ___1, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action439<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action439<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Box<ast::Expr>, usize),
-) -> spans::Spanned<Box<ast::Expr>>
-{
+) -> spans::Spanned<Box<ast::Expr>> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action395(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action395(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action440<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action440<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Box<ast::Expr>, usize),
-) -> spans::Spanned<Box<ast::Expr>>
-{
+) -> spans::Spanned<Box<ast::Expr>> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action396(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action396(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action441<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action441<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::Expr, usize),
-) -> spans::Spanned<ast::Expr>
-{
+) -> spans::Spanned<ast::Expr> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action397(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action397(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action442<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action442<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, String, usize),
-) -> spans::Spanned<String>
-{
+) -> spans::Spanned<String> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action398(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action398(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action443<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action443<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    ___0: (usize, (Option<alloc::vec::Vec<ast::TypeParam>>, spans::Spanned<ast::LetPattern>, Option<spans::Spanned<ast::TypeExpr>>, Box<ast::Expr>), usize),
-) -> spans::Spanned<(Option<alloc::vec::Vec<ast::TypeParam>>, spans::Spanned<ast::LetPattern>, Option<spans::Spanned<ast::TypeExpr>>, Box<ast::Expr>)>
-{
+    ___0: (
+        usize,
+        (
+            Option<alloc::vec::Vec<ast::TypeParam>>,
+            spans::Spanned<ast::LetPattern>,
+            Option<spans::Spanned<ast::TypeExpr>>,
+            Box<ast::Expr>,
+        ),
+        usize,
+    ),
+) -> spans::Spanned<(
+    Option<alloc::vec::Vec<ast::TypeParam>>,
+    spans::Spanned<ast::LetPattern>,
+    Option<spans::Spanned<ast::TypeExpr>>,
+    Box<ast::Expr>,
+)> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action399(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action399(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action444<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action444<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    ___0: (usize, (Option<alloc::vec::Vec<ast::TypeParam>>, Box<spans::Spanned<ast::TypeExpr>>, Box<spans::Spanned<ast::TypeExpr>>), usize),
-) -> spans::Spanned<(Option<alloc::vec::Vec<ast::TypeParam>>, Box<spans::Spanned<ast::TypeExpr>>, Box<spans::Spanned<ast::TypeExpr>>)>
-{
+    ___0: (
+        usize,
+        (
+            Option<alloc::vec::Vec<ast::TypeParam>>,
+            Box<spans::Spanned<ast::TypeExpr>>,
+            Box<spans::Spanned<ast::TypeExpr>>,
+        ),
+        usize,
+    ),
+) -> spans::Spanned<(
+    Option<alloc::vec::Vec<ast::TypeParam>>,
+    Box<spans::Spanned<ast::TypeExpr>>,
+    Box<spans::Spanned<ast::TypeExpr>>,
+)> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action400(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action400(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action445<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action445<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::StringId, usize),
-) -> spans::Spanned<ast::StringId>
-{
+) -> spans::Spanned<ast::StringId> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action401(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action401(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action446<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action446<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, String, usize),
-) -> spans::Spanned<String>
-{
+) -> spans::Spanned<String> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action402(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action402(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action447<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action447<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::TypeExpr, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action403(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action403(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action448<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action448<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::LetPattern, usize),
-) -> spans::Spanned<ast::LetPattern>
-{
+) -> spans::Spanned<ast::LetPattern> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action404(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action404(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action449<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action449<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::LetPattern, usize),
-) -> spans::Spanned<ast::LetPattern>
-{
+) -> spans::Spanned<ast::LetPattern> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action405(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action405(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action450<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action450<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Box<ast::Expr>, usize),
-) -> spans::Spanned<Box<ast::Expr>>
-{
+) -> spans::Spanned<Box<ast::Expr>> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action406(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action406(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action451<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action451<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::TypeExpr, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action407(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action407(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action452<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action452<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::Expr, usize),
-) -> spans::Spanned<ast::Expr>
-{
+) -> spans::Spanned<ast::Expr> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action408(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action408(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action453<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action453<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    ___0: (usize, (alloc::vec::Vec<ast::TypeParam>, Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>), usize),
-) -> spans::Spanned<(alloc::vec::Vec<ast::TypeParam>, Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>)>
-{
+    ___0: (
+        usize,
+        (
+            alloc::vec::Vec<ast::TypeParam>,
+            Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>,
+        ),
+        usize,
+    ),
+) -> spans::Spanned<(
+    alloc::vec::Vec<ast::TypeParam>,
+    Vec<(spans::Spanned<ast::StringId>, Box<ast::LetPattern>)>,
+)> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action409(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action409(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action454<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action454<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
-    ___0: (usize, (spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, Vec<ast::KeyPairExpr>), usize),
-) -> spans::Spanned<(spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>, Vec<ast::KeyPairExpr>)>
-{
+    ___0: (
+        usize,
+        (
+            spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+            Vec<ast::KeyPairExpr>,
+        ),
+        usize,
+    ),
+) -> spans::Spanned<(
+    spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>,
+    Vec<ast::KeyPairExpr>,
+)> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action410(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action410(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action455<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action455<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, (alloc::vec::Vec<ast::TypeParam>, Vec<ast::KeyPairType>), usize),
-) -> spans::Spanned<(alloc::vec::Vec<ast::TypeParam>, Vec<ast::KeyPairType>)>
-{
+) -> spans::Spanned<(alloc::vec::Vec<ast::TypeParam>, Vec<ast::KeyPairType>)> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action411(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action411(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action456<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action456<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
-) -> spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>
-{
+) -> spans::Spanned<alloc::vec::Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action412(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action412(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action457<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action457<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Vec<spans::Spanned<ast::Expr>>, usize),
-) -> spans::Spanned<Vec<spans::Spanned<ast::Expr>>>
-{
+) -> spans::Spanned<Vec<spans::Spanned<ast::Expr>>> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action413(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action413(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action458<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action458<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Vec<spans::Spanned<ast::TypeExpr>>, usize),
-) -> spans::Spanned<Vec<spans::Spanned<ast::TypeExpr>>>
-{
+) -> spans::Spanned<Vec<spans::Spanned<ast::TypeExpr>>> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action414(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action414(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action459<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action459<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>, usize),
-) -> spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>>
-{
+) -> spans::Spanned<Vec<(ast::StringId, spans::Spanned<ast::TypeExpr>)>> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action415(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action415(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action460<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action460<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::Expr, usize),
-) -> spans::Spanned<ast::Expr>
-{
+) -> spans::Spanned<ast::Expr> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action416(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action416(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action461<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action461<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::TypeExpr, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action417(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action417(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action462<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action462<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
-) -> spans::Spanned<&'input str>
-{
+) -> spans::Spanned<&'input str> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action418(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action418(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action463<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action463<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, String, usize),
-) -> spans::Spanned<String>
-{
+) -> spans::Spanned<String> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action419(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action419(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action464<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action464<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::StringId, usize),
-) -> spans::Spanned<ast::StringId>
-{
+) -> spans::Spanned<ast::StringId> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action420(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action420(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action465<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action465<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::TypeExpr, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action421(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action421(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action466<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action466<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, ast::TypeExpr, usize),
-) -> spans::Spanned<ast::TypeExpr>
-{
+) -> spans::Spanned<ast::TypeExpr> {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action227(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action227(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action422(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action422(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action467<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action467<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
@@ -22055,34 +19223,22 @@ fn ___action467<
     ___3: (usize, Option<spans::Spanned<ast::TypeExpr>>, usize),
     ___4: (usize, &'input str, usize),
     ___5: (usize, Box<ast::Expr>, usize),
-) -> (Option<alloc::vec::Vec<ast::TypeParam>>, spans::Spanned<ast::LetPattern>, Option<spans::Spanned<ast::TypeExpr>>, Box<ast::Expr>)
-{
+) -> (
+    Option<alloc::vec::Vec<ast::TypeParam>>,
+    spans::Spanned<ast::LetPattern>,
+    Option<spans::Spanned<ast::TypeExpr>>,
+    Box<ast::Expr>,
+) {
     let ___start0 = ___1.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action143(
-        ctx,
-        input,
-        ___1,
-    );
+    let ___temp0 = ___action143(ctx, input, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action94(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-        ___2,
-        ___3,
-        ___4,
-        ___5,
-    )
+    ___action94(ctx, input, ___0, ___temp0, ___2, ___3, ___4, ___5)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action468<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action468<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
@@ -22090,99 +19246,63 @@ fn ___action468<
     ___2: (usize, Option<spans::Spanned<ast::TypeExpr>>, usize),
     ___3: (usize, &'input str, usize),
     ___4: (usize, Box<ast::Expr>, usize),
-) -> (Option<alloc::vec::Vec<ast::TypeParam>>, spans::Spanned<ast::LetPattern>, Option<spans::Spanned<ast::TypeExpr>>, Box<ast::Expr>)
-{
+) -> (
+    Option<alloc::vec::Vec<ast::TypeParam>>,
+    spans::Spanned<ast::LetPattern>,
+    Option<spans::Spanned<ast::TypeExpr>>,
+    Box<ast::Expr>,
+) {
     let ___start0 = ___0.2;
     let ___end0 = ___1.0;
-    let ___temp0 = ___action144(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action144(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action94(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-        ___1,
-        ___2,
-        ___3,
-        ___4,
-    )
+    ___action94(ctx, input, ___0, ___temp0, ___1, ___2, ___3, ___4)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action469<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action469<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, alloc::vec::Vec<ast::TypeParam>, usize),
     ___1: (usize, Box<spans::Spanned<ast::TypeExpr>>, usize),
     ___2: (usize, &'input str, usize),
     ___3: (usize, Box<spans::Spanned<ast::TypeExpr>>, usize),
-) -> (Option<alloc::vec::Vec<ast::TypeParam>>, Box<spans::Spanned<ast::TypeExpr>>, Box<spans::Spanned<ast::TypeExpr>>)
-{
+) -> (
+    Option<alloc::vec::Vec<ast::TypeParam>>,
+    Box<spans::Spanned<ast::TypeExpr>>,
+    Box<spans::Spanned<ast::TypeExpr>>,
+) {
     let ___start0 = ___0.0;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action201(
-        ctx,
-        input,
-        ___0,
-    );
+    let ___temp0 = ___action201(ctx, input, ___0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action28(
-        ctx,
-        input,
-        ___temp0,
-        ___1,
-        ___2,
-        ___3,
-    )
+    ___action28(ctx, input, ___temp0, ___1, ___2, ___3)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action470<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action470<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, Box<spans::Spanned<ast::TypeExpr>>, usize),
     ___1: (usize, &'input str, usize),
     ___2: (usize, Box<spans::Spanned<ast::TypeExpr>>, usize),
-) -> (Option<alloc::vec::Vec<ast::TypeParam>>, Box<spans::Spanned<ast::TypeExpr>>, Box<spans::Spanned<ast::TypeExpr>>)
-{
+) -> (
+    Option<alloc::vec::Vec<ast::TypeParam>>,
+    Box<spans::Spanned<ast::TypeExpr>>,
+    Box<spans::Spanned<ast::TypeExpr>>,
+) {
     let ___start0 = ___0.0;
     let ___end0 = ___0.0;
-    let ___temp0 = ___action202(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action202(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action28(
-        ctx,
-        input,
-        ___temp0,
-        ___0,
-        ___1,
-        ___2,
-    )
+    ___action28(ctx, input, ___temp0, ___0, ___1, ___2)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action471<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action471<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
@@ -22191,34 +19311,22 @@ fn ___action471<
     ___3: (usize, spans::Spanned<ast::TypeExpr>, usize),
     ___4: (usize, &'input str, usize),
     ___5: (usize, Box<ast::Expr>, usize),
-) -> (Option<alloc::vec::Vec<ast::TypeParam>>, spans::Spanned<ast::LetPattern>, Option<spans::Spanned<ast::TypeExpr>>, Box<ast::Expr>)
-{
+) -> (
+    Option<alloc::vec::Vec<ast::TypeParam>>,
+    spans::Spanned<ast::LetPattern>,
+    Option<spans::Spanned<ast::TypeExpr>>,
+    Box<ast::Expr>,
+) {
     let ___start0 = ___3.0;
     let ___end0 = ___3.2;
-    let ___temp0 = ___action140(
-        ctx,
-        input,
-        ___3,
-    );
+    let ___temp0 = ___action140(ctx, input, ___3);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action467(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___2,
-        ___temp0,
-        ___4,
-        ___5,
-    )
+    ___action467(ctx, input, ___0, ___1, ___2, ___temp0, ___4, ___5)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action472<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action472<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
@@ -22226,35 +19334,22 @@ fn ___action472<
     ___2: (usize, spans::Spanned<ast::LetPattern>, usize),
     ___3: (usize, &'input str, usize),
     ___4: (usize, Box<ast::Expr>, usize),
-) -> (Option<alloc::vec::Vec<ast::TypeParam>>, spans::Spanned<ast::LetPattern>, Option<spans::Spanned<ast::TypeExpr>>, Box<ast::Expr>)
-{
+) -> (
+    Option<alloc::vec::Vec<ast::TypeParam>>,
+    spans::Spanned<ast::LetPattern>,
+    Option<spans::Spanned<ast::TypeExpr>>,
+    Box<ast::Expr>,
+) {
     let ___start0 = ___2.2;
     let ___end0 = ___3.0;
-    let ___temp0 = ___action141(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action141(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action467(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___2,
-        ___temp0,
-        ___3,
-        ___4,
-    )
+    ___action467(ctx, input, ___0, ___1, ___2, ___temp0, ___3, ___4)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action473<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action473<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
@@ -22262,608 +19357,336 @@ fn ___action473<
     ___2: (usize, spans::Spanned<ast::TypeExpr>, usize),
     ___3: (usize, &'input str, usize),
     ___4: (usize, Box<ast::Expr>, usize),
-) -> (Option<alloc::vec::Vec<ast::TypeParam>>, spans::Spanned<ast::LetPattern>, Option<spans::Spanned<ast::TypeExpr>>, Box<ast::Expr>)
-{
+) -> (
+    Option<alloc::vec::Vec<ast::TypeParam>>,
+    spans::Spanned<ast::LetPattern>,
+    Option<spans::Spanned<ast::TypeExpr>>,
+    Box<ast::Expr>,
+) {
     let ___start0 = ___2.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action140(
-        ctx,
-        input,
-        ___2,
-    );
+    let ___temp0 = ___action140(ctx, input, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action468(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___temp0,
-        ___3,
-        ___4,
-    )
+    ___action468(ctx, input, ___0, ___1, ___temp0, ___3, ___4)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action474<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action474<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, spans::Spanned<ast::LetPattern>, usize),
     ___2: (usize, &'input str, usize),
     ___3: (usize, Box<ast::Expr>, usize),
-) -> (Option<alloc::vec::Vec<ast::TypeParam>>, spans::Spanned<ast::LetPattern>, Option<spans::Spanned<ast::TypeExpr>>, Box<ast::Expr>)
-{
+) -> (
+    Option<alloc::vec::Vec<ast::TypeParam>>,
+    spans::Spanned<ast::LetPattern>,
+    Option<spans::Spanned<ast::TypeExpr>>,
+    Box<ast::Expr>,
+) {
     let ___start0 = ___1.2;
     let ___end0 = ___2.0;
-    let ___temp0 = ___action141(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action141(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action468(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___temp0,
-        ___2,
-        ___3,
-    )
+    ___action468(ctx, input, ___0, ___1, ___temp0, ___2, ___3)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action475<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action475<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, spans::Spanned<ast::StringId>, usize),
     ___2: (usize, Option<spans::Spanned<ast::TypeExpr>>, usize),
     ___3: (usize, Box<ast::Expr>, usize),
-) -> ast::KeyPairExpr
-{
+) -> ast::KeyPairExpr {
     let ___start0 = ___3.0;
     let ___end0 = ___3.2;
-    let ___temp0 = ___action177(
-        ctx,
-        input,
-        ___3,
-    );
+    let ___temp0 = ___action177(ctx, input, ___3);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action302(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___2,
-        ___temp0,
-    )
+    ___action302(ctx, input, ___0, ___1, ___2, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action476<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action476<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, spans::Spanned<ast::StringId>, usize),
     ___2: (usize, Option<spans::Spanned<ast::TypeExpr>>, usize),
-) -> ast::KeyPairExpr
-{
+) -> ast::KeyPairExpr {
     let ___start0 = ___2.2;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action178(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action178(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action302(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___2,
-        ___temp0,
-    )
+    ___action302(ctx, input, ___0, ___1, ___2, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action477<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action477<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::StringId>, usize),
     ___1: (usize, Option<spans::Spanned<ast::TypeExpr>>, usize),
     ___2: (usize, Box<ast::Expr>, usize),
-) -> ast::KeyPairExpr
-{
+) -> ast::KeyPairExpr {
     let ___start0 = ___2.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action177(
-        ctx,
-        input,
-        ___2,
-    );
+    let ___temp0 = ___action177(ctx, input, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action303(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___temp0,
-    )
+    ___action303(ctx, input, ___0, ___1, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action478<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action478<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::StringId>, usize),
     ___1: (usize, Option<spans::Spanned<ast::TypeExpr>>, usize),
-) -> ast::KeyPairExpr
-{
+) -> ast::KeyPairExpr {
     let ___start0 = ___1.2;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action178(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action178(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action303(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___temp0,
-    )
+    ___action303(ctx, input, ___0, ___1, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action479<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action479<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, spans::Spanned<ast::StringId>, usize),
     ___2: (usize, spans::Spanned<ast::TypeExpr>, usize),
     ___3: (usize, Box<ast::Expr>, usize),
-) -> ast::KeyPairExpr
-{
+) -> ast::KeyPairExpr {
     let ___start0 = ___2.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action179(
-        ctx,
-        input,
-        ___2,
-    );
+    let ___temp0 = ___action179(ctx, input, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action475(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___temp0,
-        ___3,
-    )
+    ___action475(ctx, input, ___0, ___1, ___temp0, ___3)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action480<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action480<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, spans::Spanned<ast::StringId>, usize),
     ___2: (usize, Box<ast::Expr>, usize),
-) -> ast::KeyPairExpr
-{
+) -> ast::KeyPairExpr {
     let ___start0 = ___1.2;
     let ___end0 = ___2.0;
-    let ___temp0 = ___action180(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action180(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action475(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___temp0,
-        ___2,
-    )
+    ___action475(ctx, input, ___0, ___1, ___temp0, ___2)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action481<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action481<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, spans::Spanned<ast::StringId>, usize),
     ___2: (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> ast::KeyPairExpr
-{
+) -> ast::KeyPairExpr {
     let ___start0 = ___2.0;
     let ___end0 = ___2.2;
-    let ___temp0 = ___action179(
-        ctx,
-        input,
-        ___2,
-    );
+    let ___temp0 = ___action179(ctx, input, ___2);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action476(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___temp0,
-    )
+    ___action476(ctx, input, ___0, ___1, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action482<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action482<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, &'input str, usize),
     ___1: (usize, spans::Spanned<ast::StringId>, usize),
-) -> ast::KeyPairExpr
-{
+) -> ast::KeyPairExpr {
     let ___start0 = ___1.2;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action180(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action180(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action476(
-        ctx,
-        input,
-        ___0,
-        ___1,
-        ___temp0,
-    )
+    ___action476(ctx, input, ___0, ___1, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action483<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action483<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::StringId>, usize),
     ___1: (usize, spans::Spanned<ast::TypeExpr>, usize),
     ___2: (usize, Box<ast::Expr>, usize),
-) -> ast::KeyPairExpr
-{
+) -> ast::KeyPairExpr {
     let ___start0 = ___1.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action179(
-        ctx,
-        input,
-        ___1,
-    );
+    let ___temp0 = ___action179(ctx, input, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action477(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-        ___2,
-    )
+    ___action477(ctx, input, ___0, ___temp0, ___2)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action484<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action484<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::StringId>, usize),
     ___1: (usize, Box<ast::Expr>, usize),
-) -> ast::KeyPairExpr
-{
+) -> ast::KeyPairExpr {
     let ___start0 = ___0.2;
     let ___end0 = ___1.0;
-    let ___temp0 = ___action180(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action180(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action477(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-        ___1,
-    )
+    ___action477(ctx, input, ___0, ___temp0, ___1)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action485<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action485<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::StringId>, usize),
     ___1: (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> ast::KeyPairExpr
-{
+) -> ast::KeyPairExpr {
     let ___start0 = ___1.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action179(
-        ctx,
-        input,
-        ___1,
-    );
+    let ___temp0 = ___action179(ctx, input, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action478(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action478(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action486<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action486<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::StringId>, usize),
-) -> ast::KeyPairExpr
-{
+) -> ast::KeyPairExpr {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action180(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action180(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action478(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action478(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action487<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action487<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::StringId>, usize),
     ___1: (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> (spans::Spanned<ast::StringId>, Box<ast::LetPattern>)
-{
+) -> (spans::Spanned<ast::StringId>, Box<ast::LetPattern>) {
     let ___start0 = ___1.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action179(
-        ctx,
-        input,
-        ___1,
-    );
+    let ___temp0 = ___action179(ctx, input, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action79(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action79(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action488<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action488<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::StringId>, usize),
-) -> (spans::Spanned<ast::StringId>, Box<ast::LetPattern>)
-{
+) -> (spans::Spanned<ast::StringId>, Box<ast::LetPattern>) {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action180(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action180(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action79(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action79(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action489<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action489<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, (Option<ast::StringId>, spans::Span), usize),
     ___1: (usize, spans::Spanned<ast::TypeExpr>, usize),
-) -> ast::LetPattern
-{
+) -> ast::LetPattern {
     let ___start0 = ___1.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action179(
-        ctx,
-        input,
-        ___1,
-    );
+    let ___temp0 = ___action179(ctx, input, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action88(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action88(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action490<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action490<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, (Option<ast::StringId>, spans::Span), usize),
-) -> ast::LetPattern
-{
+) -> ast::LetPattern {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action180(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action180(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action88(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action88(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action491<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action491<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::StringId>, usize),
     ___1: (usize, spans::Spanned<ast::StringId>, usize),
-) -> ast::TypeParam
-{
+) -> ast::TypeParam {
     let ___start0 = ___1.0;
     let ___end0 = ___1.2;
-    let ___temp0 = ___action205(
-        ctx,
-        input,
-        ___1,
-    );
+    let ___temp0 = ___action205(ctx, input, ___1);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action26(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action26(ctx, input, ___0, ___temp0)
 }
 
 #[allow(unused_variables)]
-#[allow(clippy::too_many_arguments, clippy::needless_lifetimes,
-    clippy::just_underscores_and_digits)]
-fn ___action492<
-    'input,
->(
+#[allow(clippy::too_many_arguments, clippy::needless_lifetimes, clippy::just_underscores_and_digits)]
+fn ___action492<'input>(
     ctx: &mut ast::ParserContext<'_, 'input>,
     input: &'input str,
     ___0: (usize, spans::Spanned<ast::StringId>, usize),
-) -> ast::TypeParam
-{
+) -> ast::TypeParam {
     let ___start0 = ___0.2;
     let ___end0 = ___0.2;
-    let ___temp0 = ___action206(
-        ctx,
-        input,
-        &___start0,
-        &___end0,
-    );
+    let ___temp0 = ___action206(ctx, input, &___start0, &___end0);
     let ___temp0 = (___start0, ___temp0, ___end0);
-    ___action26(
-        ctx,
-        input,
-        ___0,
-        ___temp0,
-    )
+    ___action26(ctx, input, ___0, ___temp0)
 }
 
 #[allow(clippy::type_complexity, dead_code)]
-pub  trait ___ToTriple<'input, >
-{
-    fn to_triple(self) -> Result<(usize,Token<'input>,usize), ___lalrpop_util::ParseError<usize, Token<'input>, (&'static str, spans::Span)>>;
+pub trait ___ToTriple<'input> {
+    fn to_triple(
+        self,
+    ) -> Result<(usize, Token<'input>, usize), ___lalrpop_util::ParseError<usize, Token<'input>, (&'static str, spans::Span)>>;
 }
 
-impl<'input, > ___ToTriple<'input, > for (usize, Token<'input>, usize)
-{
-    fn to_triple(self) -> Result<(usize,Token<'input>,usize), ___lalrpop_util::ParseError<usize, Token<'input>, (&'static str, spans::Span)>> {
+impl<'input> ___ToTriple<'input> for (usize, Token<'input>, usize) {
+    fn to_triple(
+        self,
+    ) -> Result<(usize, Token<'input>, usize), ___lalrpop_util::ParseError<usize, Token<'input>, (&'static str, spans::Span)>>
+    {
         Ok(self)
     }
 }
-impl<'input, > ___ToTriple<'input, > for Result<(usize, Token<'input>, usize), (&'static str, spans::Span)>
-{
-    fn to_triple(self) -> Result<(usize,Token<'input>,usize), ___lalrpop_util::ParseError<usize, Token<'input>, (&'static str, spans::Span)>> {
+impl<'input> ___ToTriple<'input> for Result<(usize, Token<'input>, usize), (&'static str, spans::Span)> {
+    fn to_triple(
+        self,
+    ) -> Result<(usize, Token<'input>, usize), ___lalrpop_util::ParseError<usize, Token<'input>, (&'static str, spans::Span)>>
+    {
         self.map_err(|error| ___lalrpop_util::ParseError::User { error })
     }
 }

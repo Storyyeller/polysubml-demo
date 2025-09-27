@@ -16,11 +16,7 @@ fn main() {
         // println!(">> {}", data);
 
         let t0 = Instant::now();
-        let res = if state.process(&data) {
-            state.get_output().unwrap()
-        } else {
-            state.get_err().unwrap()
-        };
+        let res = state.process(&data);
         dbg!(t0.elapsed());
 
         println!("{}", res);

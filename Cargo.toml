@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["compiler_lib", "cli_code"]
+members = ["compiler_lib", "cli_code", "wasm"]
 
 
 [profile.release]

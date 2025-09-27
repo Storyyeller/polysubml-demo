@@ -2,7 +2,7 @@
 
 
 let mod = null;
-const mod_promise = import('./pkg/polysubml_demo.js').then(
+const mod_promise = import('./pkg/wasm.js').then(
     m => (mod = m, mod.default()));
 
 class PolysubmlDemo extends HTMLElement {

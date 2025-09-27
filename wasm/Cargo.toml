@@ -1,0 +1,13 @@
+[package]
+name = "wasm"
+version = "0.1.0"
+authors = ["Robert Grosse <n210241048576@gmail.com>"]
+license = "Apache-2.0/MIT"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+compiler_lib = { path = "../compiler_lib" }
+wasm-bindgen = "0.2.63"

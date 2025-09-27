@@ -18,9 +18,7 @@ mod unwindmap;
 mod utils;
 
 use lasso::Rodeo;
-use wasm_bindgen::prelude::*;
 
-use std::fmt::Display;
 use std::mem;
 
 use lalrpop_util::ParseError;
@@ -32,7 +30,10 @@ use self::spans::SpanManager;
 use self::spans::SpannedError;
 use self::typeck::TypeckState;
 
-fn convert_parse_error<T: Display>(mut sm: SpanMaker, e: ParseError<usize, T, (&'static str, spans::Span)>) -> SpannedError {
+fn convert_parse_error<T: std::fmt::Display>(
+    mut sm: SpanMaker,
+    e: ParseError<usize, T, (&'static str, spans::Span)>,
+) -> SpannedError {
     match e {
         ParseError::InvalidToken { location } => {
             SpannedError::new1("SyntaxError: Invalid token", sm.span(location, location))
@@ -59,7 +60,20 @@ fn convert_parse_error<T: Display>(mut sm: SpanMaker, e: ParseError<usize, T, (&
     }
 }
 
-#[wasm_bindgen]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum CompilationResult {
+    Success(String), // Contains compiled JS code
+    Error(String),   // Contains error message
+}
+impl std::fmt::Display for CompilationResult {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            CompilationResult::Success(js_code) => write!(f, "SUCCESS\n{}", js_code),
+            CompilationResult::Error(error_msg) => write!(f, "ERROR\n{}", error_msg),
+        }
+    }
+}
+
 pub struct State {
     parser: ScriptParser,
     spans: SpanManager,
@@ -67,11 +81,7 @@ pub struct State {
 
     checker: TypeckState,
     compiler: ModuleBuilder,
-
-    out: Option<String>,
-    err: Option<String>,
 }
-#[wasm_bindgen]
 impl State {
     pub fn new() -> Self {
         let mut strings = Rodeo::new();
@@ -84,9 +94,6 @@ impl State {
 
             checker,
             compiler: ModuleBuilder::new(),
-
-            out: None,
-            err: None,
         }
     }
 
@@ -108,25 +115,12 @@ impl State {
         Ok(js_ast.to_source())
     }
 
-    pub fn process(&mut self, source: &str) -> bool {
+    pub fn process(&mut self, source: &str) -> CompilationResult {
         let res = self.process_sub(source);
         match res {
-            Ok(s) => {
-                self.out = Some(s);
-                true
-            }
-            Err(e) => {
-                self.err = Some(e.print(&self.spans));
-                false
-            }
+            Ok(s) => CompilationResult::Success(s),
+            Err(e) => CompilationResult::Error(e.print(&self.spans)),
         }
-    }
-
-    pub fn get_output(&mut self) -> Option<String> {
-        self.out.take()
-    }
-    pub fn get_err(&mut self) -> Option<String> {
-        self.err.take()
     }
 
     pub fn reset(&mut self) {
