@@ -6,7 +6,7 @@ use std::fs;
 use std::process::{Command, Stdio};
 use std::io::Write;
 use std::fmt;
-use polysubml_demo::State;
+use compiler_lib::State;
 use tempfile;
 use anyhow::{Result, anyhow};
 use sha2::{Sha256, Digest};

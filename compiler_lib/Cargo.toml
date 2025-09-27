@@ -1,0 +1,27 @@
+[package]
+name = "compiler_lib"
+version = "1.0.0"
+authors = ["Robert Grosse <n210241048576@gmail.com>"]
+license = "Apache-2.0/MIT"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = ["console_error_panic_hook"]
+
+[dependencies]
+lalrpop-util = { version = "0.20.2", features = ["lexer"] }
+wasm-bindgen = "0.2.63"
+
+# The `console_error_panic_hook` crate provides better debugging of panics by
+# logging them with `console.error`. This is great for development, but requires
+# all the `std::fmt` and `std::panicking` infrastructure, so isn't great for
+# code size when deploying.
+console_error_panic_hook = { version = "0.1.6", optional = true }
+lasso = "0.7.3"
+itertools = "0.14.0"
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.13"

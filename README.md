@@ -63,7 +63,7 @@ You can try out PolySubML online in your browser at https://storyyeller.github.i
 
 ```
 lalrpop src/grammar.lalr
-wasm-pack build --target web
+wasm-pack build --target web --no-typescript compiler_lib --out-dir ../pkg
 ```
 
 ## A quick tour of PolySubML

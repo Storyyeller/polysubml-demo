@@ -1,0 +1,13 @@
+[package]
+name = "regression"
+version = "0.1.0"
+authors = ["Robert Grosse <n210241048576@gmail.com>"]
+license = "Apache-2.0/MIT"
+edition = "2024"
+
+[dependencies]
+compiler_lib = { path = "../compiler_lib" }
+clap = { version = "4.0", features = ["derive"] }
+sha2 = "0.10"
+anyhow = "1.0"
+tempfile = "3.0"

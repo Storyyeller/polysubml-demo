@@ -6,7 +6,7 @@ use std::env;
 use std::fs;
 use std::time::Instant;
 
-use polysubml_demo::State;
+use compiler_lib::State;
 
 fn main() {
     let mut state = State::new();
