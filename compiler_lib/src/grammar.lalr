@@ -200,7 +200,7 @@ InstantiateExist: ast::Expr = {
 }
 
 RhsEqExpr = "=" <Box<NoSemiExpr>>;
-KeyPairExpr: ast::KeyPairExpr = {
+KeyPairExpr: ast::expr::KeyPair = {
     <ismut: "mut"?> <name: Spanned<Ident>> <ty: TypeAscription?> <expr: RhsEqExpr?> => {
         let ismut = ismut.is_some();
         let expr = expr.unwrap_or_else(|| Box::new(ast::Expr::Variable(name)));

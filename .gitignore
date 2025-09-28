@@ -5,7 +5,7 @@ pkg/
 wasm-pack.log
 
 local.html
-src/grammar.rs
+compiler_lib/src/grammar.rs
 
 /test*.ml
 /out*.txt

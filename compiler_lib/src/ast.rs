@@ -1,3 +1,7 @@
+pub mod expr;
+pub use expr::Expr;
+pub use expr::InstantiateSourceKind;
+
 use crate::spans::Span;
 use crate::spans::SpanMaker;
 use crate::spans::Spanned;
@@ -61,40 +65,6 @@ impl TypeParam {
         let alias = alias.unwrap_or(name);
         Self { name, alias }
     }
-}
-
-#[derive(Debug, Clone, Copy)]
-pub enum InstantiateSourceKind {
-    ImplicitCall,
-    ImplicitRecord,
-    ExplicitParams(bool),
-}
-
-pub type KeyPairExpr = (Spanned<StringId>, Box<Expr>, bool, Option<STypeExpr>);
-
-#[derive(Debug, Clone)]
-pub enum Expr {
-    BinOp(Box<Expr>, Span, Box<Expr>, Span, OpType, Op, Span),
-    Block(Vec<Statement>, Box<Expr>),
-    Call(Box<Expr>, Box<Expr>, Span),
-    Case(Spanned<StringId>, Box<Expr>),
-    FieldAccess(Box<Expr>, Spanned<StringId>, Span),
-    FieldSet(Box<Expr>, Spanned<StringId>, Box<Expr>, Span),
-    FuncDef(Spanned<(Option<Vec<TypeParam>>, Spanned<LetPattern>, Option<STypeExpr>, Box<Expr>)>),
-    If(Spanned<Box<Expr>>, Box<Expr>, Box<Expr>),
-    InstantiateExist(Box<Expr>, Spanned<Vec<(StringId, STypeExpr)>>, InstantiateSourceKind, Span),
-    InstantiateUni(
-        Spanned<Box<Expr>>,
-        Spanned<Vec<(StringId, STypeExpr)>>,
-        InstantiateSourceKind,
-        Span,
-    ),
-    Literal(Literal, Spanned<String>),
-    Loop(Box<Expr>, Span),
-    Match(Spanned<Box<Expr>>, Vec<(Spanned<LetPattern>, Box<Expr>)>, Span),
-    Record(Vec<KeyPairExpr>, Span),
-    Typed(Box<Expr>, STypeExpr),
-    Variable(Spanned<StringId>),
 }
 
 #[derive(Debug, Clone)]
