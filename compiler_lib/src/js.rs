@@ -218,18 +218,17 @@ impl Expr2 {
             }
             Self::Obj(fields) => {
                 *out += "{";
+                let mut cw = CommaListWrite::new(out);
                 for prop_def in fields {
                     use PropertyDefinition::*;
                     match prop_def {
-                        Named(name, val) => {
+                        Named(name, val) => cw.write(|out| {
                             *out += "'";
                             *out += name;
                             *out += "': ";
                             val.write(out);
-                        }
+                        }),
                     }
-
-                    *out += ", ";
                 }
                 *out += "}";
             }
@@ -294,18 +293,16 @@ impl Expr2 {
                 body.write(out);
             }
             Self::Comma(exprs) => {
-                for (i, expr) in exprs.iter().enumerate() {
-                    if i > 0 {
-                        *out += ", ";
-                    }
-                    expr.write(out);
+                let mut cw = CommaListWrite::new(out);
+                for ex in exprs.iter() {
+                    cw.write(|out| ex.write(out));
                 }
             }
             Self::Print(exprs) => {
                 *out += "p.println(";
+                let mut cw = CommaListWrite::new(out);
                 for ex in exprs {
-                    ex.write(out);
-                    *out += ", ";
+                    cw.write(|out| ex.write(out));
                 }
                 *out += ")";
             }
@@ -428,5 +425,25 @@ impl Expr2 {
             },
             _ => false,
         }
+    }
+}
+
+/// Helper for writing comma-separated lists
+struct CommaListWrite<'a> {
+    out: &'a mut String,
+    first: bool,
+}
+impl<'a> CommaListWrite<'a> {
+    fn new(out: &'a mut String) -> Self {
+        Self { out, first: true }
+    }
+
+    fn write(&mut self, f: impl FnOnce(&mut String)) {
+        if self.first {
+            self.first = false;
+        } else {
+            *self.out += ", ";
+        }
+        f(self.out);
     }
 }
