@@ -244,7 +244,7 @@ fn compile(ctx: &mut Context<'_>, expr: &ast::Expr) -> js::Expr {
                 let cond = js::eqop(tag_expr.clone(), js::lit(format!("\"{}\"", tag)));
                 res = js::ternary(cond, rhs_expr, res);
             }
-            js::comma_pair(part1, res)
+            js::comma_list(vec![part1, res])
         }
         ast::Expr::Record(fields, span) => js::obj(
             fields
@@ -341,9 +341,5 @@ pub fn compile_script(ctx: &mut Context<'_>, parsed: &[ast::Statement]) -> js::E
         compile_statement(ctx, &mut exprs, item);
     }
 
-    if exprs.is_empty() {
-        js::lit("0".to_string())
-    } else {
-        js::comma_list(exprs)
-    }
+    js::comma_list(exprs)
 }

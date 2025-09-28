@@ -27,9 +27,6 @@ pub fn binop(lhs: Expr, rhs: Expr, op: Op) -> Expr {
 pub fn call(lhs: Expr, rhs: Expr) -> Expr {
     Expr(Expr2::Call(lhs.0.into(), rhs.0.into()))
 }
-pub fn comma_pair(lhs: Expr, rhs: Expr) -> Expr {
-    Expr(Expr2::Comma(lhs.0.into(), rhs.0.into()))
-}
 pub fn unary_minus(rhs: Expr) -> Expr {
     Expr(Expr2::Minus(rhs.0.into()))
 }
@@ -49,14 +46,25 @@ pub fn var(s: String) -> Expr {
     Expr(Expr2::Var(s))
 }
 
-pub fn comma_list(mut exprs: Vec<Expr>) -> Expr {
-    // Reverse the list so we can easily create a left-recursive structure instead of right recursive
-    exprs.reverse();
-    let mut res = exprs.pop().unwrap().0;
-    while let Some(expr) = exprs.pop() {
-        res = Expr2::Comma(Box::new(res), expr.0.into());
+pub fn comma_list(exprs: Vec<Expr>) -> Expr {
+    // Flatten any nested Comma expressions
+    let mut flattened = Vec::new();
+    for expr in exprs {
+        match expr.0 {
+            Expr2::Comma(nested_exprs) => {
+                flattened.extend(nested_exprs);
+            }
+            _ => {
+                flattened.push(expr.0);
+            }
+        }
     }
-    Expr(res)
+
+    match flattened.len() {
+        0 => lit("0".to_string()),
+        1 => Expr(flattened.into_iter().next().unwrap()),
+        _ => Expr(Expr2::Comma(flattened)),
+    }
 }
 
 pub fn println(exprs: Vec<Expr>) -> Expr {
@@ -143,7 +151,7 @@ enum Expr2 {
     Assignment(Box<Expr2>, Box<Expr2>),
     ArrowFunc(Box<Expr2>, String, Box<Expr2>),
 
-    Comma(Box<Expr2>, Box<Expr2>),
+    Comma(Vec<Expr2>),
 
     // Temp hack
     Print(Vec<Expr2>),
@@ -190,7 +198,7 @@ impl Expr2 {
             Ternary(lhs, ..) => lhs.first(),
             Assignment(lhs, ..) => lhs.first(),
             ArrowFunc(..) => PAREN,
-            Comma(lhs, ..) => lhs.first(),
+            Comma(exprs) => exprs.first().map_or(OTHER, |e| e.first()),
             Print(..) => OTHER,
         }
     }
@@ -282,10 +290,13 @@ impl Expr2 {
                 *out += "={}) => ";
                 body.write(out);
             }
-            Self::Comma(lhs, rhs) => {
-                lhs.write(out);
-                *out += ", ";
-                rhs.write(out);
+            Self::Comma(exprs) => {
+                for (i, expr) in exprs.iter().enumerate() {
+                    if i > 0 {
+                        *out += ", ";
+                    }
+                    expr.write(out);
+                }
             }
             Self::Print(exprs) => {
                 *out += "p.println(";
@@ -305,6 +316,8 @@ impl Expr2 {
         *self = Paren(Box::new(temp));
     }
 
+    /// Ensure that this expression has at most the given precedence. If it has lower precedence,
+    /// wrap it in parentheses.
     fn ensure(&mut self, required: Precedence) {
         if self.precedence() > required {
             self.wrap_in_parens();
@@ -380,10 +393,14 @@ impl Expr2 {
                     body.wrap_in_parens();
                 }
             }
-            Self::Comma(lhs, rhs) => {
-                lhs.add_parens();
-                rhs.add_parens();
-                rhs.ensure(ASSIGN);
+            Self::Comma(exprs) => {
+                for expr in exprs.iter_mut() {
+                    expr.add_parens();
+                }
+                // All expressions except the first must have ASSIGN precedence
+                for expr in exprs.iter_mut().skip(1) {
+                    expr.ensure(ASSIGN);
+                }
             }
             Self::Print(exprs) => {
                 for ex in exprs {
