@@ -5,6 +5,7 @@ use clap::Parser;
 use compiler_lib::CompilationResult;
 use compiler_lib::State;
 use sha2::{Digest, Sha256};
+use similar::{ChangeTag, TextDiff};
 use std::fs;
 use std::io::Write;
 use std::path::{Path, PathBuf};
@@ -369,8 +370,21 @@ impl RegressionTester {
     }
 
     fn show_text_diff(&self, expected: &str, actual: &str) {
-        println!("Expected:\n{}", expected);
-        println!("Actual:\n{}", actual);
+        let diff = TextDiff::from_lines(expected, actual);
+
+        println!("    Expected vs Actual:");
+        for change in diff.iter_all_changes() {
+            let sign = match change.tag() {
+                ChangeTag::Delete => format!("\x1b[31m-{}\x1b[0m", change),
+                ChangeTag::Insert => format!("\x1b[32m+{}\x1b[0m", change),
+                ChangeTag::Equal => format!(" {}", change),
+            };
+            print!("    {}", sign);
+        }
+
+        if !expected.ends_with('\n') || !actual.ends_with('\n') {
+            println!();
+        }
     }
 
     fn print_summary(&self, results: &[TestResult]) {
