@@ -11,15 +11,11 @@ use crate::ast::TypeParam;
 use crate::core::*;
 use crate::instantiate::InstantionContext;
 use crate::instantiate::Substitutions;
-use crate::reachability::TypeNodeInd;
 use crate::spans::Span;
 use crate::spans::SpannedError as SyntaxError;
-use crate::spans::SpannedError;
 use crate::type_errors::HoleSrc;
 use crate::typeck::Bindings;
-use crate::typeck::TypeckState;
 use crate::unwindmap::UnwindMap;
-use crate::unwindmap::sorted;
 
 use UTypeHead::*;
 use VTypeHead::*;

@@ -2,6 +2,7 @@ use std::collections::HashMap;
 use std::hash::Hash;
 
 // utility functions
+#[allow(unused)]
 pub fn sorted<T: Ord>(it: impl IntoIterator<Item = T>) -> Vec<T> {
     let mut v = it.into_iter().collect::<Vec<_>>();
     v.sort_unstable();

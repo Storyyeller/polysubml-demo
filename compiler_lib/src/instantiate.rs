@@ -1,13 +1,8 @@
 use std::collections::HashMap;
-use std::rc::Rc;
 
 use crate::ast::StringId;
 use crate::core::*;
 use crate::parse_types::SourceLoc;
-
-type TypeSubs = HashMap<StringId, (Value, Use)>;
-type AbstractSubs = HashMap<StringId, TypeCtorInd>;
-struct Replacements(HashMap<Value, Value>, HashMap<Use, Use>);
 
 pub enum Substitutions<'a> {
     Type(&'a HashMap<StringId, (Value, Use)>),

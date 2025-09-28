@@ -1,19 +1,12 @@
-use std::cell::Cell;
 use std::cell::RefCell;
 use std::collections::HashMap;
-use std::collections::HashSet;
-use std::error;
-use std::fmt;
-use std::hash::Hash;
 use std::rc::Rc;
 
 use crate::ast;
 use crate::ast::StringId;
 use crate::core::*;
-use crate::parse_types::TreeMaterializer;
 use crate::parse_types::TreeMaterializerState;
 use crate::parse_types::TypeParser;
-use crate::spans::Span;
 use crate::spans::SpannedError as SyntaxError;
 use crate::type_errors::HoleSrc;
 use crate::unwindmap::UnwindMap;

@@ -70,7 +70,6 @@ pub enum InstantiateSourceKind {
     ExplicitParams(bool),
 }
 
-pub type KeyPairExprSub = (Spanned<StringId>, Box<Expr>, Option<STypeExpr>);
 pub type KeyPairExpr = (Spanned<StringId>, Box<Expr>, bool, Option<STypeExpr>);
 
 #[derive(Debug, Clone)]

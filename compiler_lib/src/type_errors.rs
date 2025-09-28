@@ -7,7 +7,6 @@
 use std::collections::HashSet;
 use std::u32;
 
-use crate::ast;
 use crate::ast::InstantiateSourceKind;
 use crate::ast::StringId;
 use crate::core::*;

@@ -1,8 +1,6 @@
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::collections::HashSet;
-use std::error;
-use std::fmt;
 use std::rc::Rc;
 
 use crate::ast::InstantiateSourceKind;
@@ -28,10 +26,8 @@ use crate::type_errors::poisoned_poly_err;
 use crate::type_errors::type_escape_error;
 use crate::type_errors::type_mismatch_err;
 use crate::type_errors::unhandled_variant_err;
-use crate::unwindmap::sorted;
 
 const NONE: TypeNodeInd = TypeNodeInd(usize::MAX);
-pub const INVALID: TypeNodeInd = TypeNodeInd(usize::MAX - 1);
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
 pub struct Value(pub TypeNodeInd);
@@ -49,16 +45,16 @@ pub struct TypeCtor {
     pub name: StringId,
     pub span: Option<Span>, // None for builtin type ctors
     pub scopelvl: ScopeLvl,
-    debug: String,
+    // debug: String,
 }
 impl TypeCtor {
     fn new(name: StringId, span: Option<Span>, scopelvl: ScopeLvl) -> Self {
-        let debug = format!("{}@{:?}", name.into_inner(), span);
+        // let debug = format!("{}@{:?}", name.into_inner(), span);
         Self {
             name,
             span,
             scopelvl,
-            debug,
+            // debug,
         }
     }
 }
@@ -670,10 +666,5 @@ impl TypeCheckerCore {
     pub fn make_permanent(&mut self) {
         self.r.make_permanent();
     }
-
-    pub fn num_type_nodes(&self) -> usize {
-        self.r.len()
-    }
 }
 
-pub struct SavePoint(TypeCheckerCore);

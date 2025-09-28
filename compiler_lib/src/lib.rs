@@ -15,7 +15,6 @@ mod spans;
 mod type_errors;
 mod typeck;
 mod unwindmap;
-mod utils;
 
 use lasso::Rodeo;
 
