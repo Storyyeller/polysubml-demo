@@ -145,16 +145,21 @@ impl RegressionTester {
         let mut results = Vec::new();
 
         for test_path in tests {
+            // Print test name before running
+            let test_name = test_path.file_stem().and_then(|s| s.to_str()).unwrap_or("unknown");
+            print!("{}", test_name);
+            std::io::stdout().flush().unwrap();
+
             let result = self.run_single_test(&test_path)?;
 
             let status_char = match &result.status {
-                TestStatus::Pass => "✓",
-                TestStatus::CompilationMismatch { .. } => "✗",
-                TestStatus::ExecutionMismatch { .. } => "✗",
-                TestStatus::BaselineNotFound => "S",
+                TestStatus::Pass => " ✓",
+                TestStatus::CompilationMismatch { .. } => " ✗",
+                TestStatus::ExecutionMismatch { .. } => " ✗",
+                TestStatus::BaselineNotFound => " S",
             };
 
-            println!("{} {}", status_char, result.name);
+            println!("{}", status_char);
 
             if !matches!(result.status, TestStatus::Pass) {
                 self.print_diff(&result);

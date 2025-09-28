@@ -667,4 +667,3 @@ impl TypeCheckerCore {
         self.r.make_permanent();
     }
 }
-

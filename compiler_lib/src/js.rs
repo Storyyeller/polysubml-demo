@@ -42,8 +42,8 @@ pub fn lit(code: String) -> Expr {
 pub fn ternary(cond: Expr, e1: Expr, e2: Expr) -> Expr {
     Expr(Expr2::Ternary(cond.0.into(), e1.0.into(), e2.0.into()))
 }
-pub fn var(s: String) -> Expr {
-    Expr(Expr2::Var(s))
+pub fn var(s: String, is_scope_var: bool) -> Expr {
+    Expr(Expr2::Var(s, is_scope_var))
 }
 
 pub fn comma_list(exprs: Vec<Expr>) -> Expr {
@@ -87,16 +87,16 @@ pub fn obj(fields: Vec<(String, Expr)>) -> Expr {
 #[derive(Clone, Debug)]
 pub struct Expr(Expr2);
 impl Expr {
-    // pub fn add_parens(&mut self) {
-    //     self.0.add_parens();
-    // }
-
     pub fn to_source(mut self) -> String {
         self.0.add_parens();
 
         let mut s = "".to_string();
         self.0.write(&mut s);
         s
+    }
+
+    pub fn should_inline(&self) -> bool {
+        self.0.should_inline()
     }
 }
 
@@ -136,7 +136,10 @@ enum Expr2 {
     Paren(Box<Expr2>),
     Literal(String),
     Obj(Vec<PropertyDefinition>),
-    Var(String),
+
+    // True if fields are only assigned once (i.e. internal scope vars)
+    // Used for inlining decisions in codegen.rs
+    Var(String, bool),
 
     Field(Box<Expr2>, String),
 
@@ -230,7 +233,7 @@ impl Expr2 {
                 }
                 *out += "}";
             }
-            Self::Var(name) => {
+            Self::Var(name, _) => {
                 *out += name;
             }
             Self::Field(lhs, rhs) => {
@@ -342,7 +345,7 @@ impl Expr2 {
                     }
                 }
             }
-            Self::Var(name) => {}
+            Self::Var(name, _) => {}
             Self::Field(lhs, rhs) => {
                 lhs.add_parens();
                 lhs.ensure(MEMBER);
@@ -408,6 +411,22 @@ impl Expr2 {
                     ex.ensure(PRIMARY);
                 }
             }
+        }
+    }
+
+    // Used by codegen for inlining decisions, not related to AST printing
+    fn should_inline(&self) -> bool {
+        use Expr2::*;
+        match &self {
+            Var(_, is_scope_var) => *is_scope_var,
+            Literal(s) => s.len() <= 10,
+            Minus(e) => e.should_inline(),
+            // Only inline field expressions that are one level deep where LHS is a scope var
+            Field(lhs, _) => match lhs.as_ref() {
+                Var(_, is_scope_var) => *is_scope_var,
+                _ => false,
+            },
+            _ => false,
         }
     }
 }

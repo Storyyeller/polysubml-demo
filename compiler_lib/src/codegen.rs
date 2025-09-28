@@ -17,7 +17,7 @@ pub struct ModuleBuilder {
 impl ModuleBuilder {
     pub fn new() -> Self {
         Self {
-            scope_expr: js::var("$".to_string()),
+            scope_expr: js::var("$".to_string(), true),
             scope_counter: 0,
             param_counter: 0,
             var_counter: 0,
@@ -35,17 +35,34 @@ impl ModuleBuilder {
         js_name
     }
 
-    fn new_temp_var(&mut self) -> js::Expr {
+    fn new_temp_var_assign(&mut self, rhs: js::Expr, out: &mut Vec<js::Expr>) -> js::Expr {
+        if rhs.should_inline() {
+            return rhs;
+        }
+
         let js_name = format!("t{}", self.var_counter);
         self.var_counter += 1;
 
-        js::field(self.scope_expr.clone(), js_name)
+        let expr = js::field(self.scope_expr.clone(), js_name);
+        out.push(js::assign(expr.clone(), rhs));
+        expr
     }
 
     fn new_var(&mut self, ml_name: StringId) -> js::Expr {
         let js_name = self.new_var_name();
         let expr = js::field(self.scope_expr.clone(), js_name);
         self.set_binding(ml_name, expr.clone());
+        expr
+    }
+
+    fn new_var_assign(&mut self, ml_name: StringId, rhs: js::Expr, out: &mut Vec<js::Expr>) -> js::Expr {
+        if rhs.should_inline() {
+            self.set_binding(ml_name, rhs.clone());
+            return rhs;
+        }
+
+        let expr = self.new_var(ml_name);
+        out.push(js::assign(expr.clone(), rhs));
         expr
     }
 
@@ -156,12 +173,11 @@ fn compile(ctx: &mut Context<'_>, expr: &ast::Expr) -> js::Expr {
         ast::Expr::FieldSet(lhs_expr, (name, _), rhs_expr, _) => {
             let mut exprs = Vec::new();
 
-            let lhs_temp_var = ctx.new_temp_var();
-            exprs.push(js::assign(lhs_temp_var.clone(), compile(ctx, lhs_expr)));
+            let lhs_compiled = compile(ctx, lhs_expr);
+            let lhs_temp_var = ctx.new_temp_var_assign(lhs_compiled, &mut exprs);
             let lhs = js::field(lhs_temp_var, ctx.get_new(*name));
 
-            let res_temp_var = ctx.new_temp_var();
-            exprs.push(js::assign(res_temp_var.clone(), lhs.clone()));
+            let res_temp_var = ctx.new_temp_var_assign(lhs.clone(), &mut exprs);
             exprs.push(js::assign(lhs.clone(), compile(ctx, rhs_expr)));
             exprs.push(res_temp_var);
 
@@ -170,11 +186,11 @@ fn compile(ctx: &mut Context<'_>, expr: &ast::Expr) -> js::Expr {
         ast::Expr::FuncDef(((_, (arg_pattern, _), _, body_expr), _)) => {
             ctx.fn_scope(|ctx| {
                 let new_scope_name = ctx.new_scope_name();
-                let mut scope_expr = js::var(new_scope_name.clone());
+                let mut scope_expr = js::var(new_scope_name.clone(), true);
                 swap(&mut scope_expr, &mut ctx.scope_expr);
 
                 //////////////////////////////////////////////////////
-                let js_pattern = compile_let_pattern(ctx, arg_pattern).unwrap_or_else(|| js::var("_".to_string()));
+                let js_pattern = compile_let_pattern(ctx, arg_pattern).unwrap_or_else(|| js::var("_".to_string(), true));
                 let body = compile(ctx, body_expr);
                 //////////////////////////////////////////////////////
 
@@ -202,14 +218,15 @@ fn compile(ctx: &mut Context<'_>, expr: &ast::Expr) -> js::Expr {
             }
         }
         ast::Expr::Loop(body, _) => {
-            let lhs = js::var("loop".to_string());
+            let lhs = js::var("loop".to_string(), false);
             let rhs = compile(ctx, body);
-            let rhs = js::func(js::var("_".to_string()), "_2".to_string(), rhs);
+            let rhs = js::func(js::var("_".to_string(), true), "_2".to_string(), rhs);
             js::call(lhs, rhs)
         }
         ast::Expr::Match((match_expr, _), cases, _) => {
-            let temp_var = ctx.new_temp_var();
-            let part1 = js::assign(temp_var.clone(), compile(ctx, match_expr));
+            let mut exprs = Vec::new();
+            let match_compiled = compile(ctx, match_expr);
+            let temp_var = ctx.new_temp_var_assign(match_compiled, &mut exprs);
 
             let tag_expr = js::field(temp_var.clone(), "$tag".to_string());
             let val_expr = js::field(temp_var.clone(), "$val".to_string());
@@ -244,7 +261,9 @@ fn compile(ctx: &mut Context<'_>, expr: &ast::Expr) -> js::Expr {
                 let cond = js::eqop(tag_expr.clone(), js::lit(format!("\"{}\"", tag)));
                 res = js::ternary(cond, rhs_expr, res);
             }
-            js::comma_list(vec![part1, res])
+
+            exprs.push(res);
+            js::comma_list(exprs)
         }
         ast::Expr::Record(fields, span) => js::obj(
             fields
@@ -267,8 +286,7 @@ fn compile_let_pattern_flat(ctx: &mut Context<'_>, out: &mut Vec<js::Expr>, pat:
         }
         Record(((_, pairs), _)) => {
             // Assign the rhs to a temporary value, and then do a = temp.foo for each field
-            let lhs = ctx.new_temp_var();
-            out.push(js::assign(lhs.clone(), rhs));
+            let lhs = ctx.new_temp_var_assign(rhs, out);
 
             for ((name, _), pat) in pairs.iter() {
                 compile_let_pattern_flat(ctx, out, pat, js::field(lhs.clone(), ctx.get_new(*name)));
@@ -277,8 +295,7 @@ fn compile_let_pattern_flat(ctx: &mut Context<'_>, out: &mut Vec<js::Expr>, pat:
 
         Var((ml_name, _), _) => {
             if let Some(ml_name) = ml_name {
-                let lhs = ctx.new_var(*ml_name);
-                out.push(js::assign(lhs, rhs));
+                ctx.new_var_assign(*ml_name, rhs, out);
             }
         }
     }
@@ -296,7 +313,7 @@ fn compile_let_pattern(ctx: &mut Context<'_>, pat: &ast::LetPattern) -> Option<j
         ),
 
         Var((ml_name, _), _) => {
-            let js_arg = js::var(ctx.new_param_name());
+            let js_arg = js::var(ctx.new_param_name(), false);
             let ml_name = ml_name.as_ref()?;
             ctx.set_binding(*ml_name, js_arg.clone());
             js_arg
