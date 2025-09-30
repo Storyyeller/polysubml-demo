@@ -172,7 +172,7 @@ impl Expr {
         }
     }
 }
-pub type SExpr = Expr;
+pub type SExpr = Spanned<Expr>;
 
 // Constructor functions for Expr variants
 pub fn binop(

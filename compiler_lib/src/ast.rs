@@ -47,7 +47,7 @@ pub const FLOAT_CMP: OpType = (Some(Literal::Float), Literal::Bool);
 pub const ANY_CMP: OpType = (None, Literal::Bool);
 
 type LetDefinition = (LetPattern, Box<SExpr>);
-pub type LetRecDefinition = (StringId, Spanned<Expr>);
+pub type LetRecDefinition = (StringId, SExpr);
 
 #[derive(Debug, Clone)]
 pub enum LetPattern {
@@ -135,6 +135,26 @@ pub fn make_tuple_ast<T, FieldT>(
         })
         .collect();
     make_result(fields, full_span)
+}
+
+// TODO, cleanup
+pub fn make_tuple_expr(vals: Spanned<Vec<SExpr>>, strings: &mut lasso::Rodeo) -> Expr {
+    let (mut vals, full_span) = vals;
+    if vals.len() <= 1 {
+        return vals.pop().unwrap().0;
+    }
+
+    // Tuple
+    let fields: Vec<expr::KeyPair> = vals
+        .into_iter()
+        .enumerate()
+        .map(|(i, (val, span))| {
+            let name = format!("_{}", i);
+            let name = strings.get_or_intern(&name);
+            ((name, span), Box::new((val, span)), false, None)
+        })
+        .collect();
+    expr::record(fields, full_span)
 }
 
 pub fn make_join_ast(kind: JoinKind, mut children: Vec<STypeExpr>) -> TypeExpr {

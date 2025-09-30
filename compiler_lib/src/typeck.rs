@@ -100,7 +100,7 @@ impl TypeckState {
 
     fn check_expr(&mut self, strings: &mut lasso::Rodeo, expr: &ast::SExpr, bound: Use) -> Result<()> {
         use ast::Expr::*;
-        match expr {
+        match &expr.0 {
             Block(e) => {
                 assert!(e.statements.len() >= 1);
                 let mark = self.bindings.unwind_point();
@@ -240,7 +240,7 @@ impl TypeckState {
                 // Span is just an arbitrary span (usually that of the current expression) used
                 // to help users diagnose cause of a type error that doesn't go through any holes.
                 let t = self.infer_expr(strings, expr)?;
-                self.core.flow(strings, t, bound, expr.span(), self.bindings.scopelvl)?;
+                self.core.flow(strings, t, bound, expr.1, self.bindings.scopelvl)?;
             }
         };
         Ok(())
@@ -249,7 +249,7 @@ impl TypeckState {
     fn infer_expr(&mut self, strings: &mut lasso::Rodeo, expr: &ast::SExpr) -> Result<Value> {
         use ast::Expr::*;
 
-        match expr {
+        match &expr.0 {
             BinOp(e) => {
                 use ast::Literal::*;
                 let (arg_class, ret_class) = &e.op_type;
@@ -421,7 +421,7 @@ impl TypeckState {
 
             // Cases that have to be checked instead
             Call(_) | FieldAccess(_) | FieldSet(_) | Loop(_) | InstantiateUni(_) | Match(_) => {
-                let (v, u) = self.core.var(HoleSrc::CheckedExpr(expr.span()), self.bindings.scopelvl);
+                let (v, u) = self.core.var(HoleSrc::CheckedExpr(expr.1), self.bindings.scopelvl);
                 self.check_expr(strings, expr, u)?;
                 Ok(v)
             }
@@ -437,7 +437,7 @@ impl TypeckState {
             // For FuncDef, type annotations should be added on the function definition,
             // so don't prompt for redundant annotations on the assignment.
             use ast::Expr::*;
-            match expr {
+            match &expr.0 {
                 FuncDef(..) | Literal(..) | Typed(..) | Variable(..) => {
                     let ty = self.infer_expr(strings, expr)?;
                     self.bindings.vars.insert(name, ty);
@@ -520,14 +520,14 @@ impl TypeckState {
             Expr(expr) => {
                 if !allow_useless_exprs {
                     use ast::Expr::*;
-                    match expr {
+                    match &expr.0 {
                         BinOp(_) | Case(_) | FieldAccess(_) | FuncDef(_) | InstantiateExist(_) | InstantiateUni(_)
                         | Literal(_) | Record(_) | Variable(_) => {
                             return Err(SyntaxError::new1(
                                 format!(
                                     "SyntaxError: Only block, call, field set, if, loop, match, and typed expressions can appear in a sequence. The value of this expression will be ignored, which is likely unintentional. If you did intend to ignore the value of this expression, do so explicitly via let _ = ..."
                                 ),
-                                expr.span(),
+                                expr.1,
                             ));
                         }
                         _ => {}

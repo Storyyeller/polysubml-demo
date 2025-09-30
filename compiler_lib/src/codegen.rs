@@ -123,7 +123,7 @@ impl<'a> core::ops::DerefMut for Context<'a> {
 }
 
 fn compile(ctx: &mut Context<'_>, expr: &ast::SExpr) -> js::Expr {
-    match expr {
+    match &expr.0 {
         ast::Expr::BinOp(e) => {
             let lhs = compile(ctx, &e.lhs);
             let rhs = compile(ctx, &e.rhs);
@@ -337,7 +337,7 @@ fn compile_statement(ctx: &mut Context<'_>, exprs: &mut Vec<js::Expr>, stmt: &as
             for (name, _) in defs {
                 vars.push(ctx.new_var(*name))
             }
-            for (_, (expr, _)) in defs {
+            for (_, expr) in defs {
                 rhs_exprs.push(compile(ctx, expr))
             }
 
