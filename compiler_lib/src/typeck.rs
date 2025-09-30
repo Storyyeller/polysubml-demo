@@ -101,73 +101,78 @@ impl TypeckState {
     fn check_expr(&mut self, strings: &mut lasso::Rodeo, expr: &ast::Expr, bound: Use) -> Result<()> {
         use ast::Expr::*;
         match expr {
-            Block(statements, rest_expr) => {
-                assert!(statements.len() >= 1);
+            Block(e) => {
+                assert!(e.statements.len() >= 1);
                 let mark = self.bindings.unwind_point();
 
-                for stmt in statements.iter() {
+                for stmt in e.statements.iter() {
                     self.check_statement(strings, stmt, false)?;
                 }
 
-                self.check_expr(strings, rest_expr, bound)?;
+                self.check_expr(strings, &e.expr, bound)?;
                 self.bindings.unwind(mark);
             }
-            Call(func_expr, arg_expr, span) => {
-                let arg_type = self.infer_expr(strings, arg_expr)?;
+            Call(e) => {
+                let arg_type = self.infer_expr(strings, &e.arg)?;
 
                 let bound = self.core.new_use(
                     UFunc {
                         arg: arg_type,
                         ret: bound,
                     },
-                    *span,
+                    e.span,
                     None,
                 );
-                self.check_expr(strings, func_expr, bound)?;
+                self.check_expr(strings, &e.func, bound)?;
             }
-            &FieldAccess(ref lhs_expr, (name, field_span), full_span) => {
-                let bound = self.core.obj_use(vec![(name, (bound, None, field_span))], field_span);
-                self.check_expr(strings, lhs_expr, bound)?;
+            FieldAccess(e) => {
+                let bound = self.core.obj_use(vec![(e.field.0, (bound, None, e.field.1))], e.field.1);
+                self.check_expr(strings, &e.expr, bound)?;
             }
-            &FieldSet(ref lhs_expr, (name, name_span), ref rhs_expr, full_span) => {
-                let rhs_type = self.infer_expr(strings, rhs_expr)?;
-                let bound = self.core.obj_use(vec![(name, (bound, Some(rhs_type), name_span))], name_span);
-                self.check_expr(strings, lhs_expr, bound)?;
+            FieldSet(e) => {
+                let rhs_type = self.infer_expr(strings, &e.value)?;
+                let bound = self
+                    .core
+                    .obj_use(vec![(e.field.0, (bound, Some(rhs_type), e.field.1))], e.field.1);
+                self.check_expr(strings, &e.expr, bound)?;
             }
-            If((cond_expr, span), then_expr, else_expr) => {
-                let bool_use = self.core.simple_use(self.TY_BOOL, *span);
-                self.check_expr(strings, cond_expr, bool_use)?;
-                self.check_expr(strings, then_expr, bound)?;
-                self.check_expr(strings, else_expr, bound)?;
+            If(e) => {
+                let bool_use = self.core.simple_use(self.TY_BOOL, e.cond.1);
+                self.check_expr(strings, &e.cond.0, bool_use)?;
+                self.check_expr(strings, &e.then_expr, bound)?;
+                self.check_expr(strings, &e.else_expr, bound)?;
             }
-            &InstantiateUni((ref expr, lhs_span), (ref sigs, sigs_span), src_kind, full_span) => {
+            InstantiateUni(e) => {
                 let mut params = HashMap::new();
-                for &(name, ref sig) in sigs {
+                for &(name, ref sig) in &e.types.0 {
                     params.insert(name, self.parse_type_signature(sig)?);
                 }
                 let bound = self.core.new_use(
                     UInstantiateUni {
                         params: Rc::new(RefCell::new(params)),
                         target: bound,
-                        src_template: (sigs_span, src_kind),
+                        src_template: (e.types.1, e.source),
                     },
-                    lhs_span,
+                    e.expr.1,
                     None,
                 );
-                self.check_expr(strings, expr, bound)?;
+                self.check_expr(strings, &e.expr.0, bound)?;
             }
-            &Loop(ref expr, full_span) => {
+            Loop(e) => {
                 let bound = self.core.case_use(
                     vec![
                         (strings.get_or_intern_static("Break"), bound),
                         (strings.get_or_intern_static("Continue"), self.core.top_use()),
                     ],
                     None,
-                    full_span,
+                    e.span,
                 );
-                self.check_expr(strings, expr, bound)?;
+                self.check_expr(strings, &e.body, bound)?;
             }
-            &Match((ref match_expr, arg_span), ref cases, full_span) => {
+            Match(e) => {
+                let (ref match_expr, arg_span) = e.expr;
+                let ref cases = e.cases;
+                let full_span = e.span;
                 // Bounds from the match arms
                 let mut case_type_pairs = Vec::with_capacity(cases.len());
                 let mut wildcard_type = None;
@@ -179,8 +184,8 @@ impl TypeckState {
                 for ((pattern, pattern_span), rhs_expr) in cases {
                     use ast::LetPattern::*;
                     match pattern {
-                        Case((tag, _), val_pat) => {
-                            if let Some(old_span) = case_names.insert(&*tag, *pattern_span) {
+                        Case(tag, val_pat) => {
+                            if let Some(old_span) = case_names.insert(&tag.0, *pattern_span) {
                                 return Err(SyntaxError::new2(
                                     "SyntaxError: Duplicate match pattern",
                                     *pattern_span,
@@ -190,10 +195,10 @@ impl TypeckState {
                             }
 
                             let mark = self.bindings.unwind_point();
-                            let pattern_bound = self.process_let_pattern(val_pat, true)?;
+                            let pattern_bound = self.process_let_pattern(&*val_pat, true)?;
                             // Note: bound is bound for the result types, not the pattern
                             self.check_expr(strings, rhs_expr, bound)?;
-                            case_type_pairs.push((*tag, pattern_bound));
+                            case_type_pairs.push((tag.0, pattern_bound));
                             self.bindings.unwind(mark);
                         }
                         Record(..) => {
@@ -231,18 +236,11 @@ impl TypeckState {
             }
 
             // Cases that should be inferred instead
-            BinOp(_, _, _, _, _, _, span)
-            | Case((_, span), _)
-            | FuncDef((_, span))
-            | Literal(_, (_, span))
-            | InstantiateExist(_, _, _, span)
-            | Record(_, span)
-            | Typed(_, (_, span))
-            | Variable((_, span)) => {
+            BinOp(_) | Case(_) | FuncDef(_) | Literal(_) | InstantiateExist(_) | Record(_) | Typed(_) | Variable(_) => {
                 // Span is just an arbitrary span (usually that of the current expression) used
                 // to help users diagnose cause of a type error that doesn't go through any holes.
                 let t = self.infer_expr(strings, expr)?;
-                self.core.flow(strings, t, bound, *span, self.bindings.scopelvl)?;
+                self.core.flow(strings, t, bound, expr.span(), self.bindings.scopelvl)?;
             }
         };
         Ok(())
@@ -252,9 +250,9 @@ impl TypeckState {
         use ast::Expr::*;
 
         match expr {
-            BinOp(lhs_expr, lhs_span, rhs_expr, rhs_span, op_type, op, full_span) => {
+            BinOp(e) => {
                 use ast::Literal::*;
-                let (arg_class, ret_class) = op_type;
+                let (arg_class, ret_class) = &e.op_type;
                 let (lhs_bound, rhs_bound) = match arg_class {
                     Some(arg_class) => {
                         let cls = match arg_class {
@@ -264,12 +262,12 @@ impl TypeckState {
                             Str => self.TY_STR,
                         };
 
-                        (self.core.simple_use(cls, *lhs_span), self.core.simple_use(cls, *rhs_span))
+                        (self.core.simple_use(cls, e.lhs_span), self.core.simple_use(cls, e.rhs_span))
                     }
                     None => (self.core.top_use(), self.core.top_use()),
                 };
-                self.check_expr(strings, lhs_expr, lhs_bound)?;
-                self.check_expr(strings, rhs_expr, rhs_bound)?;
+                self.check_expr(strings, &e.lhs, lhs_bound)?;
+                self.check_expr(strings, &e.rhs, rhs_bound)?;
 
                 let cls = match ret_class {
                     Bool => self.TY_BOOL,
@@ -277,32 +275,39 @@ impl TypeckState {
                     Int => self.TY_INT,
                     Str => self.TY_STR,
                 };
-                Ok(self.core.simple_val(cls, *full_span))
+                Ok(self.core.simple_val(cls, e.span))
             }
             // Allow block expressions to be inferred as well as checked
             // TODO - deduplicate this code
-            Block(statements, rest_expr) => {
-                assert!(statements.len() >= 1);
+            Block(e) => {
+                assert!(e.statements.len() >= 1);
                 let mark = self.bindings.unwind_point();
 
-                for stmt in statements.iter() {
+                for stmt in e.statements.iter() {
                     self.check_statement(strings, stmt, false)?;
                 }
 
-                let res = self.infer_expr(strings, rest_expr)?;
+                let res = self.infer_expr(strings, &e.expr)?;
                 self.bindings.unwind(mark);
                 Ok(res)
             }
-            Case((tag, span), val_expr) => {
-                let val_type = self.infer_expr(strings, val_expr)?;
-                Ok(self.core.new_val(VCase { case: (*tag, val_type) }, *span, None))
+            Case(e) => {
+                let val_type = self.infer_expr(strings, &e.expr)?;
+                Ok(self.core.new_val(
+                    VCase {
+                        case: (e.tag.0, val_type),
+                    },
+                    e.tag.1,
+                    None,
+                ))
             }
-            FuncDef(((ty_params, arg_pattern, ret_tyexpr, body_expr), span)) => {
+            FuncDef(e) => {
+                let ((ty_params, arg_pattern, ret_tyexpr, body_expr), span) = (&e.def.0, e.def.1);
                 let parsed = TypeParser::new(&self.bindings.types).parse_func_sig(
                     ty_params,
                     arg_pattern,
                     ret_tyexpr.as_ref(),
-                    *span,
+                    span,
                 )?;
 
                 let mark = self.bindings.unwind_point();
@@ -318,25 +323,29 @@ impl TypeckState {
             }
             // Allow if expressions to be inferred as well as checked
             // TODO - deduplicate this code
-            If((cond_expr, span), then_expr, else_expr) => {
-                let bool_use = self.core.simple_use(self.TY_BOOL, *span);
+            If(e) => {
+                let (cond_expr, span) = (&e.cond.0, e.cond.1);
+                let bool_use = self.core.simple_use(self.TY_BOOL, span);
                 self.check_expr(strings, cond_expr, bool_use)?;
-                let res1 = self.infer_expr(strings, then_expr)?;
-                let res2 = self.infer_expr(strings, else_expr)?;
+                let res1 = self.infer_expr(strings, &e.then_expr)?;
+                let res2 = self.infer_expr(strings, &e.else_expr)?;
                 if res1 == res2 {
                     Ok(res1)
                 } else {
                     // spans for Union nodes don't matter, so just use whatever is handy
-                    Ok(self.core.new_val(VUnion(vec![res1, res2]), *span, None))
+                    Ok(self.core.new_val(VUnion(vec![res1, res2]), span, None))
                 }
             }
-            &InstantiateExist(ref expr, (ref sigs, sigs_span), src_kind, full_span) => {
+            InstantiateExist(e) => {
+                let (ref sigs, sigs_span) = e.types;
+                let src_kind = e.source;
+                let full_span = e.span;
                 let mut params = HashMap::new();
                 for &(name, ref sig) in sigs {
                     params.insert(name, self.parse_type_signature(sig)?);
                 }
 
-                let target = self.infer_expr(strings, expr)?;
+                let target = self.infer_expr(strings, &e.expr)?;
                 Ok(self.core.new_val(
                     VInstantiateExist {
                         params: Rc::new(RefCell::new(params)),
@@ -347,11 +356,11 @@ impl TypeckState {
                     None,
                 ))
             }
-            Literal(type_, (code, span)) => {
+            Literal(e) => {
                 use ast::Literal::*;
-                let span = *span;
+                let span = e.value.1;
 
-                let ty = match type_ {
+                let ty = match e.lit_type {
                     Bool => self.TY_BOOL,
                     Float => self.TY_FLOAT,
                     Int => self.TY_INT,
@@ -359,10 +368,10 @@ impl TypeckState {
                 };
                 Ok(self.core.simple_val(ty, span))
             }
-            Record(fields, span) => {
-                let mut field_names = HashMap::with_capacity(fields.len());
-                let mut field_type_pairs = Vec::with_capacity(fields.len());
-                for ((name, name_span), expr, mutable, type_annot) in fields {
+            Record(e) => {
+                let mut field_names = HashMap::with_capacity(e.fields.len());
+                let mut field_type_pairs = Vec::with_capacity(e.fields.len());
+                for ((name, name_span), expr, mutable, type_annot) in &e.fields {
                     if let Some(old_span) = field_names.insert(&*name, *name_span) {
                         return Err(SyntaxError::new2(
                             "SyntaxError: Repeated field name",
@@ -395,29 +404,24 @@ impl TypeckState {
                     }
                 }
                 let fields = field_type_pairs.into_iter().collect();
-                Ok(self.core.new_val(VTypeHead::VObj { fields }, *span, None))
+                Ok(self.core.new_val(VTypeHead::VObj { fields }, e.span, None))
             }
-            Typed(expr, sig) => {
-                let sig_type = self.parse_type_signature(sig)?;
-                self.check_expr(strings, expr, sig_type.1)?;
+            Typed(e) => {
+                let sig_type = self.parse_type_signature(&e.type_expr)?;
+                self.check_expr(strings, &e.expr, sig_type.1)?;
                 Ok(sig_type.0)
             }
-            Variable((name, span)) => {
-                if let Some(v) = self.bindings.vars.get(name) {
+            Variable(e) => {
+                if let Some(v) = self.bindings.vars.get(&e.name.0) {
                     Ok(*v)
                 } else {
-                    Err(SyntaxError::new1(format!("SyntaxError: Undefined variable"), *span))
+                    Err(SyntaxError::new1(format!("SyntaxError: Undefined variable"), e.name.1))
                 }
             }
 
             // Cases that have to be checked instead
-            Call(_, _, span)
-            | FieldAccess(_, _, span)
-            | FieldSet(_, _, _, span)
-            | Loop(_, span)
-            | InstantiateUni(_, _, _, span)
-            | Match(_, _, span) => {
-                let (v, u) = self.core.var(HoleSrc::CheckedExpr(*span), self.bindings.scopelvl);
+            Call(_) | FieldAccess(_) | FieldSet(_) | Loop(_) | InstantiateUni(_) | Match(_) => {
+                let (v, u) = self.core.var(HoleSrc::CheckedExpr(expr.span()), self.bindings.scopelvl);
                 self.check_expr(strings, expr, u)?;
                 Ok(v)
             }
@@ -467,12 +471,14 @@ impl TypeckState {
         // Materialize the outer function types and assign to bindings
         for &(name, (ref expr, span)) in defs.iter() {
             match expr {
-                ast::Expr::FuncDef(((ty_params, arg_pattern, ret_tyexpr, body_expr), span)) => {
+                ast::Expr::FuncDef(func_def_expr) => {
+                    let ((ty_params, arg_pattern, ret_tyexpr, body_expr), span) =
+                        (&func_def_expr.def.0, func_def_expr.def.1);
                     let parsed = TypeParser::new(&self.bindings.types).parse_func_sig(
                         ty_params,
                         arg_pattern,
                         ret_tyexpr.as_ref(),
-                        *span,
+                        span,
                     )?;
 
                     self.bindings
@@ -515,20 +521,13 @@ impl TypeckState {
                 if !allow_useless_exprs {
                     use ast::Expr::*;
                     match expr {
-                        BinOp(_, _, _, _, _, _, span)
-                        | Case((_, span), _)
-                        | FieldAccess(_, _, span)
-                        | FuncDef((_, span))
-                        | InstantiateExist(_, _, _, span)
-                        | InstantiateUni(_, _, _, span)
-                        | Literal(_, (_, span))
-                        | Record(_, span)
-                        | Variable((_, span)) => {
+                        BinOp(_) | Case(_) | FieldAccess(_) | FuncDef(_) | InstantiateExist(_) | InstantiateUni(_)
+                        | Literal(_) | Record(_) | Variable(_) => {
                             return Err(SyntaxError::new1(
                                 format!(
                                     "SyntaxError: Only block, call, field set, if, loop, match, and typed expressions can appear in a sequence. The value of this expression will be ignored, which is likely unintentional. If you did intend to ignore the value of this expression, do so explicitly via let _ = ..."
                                 ),
-                                *span,
+                                expr.span(),
                             ));
                         }
                         _ => {}

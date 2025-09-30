@@ -124,10 +124,10 @@ impl<'a> core::ops::DerefMut for Context<'a> {
 
 fn compile(ctx: &mut Context<'_>, expr: &ast::Expr) -> js::Expr {
     match expr {
-        ast::Expr::BinOp(lhs_expr, lhs_span, rhs_expr, rhs_span, op_type, op, full_span) => {
-            let lhs = compile(ctx, lhs_expr);
-            let rhs = compile(ctx, rhs_expr);
-            let jsop = match op {
+        ast::Expr::BinOp(e) => {
+            let lhs = compile(ctx, &e.lhs);
+            let rhs = compile(ctx, &e.rhs);
+            let jsop = match e.op {
                 ast::Op::Add => js::Op::Add,
                 ast::Op::Sub => js::Op::Sub,
                 ast::Op::Mult => js::Op::Mult,
@@ -144,53 +144,54 @@ fn compile(ctx: &mut Context<'_>, expr: &ast::Expr) -> js::Expr {
             };
             js::binop(lhs, rhs, jsop)
         }
-        ast::Expr::Block(statements, rest_expr) => {
+        ast::Expr::Block(e) => {
             ctx.ml_scope(|ctx| {
                 let mut exprs = Vec::new(); // a list of assignments, followed by rest
 
-                for stmt in statements {
+                for stmt in &e.statements {
                     compile_statement(ctx, &mut exprs, stmt);
                 }
 
-                exprs.push(compile(ctx, rest_expr));
+                exprs.push(compile(ctx, &e.expr));
                 js::comma_list(exprs)
             })
         }
-        ast::Expr::Call(func, arg, _) => {
-            let lhs = compile(ctx, func);
-            let rhs = compile(ctx, arg);
+        ast::Expr::Call(e) => {
+            let lhs = compile(ctx, &e.func);
+            let rhs = compile(ctx, &e.arg);
             js::call(lhs, rhs)
         }
-        ast::Expr::Case((tag, _), expr) => {
-            let tag = js::lit(format!("\"{}\"", ctx.get(*tag)));
-            let expr = compile(ctx, expr);
+        ast::Expr::Case(e) => {
+            let tag = js::lit(format!("\"{}\"", ctx.get(e.tag.0)));
+            let expr = compile(ctx, &e.expr);
             js::obj(vec![("$tag".to_string(), tag), ("$val".to_string(), expr)])
         }
-        ast::Expr::FieldAccess(lhs_expr, (name, _), _) => {
-            let lhs = compile(ctx, lhs_expr);
-            js::field(lhs, ctx.get_new(*name))
+        ast::Expr::FieldAccess(e) => {
+            let lhs = compile(ctx, &e.expr);
+            js::field(lhs, ctx.get_new(e.field.0))
         }
-        ast::Expr::FieldSet(lhs_expr, (name, _), rhs_expr, _) => {
+        ast::Expr::FieldSet(e) => {
             let mut exprs = Vec::new();
 
-            let lhs_compiled = compile(ctx, lhs_expr);
+            let lhs_compiled = compile(ctx, &e.expr);
             let lhs_temp_var = ctx.new_temp_var_assign(lhs_compiled, &mut exprs);
-            let lhs = js::field(lhs_temp_var, ctx.get_new(*name));
+            let lhs = js::field(lhs_temp_var, ctx.get_new(e.field.0));
 
             let res_temp_var = ctx.new_temp_var_assign(lhs.clone(), &mut exprs);
-            exprs.push(js::assign(lhs.clone(), compile(ctx, rhs_expr)));
+            exprs.push(js::assign(lhs.clone(), compile(ctx, &e.value)));
             exprs.push(res_temp_var);
 
             js::comma_list(exprs)
         }
-        ast::Expr::FuncDef(((_, (arg_pattern, _), _, body_expr), _)) => {
+        ast::Expr::FuncDef(e) => {
             ctx.fn_scope(|ctx| {
                 let new_scope_name = ctx.new_scope_name();
                 let mut scope_expr = js::var(new_scope_name.clone(), true);
                 swap(&mut scope_expr, &mut ctx.scope_expr);
 
                 //////////////////////////////////////////////////////
-                let js_pattern = compile_let_pattern(ctx, arg_pattern).unwrap_or_else(|| js::var("_".to_string(), true));
+                let (_, arg_pattern, _, body_expr) = &e.def.0;
+                let js_pattern = compile_let_pattern(ctx, &arg_pattern.0).unwrap_or_else(|| js::var("_".to_string(), true));
                 let body = compile(ctx, body_expr);
                 //////////////////////////////////////////////////////
 
@@ -198,17 +199,17 @@ fn compile(ctx: &mut Context<'_>, expr: &ast::Expr) -> js::Expr {
                 js::func(js_pattern, new_scope_name, body)
             })
         }
-        ast::Expr::If((cond_expr, _), then_expr, else_expr) => {
-            let cond_expr = compile(ctx, cond_expr);
-            let then_expr = compile(ctx, then_expr);
-            let else_expr = compile(ctx, else_expr);
+        ast::Expr::If(e) => {
+            let cond_expr = compile(ctx, &e.cond.0);
+            let then_expr = compile(ctx, &e.then_expr);
+            let else_expr = compile(ctx, &e.else_expr);
             js::ternary(cond_expr, then_expr, else_expr)
         }
-        ast::Expr::InstantiateExist(expr, _, _, _) => compile(ctx, expr),
-        ast::Expr::InstantiateUni((expr, _), _, _, _) => compile(ctx, expr),
-        ast::Expr::Literal(type_, (code, _)) => {
-            let mut code = code.clone();
-            if let ast::Literal::Int = type_ {
+        ast::Expr::InstantiateExist(e) => compile(ctx, &e.expr),
+        ast::Expr::InstantiateUni(e) => compile(ctx, &e.expr.0),
+        ast::Expr::Literal(e) => {
+            let mut code = e.value.0.clone();
+            if let ast::Literal::Int = e.lit_type {
                 code.push_str("n");
             }
             if code.starts_with("-") {
@@ -217,15 +218,15 @@ fn compile(ctx: &mut Context<'_>, expr: &ast::Expr) -> js::Expr {
                 js::lit(code)
             }
         }
-        ast::Expr::Loop(body, _) => {
+        ast::Expr::Loop(e) => {
             let lhs = js::var("loop".to_string(), false);
-            let rhs = compile(ctx, body);
+            let rhs = compile(ctx, &e.body);
             let rhs = js::func(js::var("_".to_string(), true), "_2".to_string(), rhs);
             js::call(lhs, rhs)
         }
-        ast::Expr::Match((match_expr, _), cases, _) => {
+        ast::Expr::Match(e) => {
             let mut exprs = Vec::new();
-            let match_compiled = compile(ctx, match_expr);
+            let match_compiled = compile(ctx, &e.expr.0);
             let temp_var = ctx.new_temp_var_assign(match_compiled, &mut exprs);
 
             let tag_expr = js::field(temp_var.clone(), "$tag".to_string());
@@ -233,7 +234,7 @@ fn compile(ctx: &mut Context<'_>, expr: &ast::Expr) -> js::Expr {
 
             let mut branches = Vec::new();
             let mut wildcard = None;
-            for ((pattern, _), rhs_expr) in cases {
+            for ((pattern, _), rhs_expr) in &e.cases {
                 use ast::LetPattern::*;
                 match pattern {
                     Case((tag, _), sub_pattern) => {
@@ -265,14 +266,14 @@ fn compile(ctx: &mut Context<'_>, expr: &ast::Expr) -> js::Expr {
             exprs.push(res);
             js::comma_list(exprs)
         }
-        ast::Expr::Record(fields, span) => js::obj(
-            fields
+        ast::Expr::Record(e) => js::obj(
+            e.fields
                 .iter()
                 .map(|((name, _), expr, _, _)| (ctx.get_new(*name), compile(ctx, expr)))
                 .collect(),
         ),
-        ast::Expr::Typed(expr, _) => compile(ctx, expr),
-        ast::Expr::Variable((name, _)) => ctx.bindings.get(name).unwrap().clone(),
+        ast::Expr::Typed(e) => compile(ctx, &e.expr),
+        ast::Expr::Variable(e) => ctx.bindings.get(&e.name.0).unwrap().clone(),
     }
 }
 

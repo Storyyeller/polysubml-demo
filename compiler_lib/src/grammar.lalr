@@ -190,7 +190,7 @@ InstantiateExist: ast::Expr = {
         // sub is only spanned here for compatibility with InstantiateUni rule, we don't actually need it
         let (((sub, _), types), full_span) = <>;
         let sub = match *sub {
-            ast::Expr::InstantiateExist(sub, ..) => sub,
+            ast::Expr::InstantiateExist(inst_expr) => inst_expr.expr,
             _ => sub,
         };
 
@@ -242,7 +242,10 @@ SimpleExpr = {
     Record,
     VarOrLiteral,
     "(" <Expr> ")",
-    "(" <Box<Expr>> ":" <SType> ")" => ast::expr::typed(<>),
+    Spanned<("(" <Box<Expr>> ":" <SType> ")")> => {
+        let ((expr, ty), span) = <>;
+        ast::expr::typed(expr, ty, span)
+    },
     "begin" <Expr> "end",
 }
 //////////////////////////////////////////////////////////////////////
@@ -422,8 +425,12 @@ FuncDef: ast::Expr = {
 }
 
 
+IfSub = "if" <Spanned<Box<Expr>>> "then" <Box<Expr>> "else" <Box<NoSemiExpr>>;
 If: ast::Expr = {
-    "if" <Spanned<Box<Expr>>> "then" <Box<Expr>> "else" <Box<NoSemiExpr>> => ast::expr::if_expr(<>),
+    Spanned<IfSub> => {
+        let ((c, e1, e2), span) = <>;
+        ast::expr::if_expr(c, e1, e2, span)
+    },
 }
 
 
@@ -434,7 +441,7 @@ LetRHS = {
     "in" <Box<NoSemiExpr>>,
 }
 Let: ast::Expr = {
-    <lhs: LetLHS> <rhs: LetRHS> => ast::expr::block(vec![ast::Statement::LetDef(lhs)], rhs),
+    <l: @L> <lhs: LetLHS> <rhs: LetRHS> <r: @R> => ast::expr::block(vec![ast::Statement::LetDef(lhs)], rhs, ctx.span_maker.span(l, r)),
 }
 
 
@@ -445,7 +452,7 @@ LetRecLHS = {
     "let" "rec" <SepList<LetRecDef, "and">>,
 }
 LetRec: ast::Expr = {
-     <lhs: LetRecLHS> <rhs: LetRHS> => ast::expr::block(vec![ast::Statement::LetRecDef(lhs)], rhs),
+     <l: @L> <lhs: LetRecLHS> <rhs: LetRHS> <r: @R> => ast::expr::block(vec![ast::Statement::LetRecDef(lhs)], rhs, ctx.span_maker.span(l, r)),
 }
 
 LoopExpr: ast::Expr = {
@@ -480,11 +487,11 @@ NoSemiExpr = {
     Match,
 }
 Expr: ast::Expr = {
-    <stmts: (<Statement> ";")*> <rest: NoSemiExpr> => {
+    <l: @L> <stmts: (<Statement> ";")*> <rest: NoSemiExpr> <r: @R> => {
         if stmts.is_empty() {
             rest
         } else {
-            ast::expr::block(stmts, Box::new(rest))
+            ast::expr::block(stmts, Box::new(rest), ctx.span_maker.span(l, r))
         }
     }
 }

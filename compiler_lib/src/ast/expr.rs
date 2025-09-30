@@ -18,29 +18,159 @@ pub enum InstantiateSourceKind {
     ExplicitParams(bool),
 }
 
+// Struct types for each Expr variant
+#[derive(Debug, Clone)]
+pub struct BinOpExpr {
+    pub lhs: Box<Expr>,
+    pub lhs_span: Span,
+    pub rhs: Box<Expr>,
+    pub rhs_span: Span,
+    pub op_type: OpType,
+    pub op: Op,
+    pub span: Span,
+}
+
+#[derive(Debug, Clone)]
+pub struct BlockExpr {
+    pub statements: Vec<Statement>,
+    pub expr: Box<Expr>,
+    pub span: Span,
+}
+
+#[derive(Debug, Clone)]
+pub struct CallExpr {
+    pub func: Box<Expr>,
+    pub arg: Box<Expr>,
+    pub span: Span,
+}
+
+#[derive(Debug, Clone)]
+pub struct CaseExpr {
+    pub tag: Spanned<StringId>,
+    pub expr: Box<Expr>,
+}
+
+#[derive(Debug, Clone)]
+pub struct FieldAccessExpr {
+    pub expr: Box<Expr>,
+    pub field: Spanned<StringId>,
+    pub span: Span,
+}
+
+#[derive(Debug, Clone)]
+pub struct FieldSetExpr {
+    pub expr: Box<Expr>,
+    pub field: Spanned<StringId>,
+    pub value: Box<Expr>,
+    pub span: Span,
+}
+
+#[derive(Debug, Clone)]
+pub struct FuncDefExpr {
+    pub def: Spanned<(Option<Vec<TypeParam>>, Spanned<LetPattern>, Option<STypeExpr>, Box<Expr>)>,
+}
+
+#[derive(Debug, Clone)]
+pub struct IfExpr {
+    pub cond: Spanned<Box<Expr>>,
+    pub then_expr: Box<Expr>,
+    pub else_expr: Box<Expr>,
+    pub span: Span,
+}
+
+#[derive(Debug, Clone)]
+pub struct InstantiateExistExpr {
+    pub expr: Box<Expr>,
+    pub types: Spanned<Vec<(StringId, STypeExpr)>>,
+    pub source: InstantiateSourceKind,
+    pub span: Span,
+}
+
+#[derive(Debug, Clone)]
+pub struct InstantiateUniExpr {
+    pub expr: Spanned<Box<Expr>>,
+    pub types: Spanned<Vec<(StringId, STypeExpr)>>,
+    pub source: InstantiateSourceKind,
+    pub span: Span,
+}
+
+#[derive(Debug, Clone)]
+pub struct LiteralExpr {
+    pub lit_type: Literal,
+    pub value: Spanned<String>,
+}
+
+#[derive(Debug, Clone)]
+pub struct LoopExpr {
+    pub body: Box<Expr>,
+    pub span: Span,
+}
+
+#[derive(Debug, Clone)]
+pub struct MatchExpr {
+    pub expr: Spanned<Box<Expr>>,
+    pub cases: Vec<(Spanned<LetPattern>, Box<Expr>)>,
+    pub span: Span,
+}
+
+#[derive(Debug, Clone)]
+pub struct RecordExpr {
+    pub fields: Vec<KeyPair>,
+    pub span: Span,
+}
+
+#[derive(Debug, Clone)]
+pub struct TypedExpr {
+    pub expr: Box<Expr>,
+    pub type_expr: STypeExpr,
+    pub span: Span,
+}
+
+#[derive(Debug, Clone)]
+pub struct VariableExpr {
+    pub name: Spanned<StringId>,
+}
+
 #[derive(Debug, Clone)]
 pub enum Expr {
-    BinOp(Box<Expr>, Span, Box<Expr>, Span, OpType, Op, Span),
-    Block(Vec<Statement>, Box<Expr>),
-    Call(Box<Expr>, Box<Expr>, Span),
-    Case(Spanned<StringId>, Box<Expr>),
-    FieldAccess(Box<Expr>, Spanned<StringId>, Span),
-    FieldSet(Box<Expr>, Spanned<StringId>, Box<Expr>, Span),
-    FuncDef(Spanned<(Option<Vec<TypeParam>>, Spanned<LetPattern>, Option<STypeExpr>, Box<Expr>)>),
-    If(Spanned<Box<Expr>>, Box<Expr>, Box<Expr>),
-    InstantiateExist(Box<Expr>, Spanned<Vec<(StringId, STypeExpr)>>, InstantiateSourceKind, Span),
-    InstantiateUni(
-        Spanned<Box<Expr>>,
-        Spanned<Vec<(StringId, STypeExpr)>>,
-        InstantiateSourceKind,
-        Span,
-    ),
-    Literal(Literal, Spanned<String>),
-    Loop(Box<Expr>, Span),
-    Match(Spanned<Box<Expr>>, Vec<(Spanned<LetPattern>, Box<Expr>)>, Span),
-    Record(Vec<KeyPair>, Span),
-    Typed(Box<Expr>, STypeExpr),
-    Variable(Spanned<StringId>),
+    BinOp(BinOpExpr),
+    Block(BlockExpr),
+    Call(CallExpr),
+    Case(CaseExpr),
+    FieldAccess(FieldAccessExpr),
+    FieldSet(FieldSetExpr),
+    FuncDef(FuncDefExpr),
+    If(IfExpr),
+    InstantiateExist(InstantiateExistExpr),
+    InstantiateUni(InstantiateUniExpr),
+    Literal(LiteralExpr),
+    Loop(LoopExpr),
+    Match(MatchExpr),
+    Record(RecordExpr),
+    Typed(TypedExpr),
+    Variable(VariableExpr),
+}
+impl Expr {
+    pub fn span(&self) -> Span {
+        match self {
+            Expr::BinOp(e) => e.span,
+            Expr::Block(e) => e.span,
+            Expr::Call(e) => e.span,
+            Expr::Case(e) => e.tag.1,
+            Expr::FieldAccess(e) => e.span,
+            Expr::FieldSet(e) => e.span,
+            Expr::FuncDef(e) => e.def.1,
+            Expr::If(e) => e.span,
+            Expr::InstantiateExist(e) => e.span,
+            Expr::InstantiateUni(e) => e.span,
+            Expr::Literal(e) => e.value.1,
+            Expr::Loop(e) => e.span,
+            Expr::Match(e) => e.span,
+            Expr::Record(e) => e.span,
+            Expr::Typed(e) => e.span,
+            Expr::Variable(e) => e.name.1,
+        }
+    }
 }
 
 // Constructor functions for Expr variants
@@ -53,35 +183,53 @@ pub fn binop(
     op: Op,
     op_span: Span,
 ) -> Expr {
-    Expr::BinOp(lhs, lhs_span, rhs, rhs_span, op_type, op, op_span)
+    Expr::BinOp(BinOpExpr {
+        lhs,
+        lhs_span,
+        rhs,
+        rhs_span,
+        op_type,
+        op,
+        span: op_span,
+    })
 }
 
-pub fn block(statements: Vec<Statement>, expr: Box<Expr>) -> Expr {
-    Expr::Block(statements, expr)
+pub fn block(statements: Vec<Statement>, expr: Box<Expr>, span: Span) -> Expr {
+    Expr::Block(BlockExpr { statements, expr, span })
 }
 
 pub fn call(func: Box<Expr>, arg: Box<Expr>, span: Span) -> Expr {
-    Expr::Call(func, arg, span)
+    Expr::Call(CallExpr { func, arg, span })
 }
 
 pub fn case(tag: Spanned<StringId>, expr: Box<Expr>) -> Expr {
-    Expr::Case(tag, expr)
+    Expr::Case(CaseExpr { tag, expr })
 }
 
 pub fn field_access(expr: Box<Expr>, field: Spanned<StringId>, span: Span) -> Expr {
-    Expr::FieldAccess(expr, field, span)
+    Expr::FieldAccess(FieldAccessExpr { expr, field, span })
 }
 
 pub fn field_set(expr: Box<Expr>, field: Spanned<StringId>, value: Box<Expr>, span: Span) -> Expr {
-    Expr::FieldSet(expr, field, value, span)
+    Expr::FieldSet(FieldSetExpr {
+        expr,
+        field,
+        value,
+        span,
+    })
 }
 
 pub fn func_def(def: Spanned<(Option<Vec<TypeParam>>, Spanned<LetPattern>, Option<STypeExpr>, Box<Expr>)>) -> Expr {
-    Expr::FuncDef(def)
+    Expr::FuncDef(FuncDefExpr { def })
 }
 
-pub fn if_expr(cond: Spanned<Box<Expr>>, then_expr: Box<Expr>, else_expr: Box<Expr>) -> Expr {
-    Expr::If(cond, then_expr, else_expr)
+pub fn if_expr(cond: Spanned<Box<Expr>>, then_expr: Box<Expr>, else_expr: Box<Expr>, span: Span) -> Expr {
+    Expr::If(IfExpr {
+        cond,
+        then_expr,
+        else_expr,
+        span,
+    })
 }
 
 pub fn instantiate_exist(
@@ -90,7 +238,12 @@ pub fn instantiate_exist(
     source: InstantiateSourceKind,
     span: Span,
 ) -> Expr {
-    Expr::InstantiateExist(expr, types, source, span)
+    Expr::InstantiateExist(InstantiateExistExpr {
+        expr,
+        types,
+        source,
+        span,
+    })
 }
 
 pub fn instantiate_uni(
@@ -99,29 +252,34 @@ pub fn instantiate_uni(
     source: InstantiateSourceKind,
     span: Span,
 ) -> Expr {
-    Expr::InstantiateUni(expr, types, source, span)
+    Expr::InstantiateUni(InstantiateUniExpr {
+        expr,
+        types,
+        source,
+        span,
+    })
 }
 
 pub fn literal(lit_type: Literal, value: Spanned<String>) -> Expr {
-    Expr::Literal(lit_type, value)
+    Expr::Literal(LiteralExpr { lit_type, value })
 }
 
 pub fn loop_expr(body: Box<Expr>, span: Span) -> Expr {
-    Expr::Loop(body, span)
+    Expr::Loop(LoopExpr { body, span })
 }
 
 pub fn match_expr(expr: Spanned<Box<Expr>>, cases: Vec<(Spanned<LetPattern>, Box<Expr>)>, span: Span) -> Expr {
-    Expr::Match(expr, cases, span)
+    Expr::Match(MatchExpr { expr, cases, span })
 }
 
 pub fn record(fields: Vec<KeyPair>, span: Span) -> Expr {
-    Expr::Record(fields, span)
+    Expr::Record(RecordExpr { fields, span })
 }
 
-pub fn typed(expr: Box<Expr>, type_expr: STypeExpr) -> Expr {
-    Expr::Typed(expr, type_expr)
+pub fn typed(expr: Box<Expr>, type_expr: STypeExpr, span: Span) -> Expr {
+    Expr::Typed(TypedExpr { expr, type_expr, span })
 }
 
 pub fn variable(name: Spanned<StringId>) -> Expr {
-    Expr::Variable(name)
+    Expr::Variable(VariableExpr { name })
 }
