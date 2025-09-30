@@ -98,7 +98,7 @@ impl TypeckState {
         Ok(mat.with(&mut self.core).add_pattern(temp, &mut self.bindings))
     }
 
-    fn check_expr(&mut self, strings: &mut lasso::Rodeo, expr: &ast::Expr, bound: Use) -> Result<()> {
+    fn check_expr(&mut self, strings: &mut lasso::Rodeo, expr: &ast::SExpr, bound: Use) -> Result<()> {
         use ast::Expr::*;
         match expr {
             Block(e) => {
@@ -246,7 +246,7 @@ impl TypeckState {
         Ok(())
     }
 
-    fn infer_expr(&mut self, strings: &mut lasso::Rodeo, expr: &ast::Expr) -> Result<Value> {
+    fn infer_expr(&mut self, strings: &mut lasso::Rodeo, expr: &ast::SExpr) -> Result<Value> {
         use ast::Expr::*;
 
         match expr {
@@ -428,7 +428,7 @@ impl TypeckState {
         }
     }
 
-    fn check_let_def(&mut self, strings: &mut lasso::Rodeo, lhs: &ast::LetPattern, expr: &ast::Expr) -> Result<()> {
+    fn check_let_def(&mut self, strings: &mut lasso::Rodeo, lhs: &ast::LetPattern, expr: &ast::SExpr) -> Result<()> {
         // Check if left hand side is a simple assignment with no type annotation
         if let &ast::LetPattern::Var((Some(name), _), None) = lhs {
             // If lefthand side is a simple assignment, avoid adding an inference var

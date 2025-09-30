@@ -122,7 +122,7 @@ impl<'a> core::ops::DerefMut for Context<'a> {
     }
 }
 
-fn compile(ctx: &mut Context<'_>, expr: &ast::Expr) -> js::Expr {
+fn compile(ctx: &mut Context<'_>, expr: &ast::SExpr) -> js::Expr {
     match expr {
         ast::Expr::BinOp(e) => {
             let lhs = compile(ctx, &e.lhs);

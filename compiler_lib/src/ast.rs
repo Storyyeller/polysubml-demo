@@ -1,6 +1,7 @@
 pub mod expr;
 pub use expr::Expr;
 pub use expr::InstantiateSourceKind;
+pub use expr::SExpr;
 
 use crate::spans::Span;
 use crate::spans::SpanMaker;
@@ -45,7 +46,7 @@ pub const INT_CMP: OpType = (Some(Literal::Int), Literal::Bool);
 pub const FLOAT_CMP: OpType = (Some(Literal::Float), Literal::Bool);
 pub const ANY_CMP: OpType = (None, Literal::Bool);
 
-type LetDefinition = (LetPattern, Box<Expr>);
+type LetDefinition = (LetPattern, Box<SExpr>);
 pub type LetRecDefinition = (StringId, Spanned<Expr>);
 
 #[derive(Debug, Clone)]
@@ -105,10 +106,10 @@ pub type STypeExpr = Spanned<TypeExpr>;
 #[derive(Debug, Clone)]
 pub enum Statement {
     Empty,
-    Expr(Expr),
+    Expr(SExpr),
     LetDef(LetDefinition),
     LetRecDef(Vec<LetRecDefinition>),
-    Println(Vec<Expr>),
+    Println(Vec<SExpr>),
 }
 
 // Helper function for processing a list of sub-ast nodes, adding the _n fields, and creating a parent node
