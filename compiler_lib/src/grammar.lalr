@@ -166,9 +166,8 @@ SType = Spanned<Type>;
 // SimpleExpr ////////////////////////////////////////////////////////
 FieldAccess = Spanned<("." <Ident>)>;
 FieldAccessExpr: ast::Expr = {
-    Spanned<(Box<SSimpleExpr> FieldAccess)> => {
-        let ((lhs, rhs), full_span) = <>;
-        ast::expr::field_access(lhs, rhs, full_span)
+    Box<SSimpleExpr> FieldAccess => {
+        ast::expr::field_access(<>)
     }
 }
 
@@ -214,7 +213,7 @@ RecordSub = "{" <Spanned<RecordTypesList>> <SepListOpt<KeyPairExpr, ";">> "}";
 Record: ast::Expr = {
     Spanned<RecordSub> => {
         let ((types, fields), span) = <>;
-        let sub = (ast::expr::record(fields, span), span);
+        let sub = (ast::expr::record(fields), span);
         ast::expr::instantiate_exist(Box::new(sub), types, ast::InstantiateSourceKind::ImplicitRecord, span)
     }
 }
@@ -242,10 +241,7 @@ SimpleExpr = {
     Record,
     VarOrLiteral,
     "(" <Expr> ")",
-    Spanned<("(" <Box<SExpr>> ":" <SType> ")")> => {
-        let ((expr, ty), span) = <>;
-        ast::expr::typed(expr, ty, span)
-    },
+    "(" <Box<SExpr>> ":" <SType> ")" => ast::expr::typed(<>),
     "begin" <Expr> "end",
 }
 SSimpleExpr = Spanned<SimpleExpr>;
@@ -258,7 +254,7 @@ Call: ast::Expr = {
             ast::Expr::InstantiateUni(..) => lhs,
             _ => ast::expr::instantiate_uni((Box::new((lhs, lhs_span)), lhs_span), (vec![], lhs_span), ast::InstantiateSourceKind::ImplicitCall, lhs_span),
         };
-        ast::expr::call(Box::new((lhs, lhs_span)), rhs, full_span)
+        ast::expr::call(Box::new((lhs, lhs_span)), rhs)
     }
 }
 Case: ast::Expr = {
@@ -276,12 +272,8 @@ SCallExpr = Spanned<CallExpr>;
 // Binary expressions/////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 BinOp<Left, Op, Right>: ast::Expr = {
-    <p1: @L> <lhs: Box<Left>> <p2: @L> <op: Op> <p3: @R> <rhs: Box<Right>> <p4: @R> => {
-        let lhs_span = ctx.span_maker.span(p1, p3);
-        let rhs_span = ctx.span_maker.span(p2, p4);
-        let full_span = ctx.span_maker.span(p1, p4);
-
-        ast::expr::binop(lhs, lhs_span, rhs, rhs_span, op.0, op.1, full_span)
+    <lhs: Box<Left>> <op: Op> <rhs: Box<Right>> => {
+        ast::expr::binop(lhs, rhs, op.0, op.1)
     },
 };
 
@@ -404,15 +396,14 @@ LetPattern: ast::LetPattern = {
 // Top level expressions /////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 CompareOrTupleExpr: ast::Expr = {
-    Spanned<SepList<SCompareExpr, ",">> => 
+    SepList<SCompareExpr, ","> => 
         ast::make_tuple_expr(<>, &mut ctx.strings)
 }
 
 
 FieldSetExpr: ast::Expr = {
-    Spanned<(<Box<SSimpleExpr>> <FieldAccess> "<-" <Box<SNoSemiExpr>>)> => {
-        let ((lhs, field, rhs), span) = <>;
-        ast::expr::field_set(lhs, field, rhs, span)
+    <Box<SSimpleExpr>> <FieldAccess> "<-" <Box<SNoSemiExpr>> => {
+        ast::expr::field_set(<>)
     }
 }
 
@@ -425,11 +416,9 @@ FuncDef: ast::Expr = {
 }
 
 
-IfSub = "if" <Spanned<Box<SExpr>>> "then" <Box<SExpr>> "else" <Box<SNoSemiExpr>>;
 If: ast::Expr = {
-    Spanned<IfSub> => {
-        let ((c, e1, e2), span) = <>;
-        ast::expr::if_expr(c, e1, e2, span)
+    "if" <Spanned<Box<SExpr>>> "then" <Box<SExpr>> "else" <Box<SNoSemiExpr>> => {
+        ast::expr::if_expr(<>)
     },
 }
 
@@ -441,7 +430,7 @@ LetRHS = {
     "in" <Box<SNoSemiExpr>>,
 }
 Let: ast::Expr = {
-    <l: @L> <lhs: LetLHS> <rhs: LetRHS> <r: @R> => ast::expr::block(vec![ast::Statement::LetDef(lhs)], rhs, ctx.span_maker.span(l, r)),
+    <lhs: LetLHS> <rhs: LetRHS> => ast::expr::block(vec![ast::Statement::LetDef(lhs)], rhs),
 }
 
 
@@ -452,13 +441,12 @@ LetRecLHS = {
     "let" "rec" <SepList<LetRecDef, "and">>,
 }
 LetRec: ast::Expr = {
-     <l: @L> <lhs: LetRecLHS> <rhs: LetRHS> <r: @R> => ast::expr::block(vec![ast::Statement::LetRecDef(lhs)], rhs, ctx.span_maker.span(l, r)),
+     <lhs: LetRecLHS> <rhs: LetRHS> => ast::expr::block(vec![ast::Statement::LetRecDef(lhs)], rhs),
 }
 
 LoopExpr: ast::Expr = {
-    Spanned<("loop" <Box<SNoSemiExpr>>)> => {
-        let (expr, span) = <>;
-        ast::expr::loop_expr(expr, span)
+    "loop" <Box<SNoSemiExpr>> => {
+        ast::expr::loop_expr(<>)
     }
 }
 
@@ -468,9 +456,8 @@ MatchArm = {
 }
 MatchStart = "match" <Box<SExpr>>;
 Match: ast::Expr = {
-    Spanned<(<Spanned<MatchStart>> "with" <MatchArm+>)> => {
-        let ((lhs, arms), span) = <>;
-        ast::expr::match_expr(lhs, arms, span)
+    <Spanned<MatchStart>> "with" <MatchArm+> => {
+        ast::expr::match_expr(<>)
     }
 }
 
@@ -488,11 +475,11 @@ NoSemiExpr = {
 }
 SNoSemiExpr = Spanned<NoSemiExpr>;
 Expr: ast::Expr = {
-    <l: @L> <stmts: (<Statement> ";")*> <rest: SNoSemiExpr> <r: @R> => {
+    <stmts: (<Statement> ";")*> <rest: SNoSemiExpr> => {
         if stmts.is_empty() {
             rest.0
         } else {
-            ast::expr::block(stmts, Box::new(rest), ctx.span_maker.span(l, r))
+            ast::expr::block(stmts, Box::new(rest))
         }
     }
 }

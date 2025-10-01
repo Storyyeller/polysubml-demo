@@ -120,7 +120,7 @@ impl TypeckState {
                         arg: arg_type,
                         ret: bound,
                     },
-                    e.span,
+                    expr.1,
                     None,
                 );
                 self.check_expr(strings, &e.func, bound)?;
@@ -165,14 +165,14 @@ impl TypeckState {
                         (strings.get_or_intern_static("Continue"), self.core.top_use()),
                     ],
                     None,
-                    e.span,
+                    expr.1,
                 );
                 self.check_expr(strings, &e.body, bound)?;
             }
             Match(e) => {
                 let (ref match_expr, arg_span) = e.expr;
                 let ref cases = e.cases;
-                let full_span = e.span;
+                let full_span = expr.1;
                 // Bounds from the match arms
                 let mut case_type_pairs = Vec::with_capacity(cases.len());
                 let mut wildcard_type = None;
@@ -262,7 +262,7 @@ impl TypeckState {
                             Str => self.TY_STR,
                         };
 
-                        (self.core.simple_use(cls, e.lhs_span), self.core.simple_use(cls, e.rhs_span))
+                        (self.core.simple_use(cls, e.lhs.1), self.core.simple_use(cls, e.rhs.1))
                     }
                     None => (self.core.top_use(), self.core.top_use()),
                 };
@@ -275,7 +275,7 @@ impl TypeckState {
                     Int => self.TY_INT,
                     Str => self.TY_STR,
                 };
-                Ok(self.core.simple_val(cls, e.span))
+                Ok(self.core.simple_val(cls, expr.1))
             }
             // Allow block expressions to be inferred as well as checked
             // TODO - deduplicate this code
@@ -339,7 +339,7 @@ impl TypeckState {
             InstantiateExist(e) => {
                 let (ref sigs, sigs_span) = e.types;
                 let src_kind = e.source;
-                let full_span = e.span;
+                let full_span = expr.1;
                 let mut params = HashMap::new();
                 for &(name, ref sig) in sigs {
                     params.insert(name, self.parse_type_signature(sig)?);
@@ -404,7 +404,7 @@ impl TypeckState {
                     }
                 }
                 let fields = field_type_pairs.into_iter().collect();
-                Ok(self.core.new_val(VTypeHead::VObj { fields }, e.span, None))
+                Ok(self.core.new_val(VTypeHead::VObj { fields }, expr.1, None))
             }
             Typed(e) => {
                 let sig_type = self.parse_type_signature(&e.type_expr)?;

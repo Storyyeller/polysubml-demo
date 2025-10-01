@@ -138,8 +138,7 @@ pub fn make_tuple_ast<T, FieldT>(
 }
 
 // TODO, cleanup
-pub fn make_tuple_expr(vals: Spanned<Vec<SExpr>>, strings: &mut lasso::Rodeo) -> Expr {
-    let (mut vals, full_span) = vals;
+pub fn make_tuple_expr(mut vals: Vec<SExpr>, strings: &mut lasso::Rodeo) -> Expr {
     if vals.len() <= 1 {
         return vals.pop().unwrap().0;
     }
@@ -154,7 +153,7 @@ pub fn make_tuple_expr(vals: Spanned<Vec<SExpr>>, strings: &mut lasso::Rodeo) ->
             ((name, span), Box::new((val, span)), false, None)
         })
         .collect();
-    expr::record(fields, full_span)
+    expr::record(fields)
 }
 
 pub fn make_join_ast(kind: JoinKind, mut children: Vec<STypeExpr>) -> TypeExpr {
