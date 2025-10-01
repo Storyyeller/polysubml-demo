@@ -115,10 +115,8 @@ SimpleType: ast::TypeExpr = {
 }
 
 TupleType: ast::TypeExpr = {
-    Spanned<SepList<Spanned<SimpleType>, "*">> => {
-        ast::make_tuple_ast(<>, &mut ctx.strings, 
-            |name, sub| (name, ast::FieldTypeDecl::Imm((sub, name.1))),
-            |fields, full_span| ast::TypeExpr::Record(fields))
+    SepList<Spanned<SimpleType>, "*"> => {
+        ast::make_tuple_type(<>, &mut ctx.strings)
     }
 }
 
@@ -368,9 +366,7 @@ RecordLetPattern = {
 }
 TupleOrParensLetPattern: ast::LetPattern = {
     Spanned<("(" <SepList<Spanned<LetPattern>, ",">> ")")> => {
-        ast::make_tuple_ast(<>, &mut ctx.strings, 
-            |name, sub| (name, Box::new(sub)),
-            |fields, full_span| ast::LetPattern::Record(((vec![], fields), full_span)))
+        ast::make_tuple_pattern(<>, &mut ctx.strings)
     }
 }
 

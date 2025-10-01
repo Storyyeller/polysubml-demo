@@ -112,29 +112,18 @@ pub enum Statement {
     Println(Vec<SExpr>),
 }
 
-// Helper function for processing a list of sub-ast nodes, adding the _n fields, and creating a parent node
-pub fn make_tuple_ast<T, FieldT>(
-    vals: Spanned<Vec<Spanned<T>>>,
+fn enumerate_tuple_fields<T, R>(
+    vals: impl IntoIterator<Item = (T, Span)>,
     strings: &mut lasso::Rodeo,
-    mut make_field: impl FnMut(Spanned<StringId>, T) -> FieldT,
-    make_result: impl FnOnce(Vec<FieldT>, Span) -> T,
-) -> T {
-    let (mut vals, full_span) = vals;
-    if vals.len() <= 1 {
-        return vals.pop().unwrap().0;
-    }
-
-    // Tuple
-    let fields = vals
-        .into_iter()
+    mut make_field: impl FnMut(Spanned<StringId>, T) -> R,
+) -> Vec<R> {
+    vals.into_iter()
         .enumerate()
         .map(|(i, (val, span))| {
-            let name = format!("_{}", i);
-            let name = strings.get_or_intern(&name);
+            let name = strings.get_or_intern(&format!("_{}", i));
             make_field((name, span), val)
         })
-        .collect();
-    make_result(fields, full_span)
+        .collect()
 }
 
 // TODO, cleanup
@@ -144,16 +133,27 @@ pub fn make_tuple_expr(mut vals: Vec<SExpr>, strings: &mut lasso::Rodeo) -> Expr
     }
 
     // Tuple
-    let fields: Vec<expr::KeyPair> = vals
-        .into_iter()
-        .enumerate()
-        .map(|(i, (val, span))| {
-            let name = format!("_{}", i);
-            let name = strings.get_or_intern(&name);
-            ((name, span), Box::new((val, span)), false, None)
-        })
-        .collect();
+    let fields = enumerate_tuple_fields(vals, strings, |name, val| (name, Box::new((val, name.1)), false, None));
     expr::record(fields)
+}
+
+pub fn make_tuple_pattern(vals: Spanned<Vec<Spanned<LetPattern>>>, strings: &mut lasso::Rodeo) -> LetPattern {
+    let (mut vals, full_span) = vals;
+    if vals.len() <= 1 {
+        return vals.pop().unwrap().0;
+    }
+
+    let fields = enumerate_tuple_fields(vals, strings, |name, val| (name, Box::new(val)));
+    LetPattern::Record(((vec![], fields), full_span))
+}
+
+pub fn make_tuple_type(mut vals: Vec<STypeExpr>, strings: &mut lasso::Rodeo) -> TypeExpr {
+    if vals.len() <= 1 {
+        return vals.pop().unwrap().0;
+    }
+
+    let fields = enumerate_tuple_fields(vals, strings, |name, val| (name, FieldTypeDecl::Imm((val, name.1))));
+    TypeExpr::Record(fields)
 }
 
 pub fn make_join_ast(kind: JoinKind, mut children: Vec<STypeExpr>) -> TypeExpr {
