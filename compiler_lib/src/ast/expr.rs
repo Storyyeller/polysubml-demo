@@ -150,6 +150,17 @@ pub fn block(statements: Vec<Statement>, expr: Box<SExpr>) -> Expr {
 }
 
 pub fn call(func: Box<SExpr>, arg: Box<SExpr>) -> Expr {
+    let func = match &func.0 {
+        Expr::InstantiateUni(e) => func,
+        _ => {
+            let span = func.1;
+            Box::new((
+                instantiate_uni(Box::new(*func), (vec![], span), InstantiateSourceKind::ImplicitCall),
+                span,
+            ))
+        }
+    };
+
     Expr::Call(CallExpr { func, arg })
 }
 

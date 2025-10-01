@@ -186,9 +186,9 @@ InstantiateUni: ast::Expr = {
     }
 }
 InstantiateExist: ast::Expr = {
-    Spanned<(<Spanned<Box<SSimpleExpr>>> "[" <InstantiateParams> "]")> => {
-        // sub is only spanned here for compatibility with InstantiateUni rule, we don't actually need it
-        let (((sub, _), types), full_span) = <>;
+    // Span is unused but needed to avoid grammar conflicts
+    <Spanned<Box<SSimpleExpr>>> "[" <InstantiateParams> "]" => {
+        let ((sub, _), types) = (<>);
         let sub = match sub.0 {
             ast::Expr::InstantiateExist(inst_expr) => inst_expr.expr,
             _ => sub,
@@ -249,14 +249,7 @@ SSimpleExpr = Spanned<SimpleExpr>;
 //////////////////////////////////////////////////////////////////////
 // CallExpr //////////////////////////////////////////////////////////
 Call: ast::Expr = {
-    SSimpleExpr Box<SCallExpr> => {
-        let ((lhs, lhs_span), rhs) = (<>);
-        let lhs = match lhs {
-            ast::Expr::InstantiateUni(..) => lhs,
-            _ => ast::expr::instantiate_uni(Box::new((lhs, lhs_span)), (vec![], lhs_span), ast::InstantiateSourceKind::ImplicitCall),
-        };
-        ast::expr::call(Box::new((lhs, lhs_span)), rhs)
-    }
+    Box<SSimpleExpr> Box<SCallExpr> => ast::expr::call(<>)
 }
 Case: ast::Expr = {
     <Spanned<Tag>> <Box<SCallExpr>> => ast::expr::case(<>),
