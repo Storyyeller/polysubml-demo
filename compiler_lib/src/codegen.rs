@@ -190,9 +190,8 @@ fn compile(ctx: &mut Context<'_>, expr: &ast::SExpr) -> js::Expr {
                 swap(&mut scope_expr, &mut ctx.scope_expr);
 
                 //////////////////////////////////////////////////////
-                let (_, arg_pattern, _, body_expr) = &e.def.0;
-                let js_pattern = compile_let_pattern(ctx, &arg_pattern.0).unwrap_or_else(|| js::var("_".to_string(), true));
-                let body = compile(ctx, body_expr);
+                let js_pattern = compile_let_pattern(ctx, &e.param.0).unwrap_or_else(|| js::var("_".to_string(), true));
+                let body = compile(ctx, &e.body);
                 //////////////////////////////////////////////////////
 
                 swap(&mut scope_expr, &mut ctx.scope_expr);
@@ -273,7 +272,7 @@ fn compile(ctx: &mut Context<'_>, expr: &ast::SExpr) -> js::Expr {
                 .collect(),
         ),
         ast::Expr::Typed(e) => compile(ctx, &e.expr),
-        ast::Expr::Variable(e) => ctx.bindings.get(&e.name.0).unwrap().clone(),
+        ast::Expr::Variable(e) => ctx.bindings.get(&e.name).unwrap().clone(),
     }
 }
 

@@ -302,12 +302,11 @@ impl TypeckState {
                 ))
             }
             FuncDef(e) => {
-                let ((ty_params, arg_pattern, ret_tyexpr, body_expr), span) = (&e.def.0, e.def.1);
                 let parsed = TypeParser::new(&self.bindings.types).parse_func_sig(
-                    ty_params,
-                    arg_pattern,
-                    ret_tyexpr.as_ref(),
-                    span,
+                    &e.type_params,
+                    &e.param,
+                    e.return_type.as_ref(),
+                    expr.1,
                 )?;
 
                 let mark = self.bindings.unwind_point();
@@ -316,7 +315,7 @@ impl TypeckState {
                 let func_type = mat.add_func_type(&parsed);
                 let ret_bound = mat.add_func_sig(parsed, &mut self.bindings);
 
-                self.check_expr(strings, body_expr, ret_bound)?;
+                self.check_expr(strings, &e.body, ret_bound)?;
 
                 self.bindings.unwind(mark);
                 Ok(func_type)
@@ -412,10 +411,10 @@ impl TypeckState {
                 Ok(sig_type.0)
             }
             Variable(e) => {
-                if let Some(v) = self.bindings.vars.get(&e.name.0) {
+                if let Some(v) = self.bindings.vars.get(&e.name) {
                     Ok(*v)
                 } else {
-                    Err(SyntaxError::new1(format!("SyntaxError: Undefined variable"), e.name.1))
+                    Err(SyntaxError::new1(format!("SyntaxError: Undefined variable"), expr.1))
                 }
             }
 
@@ -471,20 +470,18 @@ impl TypeckState {
         // Materialize the outer function types and assign to bindings
         for &(name, (ref expr, span)) in defs.iter() {
             match expr {
-                ast::Expr::FuncDef(func_def_expr) => {
-                    let ((ty_params, arg_pattern, ret_tyexpr, body_expr), span) =
-                        (&func_def_expr.def.0, func_def_expr.def.1);
+                ast::Expr::FuncDef(e) => {
                     let parsed = TypeParser::new(&self.bindings.types).parse_func_sig(
-                        ty_params,
-                        arg_pattern,
-                        ret_tyexpr.as_ref(),
+                        &e.type_params,
+                        &e.param,
+                        e.return_type.as_ref(),
                         span,
                     )?;
 
                     self.bindings
                         .vars
                         .insert(name, mat.with(&mut self.core).add_func_type(&parsed));
-                    temp.push((parsed, body_expr));
+                    temp.push((parsed, &e.body));
                 }
                 _ => {
                     return Err(SyntaxError::new1(

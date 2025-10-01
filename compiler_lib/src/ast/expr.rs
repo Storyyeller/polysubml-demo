@@ -60,7 +60,10 @@ pub struct FieldSetExpr {
 
 #[derive(Debug, Clone)]
 pub struct FuncDefExpr {
-    pub def: Spanned<(Option<Vec<TypeParam>>, Spanned<LetPattern>, Option<STypeExpr>, Box<SExpr>)>,
+    pub type_params: Option<Vec<TypeParam>>,
+    pub param: Spanned<LetPattern>,
+    pub return_type: Option<STypeExpr>,
+    pub body: Box<SExpr>,
 }
 
 #[derive(Debug, Clone)]
@@ -114,7 +117,7 @@ pub struct TypedExpr {
 
 #[derive(Debug, Clone)]
 pub struct VariableExpr {
-    pub name: Spanned<StringId>,
+    pub name: StringId,
 }
 
 #[derive(Debug, Clone)]
@@ -163,8 +166,18 @@ pub fn field_set(expr: Box<SExpr>, field: Spanned<StringId>, value: Box<SExpr>) 
     Expr::FieldSet(FieldSetExpr { expr, field, value })
 }
 
-pub fn func_def(def: Spanned<(Option<Vec<TypeParam>>, Spanned<LetPattern>, Option<STypeExpr>, Box<SExpr>)>) -> Expr {
-    Expr::FuncDef(FuncDefExpr { def })
+pub fn func_def(
+    type_params: Option<Vec<TypeParam>>,
+    param: Spanned<LetPattern>,
+    return_type: Option<STypeExpr>,
+    body: Box<SExpr>,
+) -> Expr {
+    Expr::FuncDef(FuncDefExpr {
+        type_params,
+        param,
+        return_type,
+        body,
+    })
 }
 
 pub fn if_expr(cond: Spanned<Box<SExpr>>, then_expr: Box<SExpr>, else_expr: Box<SExpr>) -> Expr {
@@ -213,6 +226,6 @@ pub fn typed(expr: Box<SExpr>, type_expr: STypeExpr) -> Expr {
     Expr::Typed(TypedExpr { expr, type_expr })
 }
 
-pub fn variable(name: Spanned<StringId>) -> Expr {
+pub fn variable(name: StringId) -> Expr {
     Expr::Variable(VariableExpr { name })
 }

@@ -1,3 +1,5 @@
+#![allow(unused_braces)]
+
 use lalrpop_util::ParseError;
 
 use super::ast; // super instead of self because lalrpop wraps this in an internal module
@@ -202,7 +204,7 @@ RhsEqExpr = "=" <Box<SNoSemiExpr>>;
 KeyPairExpr: ast::expr::KeyPair = {
     <ismut: "mut"?> <name: Spanned<Ident>> <ty: TypeAscription?> <expr: RhsEqExpr?> => {
         let ismut = ismut.is_some();
-        let expr = expr.unwrap_or_else(|| Box::new((ast::expr::variable(name), name.1)));
+        let expr = expr.unwrap_or_else(|| Box::new((ast::expr::variable(name.0), name.1)));
         (name, expr, ismut, ty)
     },
 }
@@ -224,7 +226,7 @@ VarOrLiteral: ast::Expr = {
         match s {
             "false" | "true" => ast::expr::literal(ast::Literal::Bool, (String::from(s), span)),
             _ => {
-                ast::expr::variable((ctx.strings.get_or_intern(s), span))
+                ast::expr::variable(ctx.strings.get_or_intern(s))
             }
         }
     },
@@ -410,9 +412,8 @@ FieldSetExpr: ast::Expr = {
 
 FuncDefTypeParamList = "(" "type" <TypeParam+> ")";
 NoFunTypeAscription = ":" <SNoFunType>;
-FuncSub = "fun" <FuncDefTypeParamList?> <Spanned<LetPatternNoTypedIdent>> <NoFunTypeAscription?> "->" <Box<SNoSemiExpr>>;
 FuncDef: ast::Expr = {
-    Spanned<FuncSub> => ast::expr::func_def(<>),
+    "fun" <FuncDefTypeParamList?> <Spanned<LetPatternNoTypedIdent>> <NoFunTypeAscription?> "->" <Box<SNoSemiExpr>> => ast::expr::func_def(<>),
 }
 
 
