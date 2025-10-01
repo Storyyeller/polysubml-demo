@@ -6,7 +6,6 @@ use crate::ast::STypeExpr;
 use crate::ast::Statement;
 use crate::ast::StringId;
 use crate::ast::TypeParam;
-use crate::spans::Span;
 use crate::spans::Spanned;
 
 pub type KeyPair = (Spanned<StringId>, Box<SExpr>, bool, Option<STypeExpr>);
@@ -192,7 +191,6 @@ pub fn instantiate_exist(
     expr: Box<SExpr>,
     types: Spanned<Vec<(StringId, STypeExpr)>>,
     source: InstantiateSourceKind,
-    span: Span,
 ) -> Expr {
     Expr::InstantiateExist(InstantiateExistExpr { expr, types, source })
 }
@@ -201,7 +199,6 @@ pub fn instantiate_uni(
     expr: Spanned<Box<SExpr>>,
     types: Spanned<Vec<(StringId, STypeExpr)>>,
     source: InstantiateSourceKind,
-    span: Span,
 ) -> Expr {
     Expr::InstantiateUni(InstantiateUniExpr { expr, types, source })
 }

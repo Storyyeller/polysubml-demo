@@ -183,7 +183,7 @@ InstantiateUni: ast::Expr = {
     Spanned<(Spanned<Box<SSimpleExpr>> InstantiateParams)> => {
         let ((sub, types), span) = <>;
         let kind = ast::InstantiateSourceKind::ExplicitParams(types.0.is_empty());
-        ast::expr::instantiate_uni(sub, types, kind, span)
+        ast::expr::instantiate_uni(sub, types, kind)
     }
 }
 InstantiateExist: ast::Expr = {
@@ -196,7 +196,7 @@ InstantiateExist: ast::Expr = {
         };
 
         let kind = ast::InstantiateSourceKind::ExplicitParams(types.0.is_empty());
-        ast::expr::instantiate_exist(sub, types, kind, full_span)
+        ast::expr::instantiate_exist(sub, types, kind)
     }
 }
 
@@ -216,7 +216,7 @@ Record: ast::Expr = {
     Spanned<RecordSub> => {
         let ((types, fields), span) = <>;
         let sub = (ast::expr::record(fields), span);
-        ast::expr::instantiate_exist(Box::new(sub), types, ast::InstantiateSourceKind::ImplicitRecord, span)
+        ast::expr::instantiate_exist(Box::new(sub), types, ast::InstantiateSourceKind::ImplicitRecord)
     }
 }
 
@@ -254,7 +254,7 @@ Call: ast::Expr = {
         let (((lhs, lhs_span), rhs), full_span) = <>;
         let lhs = match lhs {
             ast::Expr::InstantiateUni(..) => lhs,
-            _ => ast::expr::instantiate_uni((Box::new((lhs, lhs_span)), lhs_span), (vec![], lhs_span), ast::InstantiateSourceKind::ImplicitCall, lhs_span),
+            _ => ast::expr::instantiate_uni((Box::new((lhs, lhs_span)), lhs_span), (vec![], lhs_span), ast::InstantiateSourceKind::ImplicitCall),
         };
         ast::expr::call(Box::new((lhs, lhs_span)), rhs)
     }

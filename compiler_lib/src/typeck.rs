@@ -172,7 +172,6 @@ impl TypeckState {
             Match(e) => {
                 let (ref match_expr, arg_span) = e.expr;
                 let ref cases = e.cases;
-                let full_span = expr.1;
                 // Bounds from the match arms
                 let mut case_type_pairs = Vec::with_capacity(cases.len());
                 let mut wildcard_type = None;
