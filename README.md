@@ -319,6 +319,9 @@ evaluates to `"Bob"`.
 
 > Note: Unlike in OCaml, function application is right-associative rather than left-associative. In other words, `a b c` is parsed as `a (b c)`, rather than `(a b) c` like it would be in OCaml.
 
+PolySubML also supports the reverse application operator `|>`. `a |> b` is equivalent to `b a` except that `a` will be evaluated before `b`.
+
+
 #### Multiple arguments
 
 In order to define functions that take multiple arguments, you can just use a tuple as the function argument instead:

@@ -157,9 +157,18 @@ fn compile(ctx: &mut Context<'_>, expr: &ast::SExpr) -> js::Expr {
             })
         }
         ast::Expr::Call(e) => {
-            let lhs = compile(ctx, &e.func);
-            let rhs = compile(ctx, &e.arg);
-            js::call(lhs, rhs)
+            if e.eval_arg_first {
+                let mut exprs = Vec::new();
+                let arg = compile(ctx, &e.arg);
+                let arg = ctx.new_temp_var_assign(arg, &mut exprs);
+                let func = compile(ctx, &e.func);
+                exprs.push(js::call(func, arg));
+                js::comma_list(exprs)
+            } else {
+                let func = compile(ctx, &e.func);
+                let arg = compile(ctx, &e.arg);
+                js::call(func, arg)
+            }
         }
         ast::Expr::Case(e) => {
             let tag = js::lit(format!("\"{}\"", ctx.get(e.tag.0)));

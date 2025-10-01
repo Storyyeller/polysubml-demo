@@ -249,7 +249,8 @@ SSimpleExpr = Spanned<SimpleExpr>;
 //////////////////////////////////////////////////////////////////////
 // CallExpr //////////////////////////////////////////////////////////
 Call: ast::Expr = {
-    Box<SSimpleExpr> Box<SCallExpr> => ast::expr::call(<>)
+    Box<SSimpleExpr> Box<SCallExpr> => ast::expr::call(<>, false),
+    <arg: Box<SSimpleExpr>> "|>" <func: Box<SCallExpr>> => ast::expr::call(func, arg, true),
 }
 Case: ast::Expr = {
     <Spanned<Tag>> <Box<SCallExpr>> => ast::expr::case(<>),

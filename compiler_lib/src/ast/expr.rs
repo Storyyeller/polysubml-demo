@@ -36,6 +36,7 @@ pub struct BlockExpr {
 pub struct CallExpr {
     pub func: Box<SExpr>,
     pub arg: Box<SExpr>,
+    pub eval_arg_first: bool,
 }
 
 #[derive(Debug, Clone)]
@@ -149,7 +150,7 @@ pub fn block(statements: Vec<Statement>, expr: Box<SExpr>) -> Expr {
     Expr::Block(BlockExpr { statements, expr })
 }
 
-pub fn call(func: Box<SExpr>, arg: Box<SExpr>) -> Expr {
+pub fn call(func: Box<SExpr>, arg: Box<SExpr>, eval_arg_first: bool) -> Expr {
     let func = match &func.0 {
         Expr::InstantiateUni(e) => func,
         _ => {
@@ -161,7 +162,11 @@ pub fn call(func: Box<SExpr>, arg: Box<SExpr>) -> Expr {
         }
     };
 
-    Expr::Call(CallExpr { func, arg })
+    Expr::Call(CallExpr {
+        func,
+        arg,
+        eval_arg_first,
+    })
 }
 
 pub fn case(tag: Spanned<StringId>, expr: Box<SExpr>) -> Expr {
