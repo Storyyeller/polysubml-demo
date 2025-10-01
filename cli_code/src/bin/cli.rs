@@ -4,22 +4,52 @@
 
 use std::env;
 use std::fs;
+use std::path::PathBuf;
 use std::time::Instant;
 
-use compiler_lib::State;
+use clap::Parser;
+use cli_lib::js_executor::JsExecutor;
+use compiler_lib::{CompilationResult, State};
+
+#[derive(Parser)]
+#[command(name = "cli")]
+#[command(about = "PolySubML Compiler CLI")]
+struct Args {
+    /// ML files to compile
+    files: Vec<PathBuf>,
+
+    /// Directory to cache JS execution results (optional)
+    #[arg(long)]
+    cache_dir: Option<PathBuf>,
+}
 
 fn main() {
+    let args = Args::parse();
     let mut state = State::new();
-    for fname in env::args().skip(1) {
-        println!("Processing {}", fname);
-        let data = fs::read_to_string(fname).unwrap();
-        // println!(">> {}", data);
+    let js_executor = JsExecutor::new(args.cache_dir);
+
+    for fname in args.files {
+        println!("Processing {}", fname.display());
+        let data = fs::read_to_string(&fname).unwrap();
 
         let t0 = Instant::now();
         let res = state.process(&data);
         dbg!(t0.elapsed());
 
         println!("{}", res);
+
+        if let CompilationResult::Success(js_code) = res {
+            println!("\nExecuting...");
+            match js_executor.execute_js(&js_code) {
+                Ok(output) => {
+                    println!("Output:\n{}", output);
+                }
+                Err(e) => {
+                    eprintln!("Execution error: {}", e);
+                    std::process::exit(1);
+                }
+            }
+        }
     }
 }
 

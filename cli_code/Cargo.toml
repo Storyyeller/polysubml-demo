@@ -5,6 +5,10 @@ authors = ["Robert Grosse <n210241048576@gmail.com>"]
 license = "Apache-2.0/MIT"
 edition = "2024"
 
+[lib]
+name = "cli_lib"
+path = "src/lib.rs"
+
 [dependencies]
 compiler_lib = { path = "../compiler_lib" }
 clap = { version = "4.0", features = ["derive"] }
