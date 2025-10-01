@@ -27,11 +27,13 @@ fn main() {
 mod tests {
     use super::*;
 
+    use compiler_lib::CompilationResult;
+
     #[test]
     fn run_tests() {
         let mut state = State::new();
 
-        let data = fs::read_to_string("tests/combined.ml").unwrap();
+        let data = fs::read_to_string("../tests/combined.ml").unwrap();
         for part in data.split("###") {
             let s = part.trim();
             if s.is_empty() {
@@ -41,17 +43,20 @@ mod tests {
             let (kind, s) = s.split_once('\n').unwrap();
             // println!("{} {}", kind, s);
 
-            if state.process(s) {
-                if kind != "Good" {
-                    println!("Unexpectedly passed:\n{}", s);
-                    assert_eq!(kind, "Good");
+            match state.process(s) {
+                CompilationResult::Success(s) => {
+                    if kind != "Good" {
+                        println!("Unexpectedly passed:\n{}", s);
+                        assert_eq!(kind, "Good");
+                    }
                 }
-            } else {
-                if kind != "Bad" {
-                    println!("Unexpected error:\n{}", state.get_err().unwrap());
-                    assert_eq!(kind, "Bad");
+                CompilationResult::Error(e) => {
+                    if kind != "Bad" {
+                        println!("Unexpected error:\n{}", e);
+                        assert_eq!(kind, "Bad");
+                    }
                 }
-            };
+            }
         }
     }
 }
