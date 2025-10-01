@@ -81,7 +81,7 @@ pub struct InstantiateExistExpr {
 
 #[derive(Debug, Clone)]
 pub struct InstantiateUniExpr {
-    pub expr: Spanned<Box<SExpr>>,
+    pub expr: Box<SExpr>,
     pub types: Spanned<Vec<(StringId, STypeExpr)>>,
     pub source: InstantiateSourceKind,
 }
@@ -195,11 +195,7 @@ pub fn instantiate_exist(
     Expr::InstantiateExist(InstantiateExistExpr { expr, types, source })
 }
 
-pub fn instantiate_uni(
-    expr: Spanned<Box<SExpr>>,
-    types: Spanned<Vec<(StringId, STypeExpr)>>,
-    source: InstantiateSourceKind,
-) -> Expr {
+pub fn instantiate_uni(expr: Box<SExpr>, types: Spanned<Vec<(StringId, STypeExpr)>>, source: InstantiateSourceKind) -> Expr {
     Expr::InstantiateUni(InstantiateUniExpr { expr, types, source })
 }
 

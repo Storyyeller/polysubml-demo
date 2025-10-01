@@ -156,7 +156,7 @@ impl TypeckState {
                     e.expr.1,
                     None,
                 );
-                self.check_expr(strings, &e.expr.0, bound)?;
+                self.check_expr(strings, &e.expr, bound)?;
             }
             Loop(e) => {
                 let bound = self.core.case_use(

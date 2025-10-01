@@ -178,8 +178,9 @@ InstantiateParams = {
     "[" <Spanned<SepListOpt<InstantiateParam, ";">>> "]",
 }
 InstantiateUni: ast::Expr = {
-    Spanned<(Spanned<Box<SSimpleExpr>> InstantiateParams)> => {
-        let ((sub, types), span) = <>;
+    // Span is not used here, but is needed to prevent grammar conflicts
+    Spanned<Box<SSimpleExpr>> InstantiateParams => {
+        let ((sub, _), types) = (<>);
         let kind = ast::InstantiateSourceKind::ExplicitParams(types.0.is_empty());
         ast::expr::instantiate_uni(sub, types, kind)
     }
@@ -248,11 +249,11 @@ SSimpleExpr = Spanned<SimpleExpr>;
 //////////////////////////////////////////////////////////////////////
 // CallExpr //////////////////////////////////////////////////////////
 Call: ast::Expr = {
-    Spanned<(SSimpleExpr Box<SCallExpr>)> => {
-        let (((lhs, lhs_span), rhs), full_span) = <>;
+    SSimpleExpr Box<SCallExpr> => {
+        let ((lhs, lhs_span), rhs) = (<>);
         let lhs = match lhs {
             ast::Expr::InstantiateUni(..) => lhs,
-            _ => ast::expr::instantiate_uni((Box::new((lhs, lhs_span)), lhs_span), (vec![], lhs_span), ast::InstantiateSourceKind::ImplicitCall),
+            _ => ast::expr::instantiate_uni(Box::new((lhs, lhs_span)), (vec![], lhs_span), ast::InstantiateSourceKind::ImplicitCall),
         };
         ast::expr::call(Box::new((lhs, lhs_span)), rhs)
     }

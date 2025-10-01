@@ -205,7 +205,7 @@ fn compile(ctx: &mut Context<'_>, expr: &ast::SExpr) -> js::Expr {
             js::ternary(cond_expr, then_expr, else_expr)
         }
         ast::Expr::InstantiateExist(e) => compile(ctx, &e.expr),
-        ast::Expr::InstantiateUni(e) => compile(ctx, &e.expr.0),
+        ast::Expr::InstantiateUni(e) => compile(ctx, &e.expr),
         ast::Expr::Literal(e) => {
             let mut code = e.value.0.clone();
             if let ast::Literal::Int = e.lit_type {
