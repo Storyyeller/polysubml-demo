@@ -305,6 +305,8 @@ fn compile_let_pattern_flat(ctx: &mut Context<'_>, out: &mut Vec<js::Expr>, pat:
         Var((ml_name, _), _) => {
             if let Some(ml_name) = ml_name {
                 ctx.new_var_assign(*ml_name, rhs, out);
+            } else {
+                out.push(rhs);
             }
         }
     }

@@ -61,7 +61,7 @@ pub fn comma_list(exprs: Vec<Expr>) -> Expr {
     }
 
     match flattened.len() {
-        0 => lit("0".to_string()),
+        0 => lit("undefined".to_string()),
         1 => Expr(flattened.into_iter().next().unwrap()),
         _ => Expr(Expr2::Comma(flattened)),
     }
