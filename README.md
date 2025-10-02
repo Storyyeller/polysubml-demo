@@ -319,7 +319,7 @@ evaluates to `"Bob"`.
 
 > Note: Unlike in OCaml, function application is right-associative rather than left-associative. In other words, `a b c` is parsed as `a (b c)`, rather than `(a b) c` like it would be in OCaml.
 
-PolySubML also supports the reverse application operator `|>`. `a |> b` is equivalent to `b a` except that `a` will be evaluated before `b`.
+PolySubML also supports the reverse application operator `|>`. `a |> b` is equivalent to `b a` except that `a` will be evaluated before `b`. Additionally, the `|>` operator is left-associative, meaning that `a |> b |> c` parses as `(a |> b) |> c`, which is in turn equivalent to `c b a`.
 
 
 #### Multiple arguments

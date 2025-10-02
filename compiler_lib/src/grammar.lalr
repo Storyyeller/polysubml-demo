@@ -248,20 +248,31 @@ SimpleExpr = {
 SSimpleExpr = Spanned<SimpleExpr>;
 //////////////////////////////////////////////////////////////////////
 // CallExpr //////////////////////////////////////////////////////////
-Call: ast::Expr = {
-    Box<SSimpleExpr> Box<SCallExpr> => ast::expr::call(<>, false),
-    <arg: Box<SSimpleExpr>> "|>" <func: Box<SCallExpr>> => ast::expr::call(func, arg, true),
-}
 Case: ast::Expr = {
-    <Spanned<Tag>> <Box<SCallExpr>> => ast::expr::case(<>),
+    Spanned<Tag> Box<SCallExpr> => ast::expr::case(<>),
 }
-
+Call: ast::Expr = {
+    // Function expression must be SimpleExpr so instantiation suggestions work correctly.
+    Box<SSimpleExpr> Box<SCallExpr> => ast::expr::call(<>, false),
+}
 CallExpr = {
     SimpleExpr,
-    Call,
     Case,
+    Call,
 }
 SCallExpr = Spanned<CallExpr>;
+
+
+ReverseCall: ast::Expr = {
+    // Function expression must be SimpleExpr so instantiation suggestions work correctly.
+    <arg: Box<Spanned<RevCallExpr>>> "|>" <func: Box<SSimpleExpr>> => ast::expr::call(func, arg, true),
+}
+RevCallExpr = {
+    CallExpr,
+    ReverseCall,
+}
+
+
 
 //////////////////////////////////////////////////////////////////////
 // Binary expressions/////////////////////////////////////////////////
@@ -288,7 +299,7 @@ MultOpSub: (ast::OpType, ast::Op) = {
         }
     }
 }
-MultOp: ast::Expr = BinOp<Spanned<MultExpr>, MultOpSub, Spanned<CallExpr>>;
+MultOp: ast::Expr = BinOp<Spanned<MultExpr>, MultOpSub, Spanned<RevCallExpr>>;
 
 AddOpSub: (ast::OpType, ast::Op) = {
     <l: @L> <op: r"[\+\-]\.?|\^"> <r: @R> => {
@@ -326,7 +337,7 @@ CmpOpSub: (ast::OpType, ast::Op) = {
 CmpOp: ast::Expr = BinOp<Spanned<AddExpr>, CmpOpSub, Spanned<AddExpr>>;
 
 MultExpr = {
-    CallExpr,
+    RevCallExpr,
     MultOp,
 }
 AddExpr = {
