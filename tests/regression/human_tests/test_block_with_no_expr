@@ -1,0 +1,3 @@
+let f = fun x -> (
+  print x;
+)

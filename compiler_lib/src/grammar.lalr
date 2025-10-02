@@ -478,12 +478,19 @@ NoSemiExpr = {
 }
 SNoSemiExpr = Spanned<NoSemiExpr>;
 Expr: ast::Expr = {
-    <stmts: (<Statement> ";")*> <rest: SNoSemiExpr> => {
-        if stmts.is_empty() {
+    <stmts: (<Statement> ";")*> <l: @L> <rest: SNoSemiExpr?> <r: @R> =>? {
+        let rest = match rest {
+            Some(v) => v,
+            None => return Err(ParseError::User {
+                error: ("SyntaxError: Block expressions must end in an expression. Expected an expression here.", ctx.span_maker.span(l, r))
+            })
+        };
+
+        Ok(if stmts.is_empty() {
             rest.0
         } else {
             ast::expr::block(stmts, Box::new(rest))
-        }
+        })
     }
 }
 SExpr = Spanned<Expr>;
