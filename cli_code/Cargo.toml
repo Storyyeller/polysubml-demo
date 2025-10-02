@@ -7,7 +7,7 @@ edition = "2024"
 
 [lib]
 name = "cli_lib"
-path = "src/lib.rs"
+path = "src/cli_lib.rs"
 
 [dependencies]
 compiler_lib = { path = "../compiler_lib" }

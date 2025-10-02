@@ -7,6 +7,7 @@ edition = "2024"
 
 [lib]
 crate-type = ["cdylib"]
+path = "src/wasm.rs"
 
 [dependencies]
 compiler_lib = { path = "../compiler_lib" }
