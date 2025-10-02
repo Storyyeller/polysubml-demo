@@ -16,9 +16,9 @@ use std::path::{Path, PathBuf};
 #[command(long_about = "Run regression tests for PolySubML by compiling and executing .ml files,
 comparing outputs against expected baselines.")]
 struct Args {
-    /// Directory containing .ml test files
+    /// Directories containing .ml test files
     #[arg(default_value = "tests/regression/cases")]
-    test_dir: PathBuf,
+    test_dirs: Vec<PathBuf>,
 
     /// Update expected output baselines instead of comparing
     #[arg(short, long)]
@@ -35,12 +35,19 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
-    let test_path = args.test_dir;
+    let test_dirs = args.test_dirs;
     let baseline_path = args.baseline_dir;
     let cache_path = args.cache_dir;
 
     // Print paths being used
-    println!("Test directory:     {}", test_path.display());
+    println!(
+        "Test directories:   {}",
+        test_dirs
+            .iter()
+            .map(|p| p.display().to_string())
+            .collect::<Vec<_>>()
+            .join(", ")
+    );
     println!("Baseline directory: {}", baseline_path.display());
     if let Some(ref cache_dir) = cache_path {
         println!("Cache directory:    {}", cache_dir.display());
@@ -49,7 +56,7 @@ fn main() {
     }
     println!();
 
-    let tester = RegressionTester::new(test_path, baseline_path, args.update_baselines, cache_path);
+    let tester = RegressionTester::new(test_dirs, baseline_path, args.update_baselines, cache_path);
 
     match tester.run_all_tests() {
         Ok(results) => {
@@ -89,16 +96,16 @@ pub enum TestStatus {
 }
 
 pub struct RegressionTester {
-    test_dir: PathBuf,
+    test_dirs: Vec<PathBuf>,
     baseline_dir: PathBuf,
     update_baselines: bool,
     js_executor: JsExecutor,
 }
 
 impl RegressionTester {
-    pub fn new(test_dir: PathBuf, baseline_dir: PathBuf, update_baselines: bool, cache_dir: Option<PathBuf>) -> Self {
+    pub fn new(test_dirs: Vec<PathBuf>, baseline_dir: PathBuf, update_baselines: bool, cache_dir: Option<PathBuf>) -> Self {
         Self {
-            test_dir,
+            test_dirs,
             baseline_dir,
             update_baselines,
             js_executor: JsExecutor::new(cache_dir),
@@ -108,16 +115,18 @@ impl RegressionTester {
     pub fn discover_tests(&self) -> Result<Vec<PathBuf>> {
         let mut tests = Vec::new();
 
-        if !self.test_dir.exists() {
-            return Err(anyhow!("Test directory {:?} does not exist", self.test_dir));
-        }
+        for test_dir in &self.test_dirs {
+            if !test_dir.exists() {
+                return Err(anyhow!("Test directory {:?} does not exist", test_dir));
+            }
 
-        for entry in fs::read_dir(&self.test_dir)? {
-            let entry = entry?;
-            let path = entry.path();
+            for entry in fs::read_dir(test_dir)? {
+                let entry = entry?;
+                let path = entry.path();
 
-            if path.is_file() && path.extension().map_or(false, |ext| ext == "ml") {
-                tests.push(path);
+                if path.is_file() && path.extension().map_or(false, |ext| ext == "ml") {
+                    tests.push(path);
+                }
             }
         }
 
