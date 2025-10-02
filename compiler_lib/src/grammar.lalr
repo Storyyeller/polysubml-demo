@@ -39,6 +39,8 @@ IntLiteral: String = {
 };
 FloatLiteral: String =
     <r"-?(?:0|[1-9][0-9]*)\.[0-9]*(?:[eE]-?[0-9]+)?"> => String::from(<>);
+FloatLiteralNoDot: String =
+    <r"-?(?:0|[1-9][0-9]*)[eE]-?[0-9]+"> => String::from(<>);
 StringLiteral: String =
     <r#""[^\\"\n\r]*(?:\\[tn'"\\][^\\"\n\r]*)*""#> => String::from(<>);
 
@@ -231,6 +233,7 @@ VarOrLiteral: ast::Expr = {
     },
 
     Spanned<FloatLiteral> => ast::expr::literal(ast::Literal::Float, <>),
+    Spanned<FloatLiteralNoDot> => ast::expr::literal(ast::Literal::Float, <>),
     Spanned<IntLiteral> => ast::expr::literal(ast::Literal::Int, <>),
     Spanned<StringLiteral> => ast::expr::literal(ast::Literal::Str, <>),
 }

@@ -72,7 +72,7 @@ PolySubML supports both `(* style *)` and `// style` comments. `//` comments con
 
 #### Primitives and operators
 
-PolySubML has the primitive types `bool` (`true` or `false`), `int` (arbitrary precision integers), `float` (64 bit floating point), and `str` (strings). Floating point literals must contain a decimal point, even when using scientific notation.
+PolySubML has the primitive types `bool` (`true` or `false`), `int` (arbitrary precision integers), `float` (64 bit floating point), and `str` (strings).
 
 The integer operators are `+`, `-`, `*`, `/`, `%`, `<`, `<=`, `>`, and `>=`. For floating point operations, suffix the operator with `.`, e.g. `1.1 +. 2.2`. The equality operators `==` and `!=` accept values of any type, but different types compare nonequal. String concatenation is `^`.
 
