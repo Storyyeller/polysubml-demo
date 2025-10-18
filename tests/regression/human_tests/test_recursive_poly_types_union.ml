@@ -6,6 +6,8 @@ let _ = fun x -> (
   let g: type A. A -> type B. B -> rec t={x:A | B; y:t} = (x.g : type A. A -> type B. B -> {x: A; y: {x: B; y: never}});
   let h: type A. A -> type A as B. B -> rec t={x:A | B; y:t} = (x.h : type A. A -> type A as B. B -> {x: A; y: {x: B; y: never}});
 
+  let i: type A. any -> type B. any -> rec u=any -> A | B | u = 
+    (x.i : type A. any -> type B. any -> rec u=any -> A | B | u); 
 
  x 
 )
