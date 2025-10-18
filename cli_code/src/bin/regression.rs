@@ -24,6 +24,10 @@ struct Args {
     #[arg(short, long)]
     update_baselines: bool,
 
+    /// Compare compiled output instead of execution results
+    #[arg(short, long)]
+    compare_compiled: bool,
+
     /// Directory to cache JS execution results (optional)
     #[arg(long)]
     cache_dir: Option<PathBuf>,
@@ -56,7 +60,13 @@ fn main() {
     }
     println!();
 
-    let tester = RegressionTester::new(test_dirs, baseline_path, args.update_baselines, cache_path);
+    let tester = RegressionTester::new(
+        test_dirs,
+        baseline_path,
+        args.update_baselines,
+        args.compare_compiled,
+        cache_path,
+    );
 
     match tester.run_all_tests() {
         Ok(results) => {
@@ -99,15 +109,23 @@ pub struct RegressionTester {
     test_dirs: Vec<PathBuf>,
     baseline_dir: PathBuf,
     update_baselines: bool,
+    compare_compiled: bool,
     js_executor: JsExecutor,
 }
 
 impl RegressionTester {
-    pub fn new(test_dirs: Vec<PathBuf>, baseline_dir: PathBuf, update_baselines: bool, cache_dir: Option<PathBuf>) -> Self {
+    pub fn new(
+        test_dirs: Vec<PathBuf>,
+        baseline_dir: PathBuf,
+        update_baselines: bool,
+        compare_compiled: bool,
+        cache_dir: Option<PathBuf>,
+    ) -> Self {
         Self {
             test_dirs,
             baseline_dir,
             update_baselines,
+            compare_compiled,
             js_executor: JsExecutor::new(cache_dir),
         }
     }
@@ -228,6 +246,12 @@ impl RegressionTester {
 
         let status = if actual == expected_result {
             TestStatus::Pass
+        } else if self.compare_compiled {
+            // When comparing compiled output, any difference is a compilation mismatch
+            TestStatus::CompilationMismatch {
+                actual: actual.clone(),
+                expected: expected_result,
+            }
         } else {
             // Both compiled successfully but JS code differs - check execution
             match (&actual, &expected_result) {
