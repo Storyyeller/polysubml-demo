@@ -39,14 +39,17 @@ pub fn eqop(lhs: Expr, rhs: Expr) -> Expr {
 pub fn field(lhs: Expr, rhs: String) -> Expr {
     Expr(Expr2::Field(lhs.0.into(), rhs))
 }
+pub fn scope_field(scope_var: &str, name: &str) -> Expr {
+    Expr(Expr2::ScopeField(format!("{}.{}", scope_var, name)))
+}
 pub fn lit(code: String) -> Expr {
     Expr(Expr2::Literal(code))
 }
 pub fn ternary(cond: Expr, e1: Expr, e2: Expr) -> Expr {
     Expr(Expr2::Ternary(cond.0.into(), e1.0.into(), e2.0.into()))
 }
-pub fn var(s: String, is_scope_var: bool) -> Expr {
-    Expr(Expr2::Var(s, is_scope_var))
+pub fn var(s: String) -> Expr {
+    Expr(Expr2::Var(s))
 }
 
 pub fn comma_list(exprs: Vec<Expr>) -> Expr {
@@ -140,11 +143,10 @@ enum Expr2 {
     Literal(String),
     Obj(Vec<PropertyDefinition>),
 
-    // True if fields are only assigned once (i.e. internal scope vars)
-    // Used for inlining decisions in codegen.rs
-    Var(String, bool),
+    Var(String),
 
     Field(Box<Expr2>, String),
+    ScopeField(String),
 
     Call(Box<Expr2>, Box<Expr2>),
 
@@ -174,6 +176,7 @@ impl Expr2 {
             Obj(..) => PRIMARY,
             Var(..) => PRIMARY,
             Field(..) => MEMBER,
+            ScopeField(..) => MEMBER,
             Call(..) => CALL,
             Minus(..) => UNARY,
             Void => UNARY,
@@ -200,6 +203,7 @@ impl Expr2 {
             Obj(..) => BRACE,
             Var(..) => OTHER,
             Field(lhs, ..) => lhs.first(),
+            ScopeField(..) => OTHER,
             Call(lhs, ..) => lhs.first(),
             Minus(..) => OTHER,
             Void => OTHER,
@@ -238,13 +242,16 @@ impl Expr2 {
                 }
                 *out += "}";
             }
-            Self::Var(name, _) => {
+            Self::Var(name) => {
                 *out += name;
             }
             Self::Field(lhs, rhs) => {
                 lhs.write(out);
                 *out += ".";
                 *out += rhs;
+            }
+            Self::ScopeField(s) => {
+                *out += s;
             }
             Self::Call(lhs, rhs) => {
                 lhs.write(out);
@@ -351,11 +358,12 @@ impl Expr2 {
                     }
                 }
             }
-            Self::Var(name, _) => {}
+            Self::Var(name) => {}
             Self::Field(lhs, rhs) => {
                 lhs.add_parens();
                 lhs.ensure(MEMBER);
             }
+            Self::ScopeField(_) => {}
             Self::Call(lhs, rhs) => {
                 lhs.add_parens();
                 lhs.ensure(MEMBER);
@@ -425,14 +433,9 @@ impl Expr2 {
     fn should_inline(&self) -> bool {
         use Expr2::*;
         match &self {
-            Var(_, is_scope_var) => *is_scope_var,
             Literal(s) => s.len() <= 10,
             Minus(e) => e.should_inline(),
-            // Only inline field expressions that are one level deep where LHS is a scope var
-            Field(lhs, _) => match lhs.as_ref() {
-                Var(_, is_scope_var) => *is_scope_var,
-                _ => false,
-            },
+            ScopeField(_) => true,
             _ => false,
         }
     }

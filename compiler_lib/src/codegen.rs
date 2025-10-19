@@ -6,7 +6,7 @@ use crate::js;
 use crate::unwindmap::UnwindMap;
 
 pub struct ModuleBuilder {
-    scope_expr: js::Expr,
+    scope_var_name: String, // name of JS var used to store variables in the current scope
     scope_counter: u64,
     param_counter: u64,
     // For choosing new var names
@@ -17,7 +17,7 @@ pub struct ModuleBuilder {
 impl ModuleBuilder {
     pub fn new() -> Self {
         Self {
-            scope_expr: js::var("$".to_string(), true),
+            scope_var_name: "$".to_string(),
             scope_counter: 0,
             param_counter: 0,
             var_counter: 0,
@@ -43,14 +43,14 @@ impl ModuleBuilder {
         let js_name = format!("t{}", self.var_counter);
         self.var_counter += 1;
 
-        let expr = js::field(self.scope_expr.clone(), js_name);
+        let expr = js::scope_field(&self.scope_var_name, &js_name);
         out.push(js::assign(expr.clone(), rhs));
         expr
     }
 
     fn new_var(&mut self, ml_name: StringId) -> js::Expr {
         let js_name = self.new_var_name();
-        let expr = js::field(self.scope_expr.clone(), js_name);
+        let expr = js::scope_field(&self.scope_var_name, &js_name);
         self.set_binding(ml_name, expr.clone());
         expr
     }
@@ -194,16 +194,15 @@ fn compile(ctx: &mut Context<'_>, expr: &ast::SExpr) -> js::Expr {
         }
         ast::Expr::FuncDef(e) => {
             ctx.fn_scope(|ctx| {
-                let new_scope_name = ctx.new_scope_name();
-                let mut scope_expr = js::var(new_scope_name.clone(), true);
-                swap(&mut scope_expr, &mut ctx.scope_expr);
+                let mut new_scope_name = ctx.new_scope_name();
+                swap(&mut new_scope_name, &mut ctx.scope_var_name);
 
                 //////////////////////////////////////////////////////
-                let js_pattern = compile_let_pattern(ctx, &e.param.0).unwrap_or_else(|| js::var("_".to_string(), true));
+                let js_pattern = compile_let_pattern(ctx, &e.param.0).unwrap_or_else(|| js::var("_".to_string()));
                 let body = compile(ctx, &e.body);
                 //////////////////////////////////////////////////////
 
-                swap(&mut scope_expr, &mut ctx.scope_expr);
+                swap(&mut new_scope_name, &mut ctx.scope_var_name);
                 js::func(js_pattern, new_scope_name, body)
             })
         }
@@ -227,9 +226,9 @@ fn compile(ctx: &mut Context<'_>, expr: &ast::SExpr) -> js::Expr {
             }
         }
         ast::Expr::Loop(e) => {
-            let lhs = js::var("loop".to_string(), false);
+            let lhs = js::var("loop".to_string());
             let rhs = compile(ctx, &e.body);
-            let rhs = js::func(js::var("_".to_string(), true), "_2".to_string(), rhs);
+            let rhs = js::func(js::var("_".to_string()), "_2".to_string(), rhs);
             js::call(lhs, rhs)
         }
         ast::Expr::Match(e) => {
@@ -324,7 +323,7 @@ fn compile_let_pattern(ctx: &mut Context<'_>, pat: &ast::LetPattern) -> Option<j
         ),
 
         Var((ml_name, _), _) => {
-            let js_arg = js::var(ctx.new_param_name(), false);
+            let js_arg = js::var(ctx.new_param_name());
             let ml_name = ml_name.as_ref()?;
             ctx.set_binding(*ml_name, js_arg.clone());
             js_arg
