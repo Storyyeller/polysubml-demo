@@ -367,6 +367,10 @@ pub fn compile_script(ctx: &mut Context<'_>, parsed: &[ast::Statement]) -> js::E
     for item in parsed {
         compile_statement(ctx, &mut exprs, item);
     }
+    // If the last statement is not an expression, don't return a value
+    if !matches!(parsed.last(), Some(ast::Statement::Expr(_))) {
+        exprs.push(js::void());
+    }
 
     js::comma_list(exprs)
 }
