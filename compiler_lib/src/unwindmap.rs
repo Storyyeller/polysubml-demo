@@ -11,7 +11,7 @@ pub fn sorted<T: Ord>(it: impl IntoIterator<Item = T>) -> Vec<T> {
 
 pub struct UnwindPoint(usize);
 pub struct UnwindMap<K, V> {
-    m: HashMap<K, V>,
+    pub m: HashMap<K, V>,
     changes: Vec<(K, Option<V>)>,
 }
 impl<K: Eq + Hash + Clone, V> UnwindMap<K, V> {

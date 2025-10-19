@@ -372,5 +372,10 @@ pub fn compile_script(ctx: &mut Context<'_>, parsed: &[ast::Statement]) -> js::E
         exprs.push(js::void());
     }
 
-    js::comma_list(exprs)
+    let mut res = js::comma_list(exprs);
+    // Run dead code elimination twice since the first run might allow more to be removed.
+    // We could do more, but two iterations should be good enough for now.
+    js::optimize(&mut res, &ctx.bindings.m);
+    js::optimize(&mut res, &ctx.bindings.m);
+    res
 }
