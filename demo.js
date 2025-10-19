@@ -58,7 +58,10 @@ function initializeRepl(root, compiler, Printer) {
         try {
             const p = new Printer;
             const val = eval(compiled);
-            p.visitRoot(val);
+            console.log('Evaluated code:', compiled, 'Result:', val);
+            if (val !== undefined) {
+                p.visitRoot(val);
+            }
             return [true, p.parts.join('')];
         } catch (e) {
             return [false, 'An error occurred during evaluation in the repl: ' + e.toString()];
