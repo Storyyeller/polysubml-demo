@@ -30,6 +30,9 @@ pub fn call(lhs: Expr, rhs: Expr) -> Expr {
 pub fn unary_minus(rhs: Expr) -> Expr {
     Expr(Expr2::Minus(rhs.0.into()))
 }
+pub fn void() -> Expr {
+    Expr(Expr2::Void)
+}
 pub fn eqop(lhs: Expr, rhs: Expr) -> Expr {
     Expr(Expr2::BinOp(lhs.0.into(), rhs.0.into(), Op::Eq))
 }
@@ -61,7 +64,7 @@ pub fn comma_list(exprs: Vec<Expr>) -> Expr {
     }
 
     match flattened.len() {
-        0 => lit("undefined".to_string()),
+        0 => void(),
         1 => Expr(flattened.into_iter().next().unwrap()),
         _ => Expr(Expr2::Comma(flattened)),
     }
@@ -146,6 +149,7 @@ enum Expr2 {
     Call(Box<Expr2>, Box<Expr2>),
 
     Minus(Box<Expr2>),
+    Void,
 
     BinOp(Box<Expr2>, Box<Expr2>, Op),
 
@@ -172,6 +176,7 @@ impl Expr2 {
             Field(..) => MEMBER,
             Call(..) => CALL,
             Minus(..) => UNARY,
+            Void => UNARY,
             BinOp(_, _, op) => match op {
                 Mult | Div | Rem => MULTIPLICATIVE,
                 Add | Sub => ADDITIVE,
@@ -197,6 +202,7 @@ impl Expr2 {
             Field(lhs, ..) => lhs.first(),
             Call(lhs, ..) => lhs.first(),
             Minus(..) => OTHER,
+            Void => OTHER,
             BinOp(lhs, ..) => lhs.first(),
             Ternary(lhs, ..) => lhs.first(),
             Assignment(lhs, ..) => lhs.first(),
@@ -249,6 +255,9 @@ impl Expr2 {
             Self::Minus(e) => {
                 *out += "-";
                 e.write(out);
+            }
+            Self::Void => {
+                *out += "void 0";
             }
             Self::BinOp(lhs, rhs, op) => {
                 use Op::*;
@@ -357,6 +366,7 @@ impl Expr2 {
                 e.add_parens();
                 e.ensure(UNARY);
             }
+            Self::Void => {}
             Self::BinOp(lhs, rhs, op) => {
                 use Op::*;
                 let req = match op {
