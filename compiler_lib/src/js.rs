@@ -42,7 +42,7 @@ pub fn field(lhs: Expr, rhs: String) -> Expr {
     Expr(Expr2::Field(lhs.0.into(), rhs))
 }
 pub fn scope_field(scope_var: &str, name: &str) -> Expr {
-    Expr(Expr2::ScopeField(format!("{}.{}", scope_var, name)))
+    Expr(Expr2::ScopeField(scope_var.to_string(), name.to_string()))
 }
 pub fn lit(code: String) -> Expr {
     Expr(Expr2::Literal(code))
@@ -151,7 +151,7 @@ enum Expr2 {
     Var(String),
 
     Field(Box<Expr2>, String),
-    ScopeField(String),
+    ScopeField(String, String),
 
     Call(Box<Expr2>, Box<Expr2>),
 
@@ -255,8 +255,10 @@ impl Expr2 {
                 *out += ".";
                 *out += rhs;
             }
-            Self::ScopeField(s) => {
-                *out += s;
+            Self::ScopeField(s1, s2) => {
+                *out += s1;
+                *out += ".";
+                *out += s2;
             }
             Self::Call(lhs, rhs) => {
                 lhs.write(out);
@@ -368,7 +370,7 @@ impl Expr2 {
                 lhs.add_parens();
                 lhs.ensure(MEMBER);
             }
-            Self::ScopeField(_) => {}
+            Self::ScopeField(..) => {}
             Self::Call(lhs, rhs) => {
                 lhs.add_parens();
                 lhs.ensure(MEMBER);
@@ -440,7 +442,7 @@ impl Expr2 {
         match &self {
             Literal(s) => s.len() <= 10,
             Minus(e) => e.should_inline(),
-            ScopeField(_) => true,
+            ScopeField(..) => true,
             _ => false,
         }
     }
@@ -467,6 +469,8 @@ impl<'a> CommaListWrite<'a> {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
+struct DeadCodeRemover {}
+
 pub fn optimize(expr: &mut Expr, bindings: &HashMap<crate::ast::StringId, Expr>) {
     // Basic dead code optimization. First iterate to find all used variables.
 
@@ -497,8 +501,8 @@ fn find_used_vars(expr: &Expr2, used_vars: &mut HashSet<String>) {
         }
         Var(_) => {}
         Field(lhs, _) => find_used_vars(lhs, used_vars),
-        ScopeField(s) => {
-            used_vars.insert(s.to_owned());
+        ScopeField(s1, s2) => {
+            used_vars.insert(format!("{}.{}", s1, s2));
         }
         Call(lhs, rhs) => {
             find_used_vars(lhs, used_vars);
@@ -516,7 +520,7 @@ fn find_used_vars(expr: &Expr2, used_vars: &mut HashSet<String>) {
             find_used_vars(e2, used_vars);
         }
         Assignment(lhs, rhs) => {
-            if !matches!(**lhs, Expr2::ScopeField(_)) {
+            if !matches!(**lhs, Expr2::ScopeField(..)) {
                 find_used_vars(lhs, used_vars);
             }
             find_used_vars(rhs, used_vars);
@@ -552,7 +556,7 @@ fn remove_unused_subexprs(expr: &mut Expr2, used_vars: &HashSet<String>) {
         }
         Var(_) => {}
         Field(lhs, _) => remove_unused_subexprs(lhs, used_vars),
-        ScopeField(_) => {}
+        ScopeField(..) => {}
         Call(lhs, rhs) => {
             remove_unused_subexprs(lhs, used_vars);
             remove_unused_subexprs(rhs, used_vars);
@@ -569,8 +573,9 @@ fn remove_unused_subexprs(expr: &mut Expr2, used_vars: &HashSet<String>) {
             remove_unused_subexprs(e2, used_vars);
         }
         Assignment(lhs, rhs) => {
-            if let ScopeField(s) = &**lhs {
-                if !used_vars.contains(s) {
+            if let ScopeField(s1, s2) = &**lhs {
+                let s = format!("{}.{}", s1, s2);
+                if !used_vars.contains(&s) {
                     let mut out = Vec::new();
                     simplify_unused_expr(std::mem::replace(rhs, Void), used_vars, &mut out);
                     *expr = comma_list_sub(out);
@@ -624,7 +629,7 @@ fn simplify_unused_expr(mut expr: Expr2, used_vars: &HashSet<String>, out: &mut 
         Field(lhs, _) => {
             simplify_unused_expr(*lhs, used_vars, out);
         }
-        ScopeField(s) => {}
+        ScopeField(..) => {}
         Minus(e) => {
             simplify_unused_expr(*e, used_vars, out);
         }
