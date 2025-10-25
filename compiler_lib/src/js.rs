@@ -445,6 +445,7 @@ impl Expr2 {
             Literal(s) => s.len() <= 10,
             Minus(e) => e.should_inline(),
             ScopeField(..) => true,
+            Var(..) => true,
             _ => false,
         }
     }
