@@ -20,8 +20,8 @@ pub enum Op {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
-pub fn assign(lhs: Expr, rhs: Expr) -> Expr {
-    Expr(Expr2::Assignment(lhs.0.into(), rhs.0.into()))
+pub fn assign(lhs: Expr, rhs: Expr, keep_if_unused: bool) -> Expr {
+    Expr(Expr2::Assignment(lhs.0.into(), rhs.0.into(), keep_if_unused))
 }
 pub fn binop(lhs: Expr, rhs: Expr, op: Op) -> Expr {
     Expr(Expr2::BinOp(lhs.0.into(), rhs.0.into(), op))
@@ -162,7 +162,9 @@ enum Expr2 {
 
     Ternary(Box<Expr2>, Box<Expr2>, Box<Expr2>),
 
-    Assignment(Box<Expr2>, Box<Expr2>),
+    // Last parameter indicates whether to keep the assignment even if the variable is unused
+    // Used to prevent incorrect optimization of let rec bindings
+    Assignment(Box<Expr2>, Box<Expr2>, bool),
     ArrowFunc(Box<Expr2>, String, Box<Expr2>),
 
     Comma(Vec<Expr2>),
@@ -302,7 +304,7 @@ impl Expr2 {
                 *out += " : ";
                 e2.write(out);
             }
-            Self::Assignment(lhs, rhs) => {
+            Self::Assignment(lhs, rhs, _) => {
                 lhs.write(out);
                 *out += " = ";
                 rhs.write(out);
@@ -403,7 +405,7 @@ impl Expr2 {
                 e2.add_parens();
                 e2.ensure(ASSIGN);
             }
-            Self::Assignment(lhs, rhs) => {
+            Self::Assignment(lhs, rhs, _) => {
                 lhs.add_parens();
                 lhs.ensure(LHS);
                 rhs.add_parens();
@@ -469,186 +471,165 @@ impl<'a> CommaListWrite<'a> {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-struct DeadCodeRemover {}
-
-pub fn optimize(expr: &mut Expr, bindings: &HashMap<crate::ast::StringId, Expr>) {
-    // Basic dead code optimization. First iterate to find all used variables.
-
-    let mut used_vars = HashSet::new();
-    find_used_vars(&expr.0, &mut used_vars);
-    // Any bindings that exist at the end of the module need to be checked as well
-    // because they could be used in the future even if they haven't already been used.
-    for expr in bindings.values() {
-        find_used_vars(&expr.0, &mut used_vars);
+// Dead code elimination: removes unused variable assignments by tracking which scope variables
+// are actually read. Works backwards through expressions to determine usage.
+struct DeadCodeRemover {
+    // For each scope in the current stack, the set of variables that are used so far
+    used: HashMap<String, HashSet<String>>,
+}
+impl DeadCodeRemover {
+    fn new() -> Self {
+        Self { used: HashMap::new() }
     }
 
-    // Now that we have the list of used variables removed unused expressions.
-    remove_unused_subexprs(&mut expr.0, &used_vars);
-}
-
-fn find_used_vars(expr: &Expr2, used_vars: &mut HashSet<String>) {
-    use Expr2::*;
-    match expr {
-        Paren(e) => find_used_vars(e, used_vars),
-        Literal(_) => {}
-        Obj(fields) => {
-            for prop_def in fields {
-                use PropertyDefinition::*;
-                match prop_def {
-                    Named(_, val) => find_used_vars(val, used_vars),
-                }
-            }
-        }
-        Var(_) => {}
-        Field(lhs, _) => find_used_vars(lhs, used_vars),
-        ScopeField(s1, s2) => {
-            used_vars.insert(format!("{}.{}", s1, s2));
-        }
-        Call(lhs, rhs) => {
-            find_used_vars(lhs, used_vars);
-            find_used_vars(rhs, used_vars);
-        }
-        Minus(e) => find_used_vars(e, used_vars),
-        Void => {}
-        BinOp(lhs, rhs, _) => {
-            find_used_vars(lhs, used_vars);
-            find_used_vars(rhs, used_vars);
-        }
-        Ternary(cond, e1, e2) => {
-            find_used_vars(cond, used_vars);
-            find_used_vars(e1, used_vars);
-            find_used_vars(e2, used_vars);
-        }
-        Assignment(lhs, rhs) => {
-            if !matches!(**lhs, Expr2::ScopeField(..)) {
-                find_used_vars(lhs, used_vars);
-            }
-            find_used_vars(rhs, used_vars);
-        }
-        ArrowFunc(_, _, body) => {
-            find_used_vars(body, used_vars);
-        }
-        Comma(exprs) => {
-            for ex in exprs {
-                find_used_vars(ex, used_vars);
-            }
-        }
-        Print(exprs) => {
-            for ex in exprs {
-                find_used_vars(ex, used_vars);
-            }
-        }
+    fn add_var(&mut self, scope: &str, name: String) {
+        self.used.get_mut(scope).unwrap().insert(name);
     }
-}
 
-fn remove_unused_subexprs(expr: &mut Expr2, used_vars: &HashSet<String>) {
-    use Expr2::*;
-    match expr {
-        Paren(e) => remove_unused_subexprs(e, used_vars),
-        Literal(_) => {}
-        Obj(fields) => {
-            for prop_def in fields {
-                use PropertyDefinition::*;
-                match prop_def {
-                    Named(_, val) => remove_unused_subexprs(val, used_vars),
-                }
-            }
-        }
-        Var(_) => {}
-        Field(lhs, _) => remove_unused_subexprs(lhs, used_vars),
-        ScopeField(..) => {}
-        Call(lhs, rhs) => {
-            remove_unused_subexprs(lhs, used_vars);
-            remove_unused_subexprs(rhs, used_vars);
-        }
-        Minus(e) => remove_unused_subexprs(e, used_vars),
-        Void => {}
-        BinOp(lhs, rhs, _) => {
-            remove_unused_subexprs(lhs, used_vars);
-            remove_unused_subexprs(rhs, used_vars);
-        }
-        Ternary(cond, e1, e2) => {
-            remove_unused_subexprs(cond, used_vars);
-            remove_unused_subexprs(e1, used_vars);
-            remove_unused_subexprs(e2, used_vars);
-        }
-        Assignment(lhs, rhs) => {
-            if let ScopeField(s1, s2) = &**lhs {
-                let s = format!("{}.{}", s1, s2);
-                if !used_vars.contains(&s) {
-                    let mut out = Vec::new();
-                    simplify_unused_expr(std::mem::replace(rhs, Void), used_vars, &mut out);
-                    *expr = comma_list_sub(out);
-                    return;
-                }
-            }
-
-            remove_unused_subexprs(lhs, used_vars);
-            remove_unused_subexprs(rhs, used_vars);
-        }
-        ArrowFunc(_, _, body) => {
-            remove_unused_subexprs(body, used_vars);
-        }
-        Comma(exprs) => {
-            let mut out = Vec::new();
-            let mut last = exprs.pop().unwrap();
-
-            for ex in std::mem::take(exprs) {
-                simplify_unused_expr(ex, used_vars, &mut out);
-            }
-            remove_unused_subexprs(&mut last, used_vars);
-            out.push(last);
-            *expr = comma_list_sub(out);
-        }
-        Print(exprs) => {
-            for ex in exprs {
-                remove_unused_subexprs(ex, used_vars);
-            }
-        }
-    }
-}
-
-fn simplify_unused_expr(mut expr: Expr2, used_vars: &HashSet<String>, out: &mut Vec<Expr2>) {
-    use Expr2::*;
-    match expr {
-        Paren(e) => {
-            simplify_unused_expr(*e, used_vars, out);
-        }
-        Literal(_) => {}
-        Obj(fields) => {
-            for prop_def in fields {
-                use PropertyDefinition::*;
-                match prop_def {
-                    Named(_, val) => {
-                        simplify_unused_expr(*val, used_vars, out);
+    // Replace "s.x = rhs" with just "rhs" if s.x is never read
+    fn remove_var_assign_if_unused(&self, expr: &mut Expr2) {
+        use Expr2::*;
+        if let Assignment(lhs, rhs, keep_if_unused) = expr {
+            if !*keep_if_unused {
+                if let ScopeField(ref s1, ref s2) = **lhs {
+                    if !self.used.get(s1).unwrap().contains(s2) {
+                        let rhs: Expr2 = std::mem::replace(&mut *rhs, Void);
+                        *expr = rhs;
                     }
                 }
             }
         }
-        Var(_) => {}
-        Field(lhs, _) => {
-            simplify_unused_expr(*lhs, used_vars, out);
-        }
-        ScopeField(..) => {}
-        Minus(e) => {
-            simplify_unused_expr(*e, used_vars, out);
-        }
-        Void => {}
-        BinOp(lhs, rhs, op) => {
-            simplify_unused_expr(*lhs, used_vars, out);
-            simplify_unused_expr(*rhs, used_vars, out);
-        }
-        ArrowFunc(_, _, _) => {}
-        Comma(exprs) => {
-            for ex in exprs {
-                simplify_unused_expr(ex, used_vars, out);
+    }
+
+    // Process an expression whose value is used - traverses backwards, marking variables as used
+    fn process_used_expr(&mut self, expr: &mut Expr2) {
+        self.remove_var_assign_if_unused(expr);
+
+        use Expr2::*;
+        match expr {
+            Paren(e) => {
+                self.process_used_expr(e);
+            }
+            Literal(_) => {}
+            Obj(fields) => {
+                for prop_def in fields.iter_mut().rev() {
+                    use PropertyDefinition::*;
+                    match prop_def {
+                        Named(_, val) => {
+                            self.process_used_expr(val);
+                        }
+                    }
+                }
+            }
+            Var(_) => {}
+            Field(lhs, _) => {
+                self.process_used_expr(lhs);
+            }
+            ScopeField(s1, s2) => {
+                self.add_var(s1, s2.clone());
+            }
+            Call(lhs, rhs) => {
+                self.process_used_expr(rhs);
+                self.process_used_expr(lhs);
+            }
+            Minus(e) => {
+                self.process_used_expr(e);
+            }
+            Void => {}
+            BinOp(lhs, rhs, _) => {
+                self.process_used_expr(rhs);
+                self.process_used_expr(lhs);
+            }
+            Ternary(cond, e1, e2) => {
+                self.process_used_expr(e2);
+                self.process_used_expr(e1);
+                self.process_used_expr(cond);
+            }
+            Assignment(lhs, rhs, _) => {
+                self.process_used_expr(rhs);
+                self.process_used_expr(lhs);
+            }
+            ArrowFunc(_, scope, body) => {
+                self.used.insert(scope.clone(), HashSet::new());
+                self.process_used_expr(body);
+                self.used.remove(scope);
+            }
+            Comma(exprs) => {
+                // In comma expressions, only the last value is used
+                let mut last = exprs.pop().unwrap();
+                self.process_used_expr(&mut last);
+                let mut out = vec![last];
+
+                while let Some(ex) = exprs.pop() {
+                    self.process_unused_expr(ex, &mut out);
+                }
+
+                out.reverse();
+                *expr = comma_list_sub(out);
+            }
+            Print(exprs) => {
+                for ex in exprs.iter_mut().rev() {
+                    self.process_used_expr(ex);
+                }
             }
         }
-        Call(..) | Ternary(..) | Assignment(..) | Print(..) => {
-            remove_unused_subexprs(&mut expr, used_vars);
-            if !matches!(expr, Expr2::Void) {
+    }
+
+    // Process an expression whose value is discarded - only keeps side effects
+    fn process_unused_expr(&mut self, mut expr: Expr2, out: &mut Vec<Expr2>) {
+        self.remove_var_assign_if_unused(&mut expr);
+
+        use Expr2::*;
+        match expr {
+            Paren(e) => {
+                self.process_unused_expr(*e, out);
+            }
+            Literal(_) => {}
+            Obj(fields) => {
+                for prop_def in fields.into_iter().rev() {
+                    use PropertyDefinition::*;
+                    match prop_def {
+                        Named(_, val) => {
+                            self.process_unused_expr(*val, out);
+                        }
+                    }
+                }
+            }
+            Var(_) => {}
+            Field(lhs, _) => {
+                self.process_unused_expr(*lhs, out);
+            }
+            ScopeField(..) => {}
+            Minus(e) => {
+                self.process_unused_expr(*e, out);
+            }
+            Void => {}
+            BinOp(lhs, rhs, _) => {
+                self.process_unused_expr(*rhs, out);
+                self.process_unused_expr(*lhs, out);
+            }
+            ArrowFunc(..) => {}
+            Comma(exprs) => {
+                for ex in exprs.into_iter().rev() {
+                    self.process_unused_expr(ex, out);
+                }
+            }
+            Call(..) | Ternary(..) | Assignment(..) | Print(..) => {
+                // These expression types inherently have side effects, so we keep them as is.
+                self.process_used_expr(&mut expr);
                 out.push(expr);
             }
         }
     }
+}
+
+pub fn optimize(expr: &mut Expr, main_scope_name: String, bindings: &HashMap<crate::ast::StringId, Expr>) {
+    let mut optimizer = DeadCodeRemover::new();
+    optimizer.used.insert(main_scope_name, HashSet::new());
+    for expr in bindings.values() {
+        if let Expr2::ScopeField(s1, s2) = &expr.0 {
+            optimizer.add_var(s1, s2.clone());
+        }
+    }
+    optimizer.process_used_expr(&mut expr.0);
 }

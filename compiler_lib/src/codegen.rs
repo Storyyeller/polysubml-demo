@@ -44,7 +44,7 @@ impl ModuleBuilder {
         self.var_counter += 1;
 
         let expr = js::scope_field(&self.scope_var_name, &js_name);
-        out.push(js::assign(expr.clone(), rhs));
+        out.push(js::assign(expr.clone(), rhs, false));
         expr
     }
 
@@ -62,7 +62,7 @@ impl ModuleBuilder {
         }
 
         let expr = self.new_var(ml_name);
-        out.push(js::assign(expr.clone(), rhs));
+        out.push(js::assign(expr.clone(), rhs, false));
         expr
     }
 
@@ -187,7 +187,7 @@ fn compile(ctx: &mut Context<'_>, expr: &ast::SExpr) -> js::Expr {
             let lhs = js::field(lhs_temp_var, ctx.get_new(e.field.0));
 
             let res_temp_var = ctx.new_temp_var_assign(lhs.clone(), &mut exprs);
-            exprs.push(js::assign(lhs.clone(), compile(ctx, &e.value)));
+            exprs.push(js::assign(lhs.clone(), compile(ctx, &e.value), false));
             exprs.push(res_temp_var);
 
             js::comma_list(exprs)
@@ -350,8 +350,11 @@ fn compile_statement(ctx: &mut Context<'_>, exprs: &mut Vec<js::Expr>, stmt: &as
                 rhs_exprs.push(compile(ctx, expr))
             }
 
+            // Since dead code elimination is a single backwards pass, we need to skip it
+            // in case of mutually recursive definitions to avoid false positives.
+            let dont_optimize = vars.len() > 1;
             for (lhs, rhs) in vars.into_iter().zip(rhs_exprs) {
-                exprs.push(js::assign(lhs, rhs));
+                exprs.push(js::assign(lhs, rhs, dont_optimize));
             }
         }
         Println(args) => {
@@ -373,9 +376,6 @@ pub fn compile_script(ctx: &mut Context<'_>, parsed: &[ast::Statement]) -> js::E
     }
 
     let mut res = js::comma_list(exprs);
-    // Run dead code elimination twice since the first run might allow more to be removed.
-    // We could do more, but two iterations should be good enough for now.
-    js::optimize(&mut res, &ctx.bindings.m);
-    js::optimize(&mut res, &ctx.bindings.m);
+    js::optimize(&mut res, ctx.scope_var_name.to_owned(), &ctx.bindings.m);
     res
 }
