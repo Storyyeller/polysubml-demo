@@ -6,7 +6,7 @@ PolySubML is an experimental ML-like programming language with the following fea
 * Higher rank types
 * Existential types
 * Equirecursive types
-* No unnameable or [inconceivable types](https://blog.polybdenum.com/2024/06/07/the-inconceivable-types-of-rust-how-to-make-self-borrows-safe.html)
+* ~~No unnameable or [inconceivable types](https://blog.polybdenum.com/2024/06/07/the-inconceivable-types-of-rust-how-to-make-self-borrows-safe.html)~~
 * **Worst-case polynomial time type checking**
 
 You can try it out online in your browser [here](https://storyyeller.github.io/polysubml-demo/demo.html). PolySubML is not intended to be used as a production language, but rather serves as a demonstration of a novel type inference algorithm and other language design techniques.
@@ -963,7 +963,7 @@ All other types are called *intersection-ineligible*. An intersection can contai
 
 Additionally in order to avoid programmer confusion, `any` and `never` cannot appear in unions and intersections, since these can always be simplified away.
 
-The above rules may sound arbitrary, but they are a) just powerful enough to make every possible type representable while also b) being just restrictive enough to allow for fast type checking. For the most part, you will never have to worry about them, and they are included here just for completeness.
+For the most part, you will never have to worry about these rules, and they are included here just for completeness.
 
 ### Loops and recursion
 
@@ -1034,11 +1034,24 @@ let _ = fun x -> (
   x 
 )
 ```
-Unfortuantely, there is no easy way to fix this bug due to the limitations of the typechecking algorithm used in PolySubML. 
 
-Fortuantely, it is highly unlikely that you'd run into a pathological example like this in practice, and even if you do, you can always fix it by adding an extra type annotation as demonstrated in the example above.
-
+Fortunately, it is highly unlikely that you'd run into a pathological example like this in practice, and even if you do, you can always fix it by adding an extra type annotation as demonstrated in the example above.
 
 
+Additionally, by combining polymorphism and recursive types, it is possible to violate the *writable types property*. In other words, it is possible to construct cases where the inferred types are infinitely large and cannot be written explicitly, as in the following example:
+
+```ml
+let _ = fun x -> (
+    let a: rec f=(type T. any -> T -> f) = x;
+    let b: any -> rec f=(type T. any -> T -> f) = x;
+
+    let c: _ (*what type goes here?*) = if x then a else b;
+
+    let _: rec f=(type T. never -> T -> f) = c;
+    let _: never -> rec f=(type T. never -> T -> f) = c;
+
+    0
+);
+```
 
 
